@@ -28,19 +28,16 @@ Implementing a Revolutionary Novel Desktop-as-a-Service}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Christian Baun\orcidID{0000-1111-2222-3333} \and
-Johannes Bouché\orcidID{1111-2222-3333-4444}}
+\author{Christian Baun\orcidID{0009-0004-9955-3752} \and
+Johannes Bouché\orcidID{TODO}}
 %
-\authorrunning{F. Author et al.}
+\authorrunning{C. Baun, J. Bouché}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
 \institute{Faculty of Computer Science and Engineering, Frankfurt University of Applied Sciences,\\
 Nibelungenplatz 1, 60318 Frankfurt am Main, Germany
-\email{lncs@springer.com}\\
-\url{http://www.springer.com/gp/computer-science/lncs} \and
-ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
-\email{\{abc,lncs\}@uni-heidelberg.de}}
+\email{[christianbaun|johannes.bouche]@fb2.fra-uas.de}}
 %
 \maketitle              % typeset the header of the contribution
 %
@@ -48,37 +45,39 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 The paper will cover very novel and non-published knowledge we gained
 from developing and implementing a DaaS that is funded by the German
 Federal Ministry for Economic Affairs and Climate Action. The topic
-fits very well into the topics of the conference.
+fits very well into the topics of the conference. TODO: Christian
 
-\keywords{First keyword  \and Second keyword \and Another keyword.}
+\keywords{DaaS \and Compatibility \and Performance \and Stability \and Usability}
 \end{abstract}
 %
 %
 %
 \section{Introduction}
-% \subsection{A Subsection Sample}
-% Please note that the first paragraph of a section or subsection is
-% not indented. The first paragraph that follows a table, figure,
-% equation etc. does not need an indent, either.
-% 
-% Subsequent paragraphs, however, are indented.
 
+Inkl. Motivation
 
-\subsection{Motivation}
+TODO: Christian (1)
+TODO: Johannes (2)
 
 \section{Related Work}
 
+TODO: Christian (1)
+TODO: Johannes (2)
+
 \section{Architecture}
 
-TODO: Christian 
+TODO: Christian (1)
+TODO: Johannes (2)
 
 \section{Challenges and Solutions}
 
-TODO: Christian 
+TODO: Christian (1)
+TODO: Johannes (2)
 
 \subsection{Compatibility}
 
-TODO: Christian 
+TODO: Christian (1)
+TODO: Johannes (2)
 
 Anwendungen (Windows / Linux / MacOS)
 
@@ -91,6 +90,10 @@ Externe Geräte (USB-Stick)
 
 \subsection{Performance}
 
+TODO: Johannes (1)
+TODO: Christian (2)
+TODO Christian: Latenz bei Cloud-Gaming Erfahrungen
+
 Welche Performance-Paramter / Kriterien sind hier relevant für die Anwendung / Nutzung
 Fokus: Bottlenecks, Möglichkeiten der Performance-Steigerung, Grenzen/Limits, die man akzeptieren muss
 
@@ -98,10 +101,18 @@ Latenz hängt auch immer von Entfernung und Übertragungsmedium ab.
 
 Skalierbarkeit: Stand und Möglichkeiten
 
-TODO Christian: Latenz bei Cloud-Gaming Erfahrungen
+Ceph-Dateisystem 
+
+Datenbank SQlite aktuell. Perspektivisch MariaDB
+
+Guacamole läuft 1x direkt auf dem Host aktuell. Läuft theoretisch auf jedem Host.
+
 
 
 \subsection{Stability}
+
+TODO: Johannes (1)
+TODO: Christian (2)
 
 Was ist hier relevant?
 
@@ -119,89 +130,59 @@ Wo sehen wir aktuell in unserer Architektur Risiken für Dienstausfall und Daten
 
 Features von Proxmox
 
+Ceph-Dateisystem
+
+Datenbank SQlite aktuell. Perspektivisch MariaDB
+
+Guacamole läuft 1x direkt auf dem Host aktuell. Läuft theoretisch auf jedem Host. Proxmox kann sich darum kümmern?!
+
 Docker haben/nicht haben / Vor- und Nachteile
 
 Hier auch auf die Skalierbarkeit beziehen
 
+TODO Johannes: Beschreibung zur Position der Komponenten, Möglichkeiten der Parallelisierung und Einschränkungen 
+
 \subsection{Usability}
 
+TODO: Christian (1)
+TODO: Johannes (2)
 
-\newpage
+Ideen und Konzepte zur Trennung von User und Admin-Ansicht
 
+Reduktion der Komplexität der Bedienung durch Fokus auf notwendigste Interaktionsschritte
 
-\begin{table}
-\caption{Table captions should be placed above the
-tables.}\label{tab1}
-\begin{tabular}{|l|l|l|}
-\hline
-Heading level &  Example & Font size and style\\
-\hline
-Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-\hline
-\end{tabular}
-\end{table}
+Desktop vs. einzelne Anwendung im Browser-Tab
+
+Anpassung des Browser-Inhalts auf die Größe der Anwendung
+
+Herausforderungen, Entwicklung, Implementierung, Lessons-learned
+
+TODO Johannes: Erlebnisse der letzten 3-4 Wochen aufschreiben
 
 
-\noindent Displayed equations are centered and set on a separate
-line.
-\begin{equation}
-x + y = z
-\end{equation}
-Please try to avoid rasterized images for line-art diagrams and
-schemas. Whenever possible, use vector graphics instead (see
-Fig.~\ref{fig1}).
 
-\begin{figure}
-\includegraphics[width=\textwidth]{fig1.eps}
-\caption{A figure caption is always placed below the illustration.
-Please note that short captions are centered, while long ones are
-justified by the macro package automatically.} \label{fig1}
-\end{figure}
+\section{Conclusion}
 
-\begin{theorem}
-This is a sample theorem. The run-in heading is set in bold, while
-the following text appears in italics. Definitions, lemmas,
-propositions, and corollaries are styled the same way.
-\end{theorem}
-%
-% the environments 'definition', 'lemma', 'proposition', 'corollary',
-% 'remark', and 'example' are defined in the LLNCS documentclass as well.
-%
-\begin{proof}
-Proofs, examples, and remarks have the initial word in italics,
-while the following text appears in normal font.
-\end{proof}
-For citations of references, we prefer the use of square brackets
-and consecutive numbers. Citations using labels or the author/year
-convention are also acceptable. The following bibliography provides
-a sample reference list with entries for journal
-articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-and a homepage~\cite{ref_url1}. Multiple citations are grouped
-\cite{ref_article1,ref_lncs1,ref_book1},
-\cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
+TODO: Zusammen am Schluss
 
-\begin{credits}
-\subsubsection{\ackname} A bold run-in heading in small font size at the end of the paper is
-used for general acknowledgments, for example: This study was funded
-by X (grant number Y).
+\section{Outlook}
 
-\subsubsection{\discintname}
-It is now necessary to declare any competing interests or to specifically
-state that the authors have no competing interests. Please place the
-statement with a bold run-in heading in small font size beneath the
-(optional) acknowledgments\footnote{If EquinOCS, our proceedings submission
-system, is used, then the disclaimer can be provided directly in the system.},
-for example: The authors have no competing interests to declare that are
-relevant to the content of this article. Or: Author A has received research
-grants from Company W. Author B has received a speaker honorarium from
-Company X and owns stock in Company Y. Author C is a member of committee Z.
-\end{credits}
-%
+TODO: Zusammen am Schluss
+
+\section*{Acknowledgements}
+
+This work was funded by the Federal Ministry for Economic Affairs and Climate Action
+('\textsl{Bundesministerium f\"ur Wirtschaft und Klimaschutz}')
+in the framework of the central innovation programme
+for small and medium-sized enterprises
+('\textsl{Zentrales Innovationsprogramm Mittelstand}').
+
+We thank our project partners from Nuromedia GmbH for their support.
+We especially thank Björn Goetschke, Mike Ludemann, Dario Savella, Holger Sprengel, and Rahul Tomar.
+
+
+\section*{References}
+
 % ---- Bibliography ----
 %
 % BibTeX users should specify bibliography style 'splncs04'.
@@ -210,24 +191,8 @@ Company X and owns stock in Company Y. Author C is a member of committee Z.
 % \bibliographystyle{splncs04}
 % \bibliography{mybibliography}
 %
-\begin{thebibliography}{8}
-\bibitem{ref_article1}
-Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
 
-\bibitem{ref_lncs1}
-Author, F., Author, S.: Title of a proceedings paper. In: Editor,
-F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-Springer, Heidelberg (2016). \doi{10.10007/1234567890}
+% \bibliography{\jobname_no_dashes_at_repeated_names,references}{}
 
-\bibitem{ref_book1}
-Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
-Location (1999)
 
-\bibitem{ref_proc1}
-Author, A.-B.: Contribution title. In: 9th International Proceedings
-on Proceedings, pp. 1--2. Publisher, Location (2010)
-
-\bibitem{ref_url1}
-LNCS Homepage, \url{http://www.springer.com/lncs}, last accessed 2023/10/25
-\end{thebibliography}
 \end{document}
