@@ -54,22 +54,38 @@
 %
 \section{Introduction}
 
-Inkl. Motivation
 
-TODO: Christian (1)
-TODO: Johannes (2)
+This paper discusses challenges during the development and implementation of a novel Desktop-as-a-Service (DaaS) solution that enables the deployment and usage of unmodified Linux and Windows applications in the same way as web applications and can run inside public resources but can also be deployed in a private context. Since all interaction with the DaaS and the applications that reside inside is done via a user's web browser, the users can use any client, no matter what hardware or host operating system it is compromised of. A browser is the only software component required to use the novel DaaS service DESIGN.
+
+Undoubtedly, the development of a feature-rich DaaS system is a complex task, riddled with numerous obstacles and challenges. This paper meticulously addresses these challenges, categorizing them under compatibility, performance, stability, and usability. It not only brings these obstacles to light but also presents the solutions we devised to overcome them, along with the valuable lessons we learned in the process.
+
+This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions, and section~\ref{sec:NextSteps} includes directions for future work.
+
+
+% TODO: Christian (1)
+% TODO: Johannes (2)
 
 \section{Related Work}
+\label{sec:relatedworkAbschnitt}
 % TODO:  Introduce: Infratstructure-as-a-Service  and others (IaaS, PaaS, SaaS, DaaS)
 TODO: Christian (1)
 TODO: Johannes (2)
 
 \section{Architecture}
+\label{sec:RecommendDaaSarchitecture}
 
 TODO: Christian (1)
 TODO: Johannes (2)
 
+(see Figure~\ref{figure_architecture}).
+
+\begin{figure}
+\includegraphics[width=\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
+\caption{Architecture of the novel DaaS DESIGN.} \label{figure_architecture}
+\end{figure}
+
 \section{Challenges and Solutions}
+\label{sec:AnalysisPossibleComponents}
 
 TODO: Christian (1)
 TODO: Johannes (2)
@@ -596,10 +612,12 @@ TODO Johannes: Erlebnisse der letzten 3-4 Wochen aufschreiben
 
 
 \section{Conclusion}
+\label{sec:Conclusions}
 
 TODO: Zusammen am Schluss
 
 \section{Outlook}
+\label{sec:NextSteps}
 
 TODO: Zusammen am Schluss
 
@@ -615,7 +633,6 @@ We thank our project partners from Nuromedia GmbH for their support.
 We especially thank Björn Goetschke, Mike Ludemann, Dario Savella, Holger Sprengel, and Rahul Tomar.
 
 
-\section*{References}
 
 % ---- Bibliography ----
 %
