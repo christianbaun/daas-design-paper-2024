@@ -102,7 +102,14 @@ For Linux containers, the free software projects x11vnc and Xrdp can be used in 
 
 One of the main goals of DESIGN is to allow all interactions to be carried out solely by using a browser, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole because it supports VNC and RDP both and includes further relevant features regarding sound and printing.
 
-The core component of DESIGN is our self-developed Web UNI and Control Application, that .... TODO!!!
+The core component of DESIGN is our self-developed Web UI and the Control Application, that carries out the communication between all components of the service. 
+
+When starting an instance (virtual machine or container), they include a SSH service automatically. Our self-developed instance component waits until the SSH service is ready to satisfy requests in case applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
+
+In general, die self-developed instance component allows to carry out essential administration and usage tasks the operating systems does not offer via a generalized API.
+
+TODO: Die letzten 3 Abschnitte noch überarbeiten und präzisieren
+
 
 \begin{figure}
 \includegraphics[width=\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
