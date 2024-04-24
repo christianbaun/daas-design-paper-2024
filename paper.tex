@@ -82,7 +82,28 @@ Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using Open
 
 Magana et al.~\cite{magana2019remote} compared in 2019 the most popular remote desktop protocols and software implementations. The authors analyzed five protocols: PCoIP used in the Amazon WorkSpaces, Microsoft RDP, TeamViewer, VNC, and Citrix Independent Computing Architecture (ICA). In the paper, the network transfer rate and its relation to the quality experienced by the DaaS user are evaluated by assuming three scenarios: using an office software suite, web browsing, and video streaming. One emphasis of the paper is comparing the transfer rate of the different protocols for three scenarios. In the Office Software Suite scenario, the transfer rate is measured and compared when performing several different tasks like opening and editing a document (typing), loading an image, and saving a document. The web browsing scenario covers requesting three different web pages, and for the video streaming scenario, the same YouTube video file was viewed at different resolutions. The authors conclude that RDP requires fewer downstream and upstream network resources for all three scenarios. It is important to understand that the protocols RDP and VNC are implemented in open-source projects and proprietary solutions for many different operating systems. Depending on the different quality levels of the many existing implementations, it is difficult to generalize about the performance of the protocols, as individual implementations may have better or worse performance characteristics than expected.
 
-Several works in literature have analyzed the latency of Cloud gaming services that have, in some aspects, similar requirements to DaaS offerings. For both cloud service categories, users expect a latency value that is not considered annoying when interacting with the service and its applications. Choy et al.~\cite{ChoyWongSimonRosenberg2012}, Claypool et al.~\cite{claypool2010latency}, and Jarschel et al.~\cite{jarschel2011evaluation} consider a maximum tolerable latency, based on subjective tests, being around 100\,ms. This relatively low value sets the demand for a fast network interaction between client and service and limits their maximum distance. As mentioned in Clincy et al.~\cite{clincy2013subjective}, The former cloud gaming service provider OnLive specified in the year 2010 that the distance between service provider and consumer should not be greater than 1000 miles (approx. 1600\,km) because otherwise the round-trip communications delay time between will be too long for video games.
+Several works in literature have analyzed the latency of Cloud gaming services that have, in some aspects, similar requirements to DaaS offerings. According to Lampe et al.~\cite{lampe2014assessing}, the latency of locally executed games is compromised of the following components:
+
+\begin{itemize}
+\item Input lag caused by the controller device (e.g., mouse or keyboard).
+\item CPU time for processing the user input and the program itself.
+\item GPU time of the graphics processor for rendering the next frame.
+\item Time required for delivering the frame into the frame buffer.
+\item LCD response time (time required to display the frame on the screen).
+\end{itemize}
+
+In cloud gaming scenarios, the following components increase latency further: 
+
+\begin{itemize}
+\item Transfer time (upstream) for sending the user input to the service provider.
+\item Time required for capturing the frames and encoding it as a video stream.
+\item Transfer time (downstream) for sending the video stream to the client.
+\item Time required for decoding the video stream back into a frame.
+\end{itemize}
+
+For both cloud service categories, users expect a latency value that is not considered annoying when interacting with the service and its applications. Choy et al.~\cite{ChoyWongSimonRosenberg2012}, Claypool et al.~\cite{claypool2010latency}, and Jarschel et al.~\cite{jarschel2011evaluation} consider a maximum tolerable latency, based on subjective tests, being around 100\,ms. This relatively low value sets the demand for a fast network interaction between client and service and limits their maximum distance. As mentioned in Clincy et al.~\cite{clincy2013subjective}, The former cloud gaming service provider OnLive specified in the year 2010 that the distance between service provider and consumer should not be greater than 1000 miles (approx. 1600\,km) because otherwise the round-trip communications delay time between will be too long for video games. 
+
+On first thought, the latency requirements of a modern computer game are hardly the same as those of a desktop application. However, just as with computer games, the lagging operation of desktop programs has a negative impact on the user experience, and with video conferencing or other graphics-intensive applications, the utilization of resources and latency requirements are very similar to computer games.
 
 \section{Architecture}
 \label{sec:RecommendDaaSarchitecture}
