@@ -132,7 +132,7 @@ In general, the self-developed instance component allows users to carry out esse
 
 \begin{figure}
 \includegraphics[width=\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
-\caption{Architecture of the novel DaaS DESIGN.} \label{figure_architecture}
+\caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.} \label{figure_architecture}
 \end{figure}
 
 \section{Challenges and Solutions}
@@ -150,7 +150,7 @@ While developing the novel DaaS platform, we faced multiple obstacles and challe
 
 The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular everyday applications. 
 
-Examples worth mentioning in this context are eyeOS and SilveOS. The project eyeOS~\cite{liu2012research}~\cite{vidyabanu2011implementation} which simulated a desktop environment using HTML, PHP, JavaScript, and MySQL. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of Windows 10 in the browser using the discontinued application framework Microsoft Silverlight. Despite being open source, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications with such solutions. All required applications have to be developed as web applications. This limitation especially caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service offerings like Microsoft Office 365 and Google Docs already exist.
+Examples worth mentioning in this context are eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulated a desktop environment using HTML, PHP, JavaScript, and MySQL. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of Windows 10 in the browser using the discontinued application framework Microsoft Silverlight. Despite being open source, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications with such solutions. All required applications have to be developed as web applications. This limitation especially caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service offerings like Microsoft Office 365 and Google Docs already exist.
 
 The development of DaaS solutions in the past shows that a new DaaS will only be accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports applications for the Linux and Windows operating systems to enable flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
 
@@ -270,9 +270,7 @@ discussing relevant performance aspects of such systems,
 the obvious advanatge in most categories
 has a lightweight container solution compared to virtual machine
 if a identical program was tested in both environments
-~\cite{felter2015updated}
-~\cite{potdar2020performance}
-~\cite{seo2014performance}.
+~\cite{felter2015updated,potdar2020performance,seo2014performance}.
 
 On one hand, that implies for our solution,
 that a container-based approach is most likely preferable,
@@ -288,8 +286,8 @@ that in most studies there is no dramatic difference
 if derivates of operating systems are compared to each other.
 Nevertheless, there are derivates
 which are more driven towards being lightweight and more performant
-~\cite{boras2020performance}  %nix vs. nix win vs. win
-~\cite{balen2020performance}. %win in vm
+~\cite{balen2020performance,boras2020performance}.  %nix vs. nix win vs. win
+% ~\cite{balen2020performance}. %win in vm
 In cases where a Windows virtual machine can be replaced with a natively operating wine platform,
 additional performance potentials can be leveraged
 ~\cite{huang2012performance}.  % win inside vm
@@ -299,8 +297,8 @@ especially when taking into account implementations of low-level operating syste
 such as interrupt handling, memory allocation, driver-specific implementations
 or other more subtle requirements such as boot time
 or the time needed for maintenance or system updates
-~\cite{sergeev2022docker} % docker, win vs nix
-~\cite{sulaiman2021comparison}. % office apps win vs nix
+~\cite{sergeev2022docker,sulaiman2021comparison}. % docker, win vs nix
+% ~\cite{sulaiman2021comparison}. % office apps win vs nix
 
 As a result of our research we aim to spport
 any Windows or Linux based operating system in virtual machines
@@ -658,18 +656,40 @@ and all other components may reside somewhere in the daas network.
 
 \subsection{Usability}
 
-TODO: Christian (1)
-TODO: Johannes (2)
+% TODO: Christian (1)
+% TODO: Johannes (2)
 
-Ideen und Konzepte zur Trennung von User und Admin-Ansicht
+An essential feature of a DaaS platform is its strong user-friendliness, which eliminates the complexity of the different operating systems used inside virtual machines and containers, makes the underlying hardware transparent, and simplifies the necessary interactions as much as possible.
 
-Reduktion der Komplexität der Bedienung durch Fokus auf notwendigste Interaktionsschritte
+Since users already have an operating system on their clients, and the motivation for using a DaaS is the simple use of various applications, it makes no sense for most users to have additional desktops available in the browser. The focus should be on the applications. For this reason, when developing a new DaaS solution, the main goal should be to reduce the graphical output to the limits of the respective application. The concept uses a separate browser tag for each application whose content exclusively represents the application.
 
-Desktop vs. einzelne Anwendung im Browser-Tab
+Developing the automatic adaptation of the output to the limits of the respective application window is challenging. Only a few VNC and RDP servers make exporting the output of only individual windows or processes possible~\cite{OJCC_2023v8i1n01_Baun}. For Windows operating systems, the proprietary built-in RDP server and the free software TightVNC offer the export of full desktops and single windows. For Linux operating system deployments, the free software projects xrdp and x11vnc enable all desired features (see Table~\ref{tab:DaaS_Services_Overview}). 
 
-Anpassung des Browser-Inhalts auf die Größe der Anwendung
+\begin{table}
+	\centering
+	\caption{Services used by our DaaS for Remote Access to individual Linux or Windows Applications}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		\textbf{Service}    &  \textbf{Protocol}  & \textbf{Export of}           & \textbf{Operating} & \textbf{Software}  \\
+		\textbf{implementation}  &                & \textbf{single Window only}  & \textbf{System}    & \textbf{License}   \\
+		\hline
+		TightVNC            &  VNC                & supported                    & Windows            & GPL2               \\
+		\hline
+		Windows RDP server  &  RDP                & supported                    & Windows            & proprietary        \\
+		\hline
+		x11vnc              &  VNC                & supported                    & Linux              & GPL2               \\
+		\hline
+		Xrdp                &  RDP                & supported                    & Linux              & Apache 2.0         \\
+		\hline
+	\end{tabular}
+	\label{tab:DaaS_Services_Overview}
+\end{table}
 
-Herausforderungen, Entwicklung, Implementierung, Lessons-learned
+The automatic adaptation of browser tabs content size, is done by.... TOTO: Johannes...
+
+TODO: Ideen und Konzepte zur Trennung von User und Admin-Ansicht
+
+TODO: Herausforderungen, Entwicklung, Implementierung, Lessons-learned
 
 TODO Johannes: Erlebnisse der letzten 3-4 Wochen aufschreiben
 
