@@ -456,13 +456,13 @@ but in larger scales it preferable to externalize such functionality to dedicate
 %		- Errors affect only errornous component
 
 
-Stability in Desktop as a Service (DaaS) applications is of major importance
+Stability in Desktop as a Service (DaaS) applications is of significant importance
 to ensure that our solution can meet the demands of continuous
 and time-critical operations across varied user scenarios.
-From our point of view any daas system must ensure the stability
+From our point of view, any DaaS system must ensure the stability
 of all system components during runtime
-in order to maintain the ability to provide service continuity,
-handle growing user loads and to transparently recover from failures,
+to maintain the ability to provide service continuity,
+handle growing user loads and transparently recover from failures,
 while still providing a seamless end-user experience.
 Such considerations are an integral part of our architectural concept
 as they directly impact the operational integrity
@@ -470,19 +470,20 @@ of the system and its hosted instances,
 making them suitable for enterprise-level deployment and trust.
 
 This definition of stability is underpinned by several architectural
-and operational strategies including redundancy of components, scalability of nodes,
+and operational strategies, including redundancy of components, scalability of nodes,
 and a robust backend service framework
 providing means of communication between components and nodes.
-These strategies as well as their drawbacks and benefits
+These strategies, as well as their drawbacks and benefits
 will be further discussed on a component level
 and within the following subsections.
 
 \subsubsection{Scalability of Components}
-Scalability in general, but also specificaly in daas environments
+
+Scalability in general, but also specifically in DaaS environments
 can be approached in two fundamental ways:
-horizontal and vertical scaling.
+Horizontal and vertical scaling.
 Horizontal scaling, or scaling out, involves adding more machines or instances
-to a pool to manage increased load.
+to a pool to manage the increased load.
 In contrast to that, vertical scaling or scaling up,
 refers to adding more power (CPU, RAM)
 to an existing machine~\cite{vaquero2011dynamically}.
@@ -493,154 +494,152 @@ due to its ease of integration with existing architectures,
 vertical scaling remains important for applications
 requiring strong single-thread performance or low latencies.
 
-In order to comply to both we defined means of configuration
-such that the system itself as well as all of its backend services
+To comply with both, we defined means of configuration
+such that the system itself, as well as all of its backend services
 are designed to be split up into logical units
 which can be distributed to dedicated systems.
-Esssentially, all backend services receive their own dedicated configuration
+Essentially, all backend services receive their dedicated configuration
 and can be accessed via tuples of hostname and port.
 Any component using such a backend service can obtain the relevant tuple
 and then use it to fetch requests from that service.
-By default and in a standlone configuration
-all backend-services reside on the same native host
-and relevant tuples can be derived from the host configuration.
-In a distributed context a selection of these services
+By default and in a standalone configuration,
+all backend services reside on the same native host, and relevant tuples can be derived from the host configuration.
+In a distributed context, a selection of these services
 can be distributed to a dedicated and remote system
-in order to comply to horizontal scaling principles.
+to comply with horizontal scaling principles.
 The relevant tuple can then be derived from any node in the system
-by utilizing a common database containing the relevant metainformation.
+by utilizing a common database containing the relevant meta information.
 
-Vertical Scaling of daas nodes is currently not planned
-but a adminstrators are free to use custom 3rd party toolchains, e.g for GPU virtualization.
-Allthough vertical scaling on a host basis
-is beyond scope of our research project,
-it is more plausbile to scale the instances
+Vertical scaling of DaaS nodes is currently not planned
+but administrators are free to use custom 3rd party toolchains, e.g., for GPU virtualization.
+Although vertical scaling on a host basis
+is beyond the scope of our research project,
+it is more plausible to scale the instances
 being hosted within that system and for both dimensions.
 
-For vertical scaling of instances appropriate parameters and api endpoints are present
-in order to manipulate the configuration of their resource assignments,
+For vertical scaling of instances, appropriate parameters and API endpoints are present
+to manipulate the configuration of their resource assignments,
 such that arbitrary configurations are possible.
 
 For horizontal scaling of instances
 the builtin mechanisms of each backend service are automatically configured and utilized
-such that instances can be arbitrily distributed across a pool of connected nodes.
-In the case of virtual machines the responsible backend service proxmox implements
+such that instances can be arbitrarily distributed across a pool of connected nodes.
+In the case of virtual machines, the responsible backend service proxmox implements
 such mechanisms as part of its 'Proxmox VE High Availability (HA)' cluster.
-In the case of containers any backend service fullfilling
-similar concepts can be integrated, as for example with kubernetes.
-Within such clusters any daas instance is fully agnostic to its hosting system
-and must only be reachable via a known hostname or ip.
+In the case of containers, any backend service fulfilling
+similar concepts can be integrated, for example, with Kubernetes.
+Within such clusters, any DaaS instance is entirely agnostic to its hosting system
+and must only be reachable via a known hostname or IP.
 
 \subsubsection{Redundancy of Components}
 
 Redundancy is critical for most distributed systems
-but especially for daas architectures,
+but especially for DaaS architectures,
 and serves as a safeguard against service interruptions and data loss
-by duplicating essential components, functions and data.
+by duplicating essential components, functions, and data.
 This design principle ensures that systems remain highly available and reliable,
 even during component failures.
-In the following a list of components eligable for redundancy is given
+In the following, a list of components eligible for redundancy is given
 which briefly describes the most relevant strategies contained in our architecture.
 
 \begin{itemize}
-	\item \textbf{Frontend/Backend: } In our final version
-	      redundancy of the frontend and backend components will offer means of configuration
-	      such that multiple instances can be distributed to dedicated systems
-	      and can be target of standardized load balancing strategies.
-	      By doing so the frontend or the backend may just act as a gateway
-	      between the user and the backend service containing the relevant instances.
-	      In that manner redundancy is achieved and frontend or backend
-	      can forward requests and responses
-	      by identifying the correct communication endpoint
-	      based on url's or specific parts of them,
-	      as for example by extracting hostnames
-	      or specific identifiers being unique within the daas domain.
-	\item \textbf{Database: } The database is integrated as a backend service
-	      and as such completely unaware of surrounding components
-	      and contexts in which it is used.
-	      The database can therefore be distributed to a dedicated system if needed.
-	      Generally, any modern database (e.g. MariaDB) implements rich features
-	      to maintain specific data consistency strategies
-	      such as data replication, clustering,
-	      dedicated failover mechnisms or also RAID control.
-	      Therefore redundancies of our database system are currently not planned,
-	      but can easily be applied by users with such needs
-	      and by using database specific features and a modified database adapter.
-	\item \textbf{Authentication: } Authentication within our architecture
-	      is also implemented as a backend service
-	      and can therefore be distributed to any dedicated system,
-	      can be a target of standardized load balancing mechanisms and strategies
-	      and is as well fully agnostic of surrounding components
-	      and calling contexts.
-	      The authentication system maintains
-	      its own credential registry in a seperate database,
-	      a customizable set of user and group privileges,
-	      and implements the well defined OAuth 2.0 standard
-	      to allow remote authentication.
-	      In our final version, a customizable amount of redundant systems might be configured.
+\item \textbf{Frontend/Backend:} In our final version
+redundancy of the frontend and backend components will offer means of configuration
+such that multiple instances can be distributed to dedicated systems
+and can be the target of standardized load-balancing strategies.
+By doing so, the frontend or the backend may act as a gateway
+between the user and the backend service containing the relevant instances.
+In that manner, redundancy is achieved, and frontend or backend
+can forward requests and responses
+by identifying the correct communication endpoint
+based on URL's or specific parts of them,
+for example, by extracting hostnames
+or specific identifiers being unique within the DaaS domain.
+\item \textbf{Database:} The database is integrated as a backend service
+and as such, completely unaware of surrounding components
+and contexts in which it is used.
+The database can, therefore, be distributed to a dedicated system if needed.
+Generally, any modern database solution (e.g., MariaDB) implements rich features
+to maintain specific data consistency strategies
+such as data replication, clustering,
+dedicated failover mechanisms or also RAID control.
+Therefore, redundancies in our database system are currently not planned,
+but can easily be applied by users with such needs
+and by using database-specific features and a modified database adapter.
+\item \textbf{Authentication: } Authentication within our architecture
+is also implemented as a backend service
+and can, therefore, be distributed to any dedicated system,
+can be a target of standardized load-balancing mechanisms and strategies
+and is as well fully agnostic of surrounding components
+and calling contexts.
+The authentication system maintains
+its credential registry in a separate database,
+a customizable set of user and group privileges,
+and implements the well-defined OAuth 2.0 standard
+to allow remote authentication.
+A customizable amount of redundant systems might be configured in our final version.
 	      % TODO: Discuss: Is that true? Do we want to make Darios authenticator redundant?
-	\item \textbf{Distributed Filesystem: } Within our architecture
-	      we use the distributed filesystem ceph which is a distributed storage system
-	      providing object, block and file storage. In ceph redundancy is achieved
-	      through its self-healing and self-managing capabilities utilizing an algorithm
-	      called CRUSH (Controlled Replication Under Scalable Hashing).
-	      Data availability and fault-tolerance is obtained
-	      by automatically managing replication
-	      of data pieces across different devices.
-	      Our designed architecture uses these capabilities
-	      to reliably provide
-	      file storage to host systems and all hosted daas instances
-	      and provides block storage to the infrastructural backend services.
-	      By hosting daas instances directly from the distributed block storage,
-	      arbitrary redundancy scenarios might be covered
-	      by using specific configuration parameters.
-	\item \textbf{Instances: } Redundancy of instances
-	      is not a necessary condition for daas systems in general
-	      but it might make sense to apply such strategies under certain conditions.
-	      By using highly available clusters within our backend services
-	      redundancy can simply be achieved by using the corresponding api endpoints
-	      previously described and by parameterizing them appropriately.
+\item \textbf{Distributed Filesystem:} Within our architecture
+we use the distributed filesystem Ceph, which is a distributed storage system
+providing object, block, and file storage. In Ceph, redundancy is achieved
+through its self-healing and self-managing capabilities utilizing an algorithm
+called CRUSH (Controlled Replication Under Scalable Hashing).
+Data availability and fault tolerance are obtained
+by automatically managing replication
+of data pieces across different devices.
+Our designed architecture uses these capabilities
+to reliably provide
+file storage to host systems and all hosted DaaS instances
+and provides block storage to the infrastructural backend services.
+By hosting DaaS instances directly from the distributed block storage,
+arbitrary redundancy scenarios might be covered
+by using specific configuration parameters.
+\item \textbf{Instances:} Redundancy of instances
+It is not a necessary condition for DaaS systems in general, but applying such strategies under certain conditions might make sense.
+By using highly available clusters within our backend services
+redundancy can be achieved by using the corresponding API endpoints
+previously described and by parameterizing them appropriately.
 \end{itemize}
 
 \subsubsection{Internal Communication}
 After discussing the principles being used to achieve scalability and redundancy
 it adheres to describe how communication flows are maintained
-in such a distributed enironment.
+in such a distributed environment.
 
-Our proposed solution is at the core designed
-as a message oriented architecture
-which additionally aims to fullfill daas properties
+Our proposed solution is, at the core, designed
+as a message-oriented architecture
+which additionally aims to fulfill DaaS properties
 for scalability and redundancy as previously described.
 
-That implies fundamentally, that any action being triggered,
+That implies fundamentally that any action being triggered,
 may it either be in the frontend on the client side,
 in the backend on the host side
 or within any of the hosted instances
-must always fullfill the condition that the required information to execute that action
+must always fulfill the condition that the required information to execute that action
 must either be directly derivable from a request or a corresponding response
-or otherwise, must be immidiately available to the component executing that action.
+or otherwise, must be immediately available to the component executing that action.
 
 We achieve that by storing all runtime information of instances in the distributed block storage,
 by storing all relevant configuration files in our distributed file storage,
 by utilizing a common database to persist all object metadata
 and by using our decentralized OAuth component to handle authentication.
 
-By doing so, any change being trigerred by a node within the daas network
-is immidiately available to any other node in the system
+By doing so, any change being triggered by a node within the DaaS network
+is immediately available to any other node in the system
 which relies on that information change.
-Apart from that any additional information needed by a component
+Apart from that, any additional information needed by a component
 is fully contained within the related request or response.
 
-Therefore, arbitrary distributed configurations are possible
-as long as request and response messages reach their desired target eventually
-and as long availability of all relevant backend services is guaranteed.
+Therefore, arbitrarily distributed configurations are possible
+as long as request and response messages reach their desired target, eventually
+and as long as the availability of all relevant backend services is guaranteed.
 
-If that is the case, each distributed daas node can typically
-just contain all time-critical components as a bare minimum
-in order to maintain an acceptable performance throughout the whole user-facing network stack.
+If that is the case, each distributed DaaS node can typically
+just contain all time-critical components at a bare minimum
+to maintain an acceptable performance throughout the whole user-facing network stack.
 This would typically include the backend service hosting the relevant instances
-as well as the websocket proxy directly connected to the guacamole daemon
-and all other components may reside somewhere in the daas network.
+as well as the WebSocket proxy directly connected to the guacamole daemon
+and all other components may reside somewhere in the DaaS network.
 
 
 \subsection{Usability}
