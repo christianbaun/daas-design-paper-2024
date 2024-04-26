@@ -136,7 +136,7 @@ In general, the self-developed instance component allows users to carry out esse
 % TODO: Christian (1)
 % TODO: Johannes (2)
 
-While developing the novel DaaS platform, we faced multiple obstacles and challenges. Each of these issues belongs to one of the four categories: compatibility, performance, stability, and usability. This section presents the issues we were confronted with, the possible approaches we analyzed, and the solutions we chose.
+While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each of these issues belongs to one of the four categories: compatibility, performance, stability, and usability. This section presents the issues we were confronted with, the possible approaches we analyzed, and the solutions we chose.
 
 \subsection{Compatibility}
 % 
@@ -145,22 +145,16 @@ While developing the novel DaaS platform, we faced multiple obstacles and challe
 
 The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular everyday applications. 
 
-Examples worth mentioning in this context are eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulated a desktop environment using HTML, PHP, JavaScript, and MySQL. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of Windows 10 in the browser using the discontinued application framework Microsoft Silverlight. Despite being open source, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications with such solutions. All required applications have to be developed as web applications. This limitation especially caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service offerings like Microsoft Office 365 and Google Docs already exist.
+Examples worth mentioning in this context are eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulated a desktop environment using HTML, the scripting language PHP, JavaScript, and the MySQL database management system. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of a Windows desktop in the browser using the discontinued application framework Microsoft Silverlight. Despite being open source, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications with such solutions. All required applications have to be developed as web applications. This limitation especially caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service (SaaS) offerings like Microsoft Office 365 and Google Docs already exist.
 
 The development of DaaS solutions in the past shows that a new DaaS will only be accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports applications for the Linux and Windows operating systems to enable flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
 
-Further essential features for most users are printing, sound, and compatibility with external storage media.
+Further essential features for most users are printing, sound, and compatibility with external storage media. 
 
-% !!!!!!
-% Vermutlich ist das einfach gar nicht relevant hier... wenn doch, müssen wir es sinnvoll einbauen.
-% !!!!!!
-% On Linux operating systems, sound and microphone devices are accessed via sound servers like PulseAudio and PipeWire, which interact with the sound interface present in the kernel, e.g., Advanced Linux Sound Architecture (ALSA) or Open Sound System (OSS). ... 
+Guacamole supports redirecting audio, printing, and disk access via the protocol RDP. The printing feature does not allow access to local or remote printers; instead, it allows users to print directly to PDF files, which are received by the user's web browser. As a prerequisite, the GhostScript interpreter must be deployed on the Guacamole server. File transfer over RDP supports Guacamole by emulating a virtual disk drive that persistently stores data on the Guacamole server.~\cite{ApacheGuacamole2024} 
 
+Compared to RDP, the protocol VNC offers fewer features in Guacamole since it does not support sound on its own. However, Guacamole supports sound using PulseAudio\footnote{On Linux operating systems, sound and microphone devices are accessed via sound servers like PulseAudio and PipeWire, which interact with the sound interface present in the kernel, e.g., Advanced Linux Sound Architecture (ALSA) or Open Sound System (OSS)} as a workaround solution. VNC also does not offer file transfer and access to external storage media, but as a workaround solution, Guacamole supports file transfer file transfer via the SSH File Transfer Protocol (SFTP) which is an extension of the Secure Shell protocol (SSH).
 
-Guacamole supports redirecting audio, printing, and disk access via the protocol RDP. The printing feature does not allow access to local or remote printers; instead, it allows users to print directly to PDF files, which are received by the user's web browser. As a prerequisite, the GhostScript interpreter must be deployed on the Guacamole server.
-File transfer over RDP supports Guacamole by emulating a virtual disk drive that persistently stores data on the Guacamole server.~\cite{ApacheGuacamole2024} 
-
-Compared to RDP, the protocol VNC offers fewer features in Guacamole since it does not support sound on its own. However, Guacamole supports sound using PulseAudio as a workaround solution. VNC also does not offer file transfer and access to external storage media, but as a workaround solution, Guacamole supports file transfer file transfer over SSH using the protocol SFTP.
 
 
 \subsection{Performance}
@@ -237,7 +231,7 @@ From our point of view the three most critial performance aspects
 for Daas-Systems are:
 \begin{itemize}
 	\item Infrastructure and Platform
-	\item Network Latency
+	\item Network Latency and Bandwidth
 	\item Internal Processing and Communication
 \end{itemize}
 As there is no generalized measurment system available,
