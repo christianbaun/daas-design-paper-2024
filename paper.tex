@@ -663,15 +663,16 @@ An essential feature of a DaaS platform is its strong user-friendliness, which e
 
 Since users already have an operating system on their clients, and the motivation for using a DaaS is the simple use of various applications, it makes no sense for most users to have additional desktops available in the browser. The focus should be on the applications. For this reason, when developing a new DaaS solution, the main goal should be to reduce the graphical output to the limits of the respective application. The concept uses a separate browser tag for each application whose content exclusively represents the application.
 
-Developing the automatic adaptation of the output to the limits of the respective application window is challenging. Only a few VNC and RDP servers make exporting the output of only individual windows or processes possible~\cite{OJCC_2023v8i1n01_Baun}. For Windows operating systems, the proprietary built-in RDP server and the free software TightVNC offer the export of full desktops and single windows. For Linux operating system deployments, the free software projects xrdp and x11vnc enable all desired features (see Table~\ref{tab:DaaS_Services_Overview}). 
+Developing the automatic adaptation of the output to the limits of the respective application window is challenging. Only a few RDP and VNC server implementations offer to export the graphical output of only individual windows or processes. For Windows operating systems, the proprietary built-in RDP server and the free software TightVNC offer the export of full desktops and single windows. For Linux operating system deployments, the free software projects xrdp and x11vnc enable all desired features. Table ~\ref{tab:DaaS_Services_Overview} includes an overview of the mentioned service implementations for RDP and VNC protocols and their relevant characteristics. Further implementations like TigerVNC and protocols like NoMachine NX exist but do not seem useful in a novem DaaS design and implementation because they do not meet all feature requirements.~\cite{OJCC_2023v8i1n01_Baun}
+
 
 \begin{table}
 	\centering
 	\caption{Services used by our DaaS for Remote Access to individual Linux or Windows Applications}
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
-		\textbf{Service}    &  \textbf{Protocol}  & \textbf{Export of}           & \textbf{Operating} & \textbf{Software}  \\
-		\textbf{implementation}  &                & \textbf{single Window only}  & \textbf{System}    & \textbf{License}   \\
+		\textbf{Service}    &  \textbf{Protocol}  & \textbf{Single Window}       & \textbf{Operating} & \textbf{Software}  \\
+		\textbf{implementation}  &                & \textbf{Mode}                & \textbf{System}    & \textbf{License}   \\
 		\hline
 		TightVNC            &  VNC                & supported                    & Windows            & GPL2               \\
 		\hline
