@@ -112,13 +112,13 @@ Figure~\ref{figure_architecture} shows the architecture of our novel DaaS soluti
 
 The open-source server virtualization platform Proxmox VE runs bare-metal and offers virtual machines with the Kernel-based Virtual Machine (KVM) and container-based virtualization via LXC Linux container. Since the LXC API is, in comparison to the Docker API, rather poorly documented and lacks several features, we considered Docker a better container virtualization solution. A deployment of docker directly in the host-operating system or inside a virtual machine is both possible.
 
-Exporting the graphical user interface of the Linux and Windows applications, is possible using the a protocols VNC or RDP. Free server implementations exist for both operating system families. Since the focus of our DaaS solution is to export only the application's graphical user interface and not full desktops -- a feature not all implementations include -- is the number of available projects and solutions limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software project TightVNC and the Windows-internal RDP server can be used. 
+Exporting the graphical user interface of Linux and Windows applications, is possible using the a protocols VNC or RDP. Free server implementations exist for both operating system families. Since the focus of our DaaS solution is to export only the application's graphical user interface and not full desktops -- a feature not all server implementations include -- is the number of available projects and solutions limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software TightVNC and the Windows-internal RDP server can be used. 
 
-One of the main goals of DESIGN is to allow all interactions to be carried out solely by using a browser, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole because it supports VNC and RDP both and includes further relevant features regarding sound and printing.
+One of the main goals of DESIGN is to allow all interactions to be carried out solely by using a browser. Thus, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole which supports VNC and RDP both and includes further relevant features regarding sound and printing.
 
 The core components of DESIGN are our self-developed Web UI and the Control Application, which carry out the communication between all service components. 
 
-When starting an instance (virtual machine or container), it automatically includes an SSH service. Our self-developed instance component waits until the SSH service is ready to satisfy requests. In case applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
+When starting a virtual machine or container instance, it automatically includes an SSH service. Our self-developed instance component waits until the SSH service is ready to satisfy requests. In case applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
 
 In general, the self-developed instance component allows users to carry out essential administration and usage tasks that the operating system does not offer via a generalized API.
 
@@ -126,7 +126,8 @@ In general, the self-developed instance component allows users to carry out esse
 
 
 \begin{figure}
-\includegraphics[width=\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
+\centering
+\includegraphics[width=.9\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
 \caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.} \label{figure_architecture}
 \end{figure}
 
@@ -136,18 +137,18 @@ In general, the self-developed instance component allows users to carry out esse
 % TODO: Christian (1)
 % TODO: Johannes (2)
 
-While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each of these issues belongs to one of the four categories: compatibility, performance, stability, and usability. This section presents the issues we were confronted with, the possible approaches we analyzed, and the solutions we chose.
+While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each of these issues belongs to one of these four categories: compatibility, performance, stability, and usability. This section presents the issues we were confronted with, the possible approaches we analyzed, and the solutions we chose.
 
 \subsection{Compatibility}
 % 
 % TODO: Christian (1)
 % TODO: Johannes (2)
 
-The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular everyday applications. 
+The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular applications. 
 
-Examples worth mentioning in this context are eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulated a desktop environment using HTML, the scripting language PHP, JavaScript, and the MySQL database management system. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of a Windows desktop in the browser using the discontinued application framework Microsoft Silverlight. Despite being open source, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications with such solutions. All required applications have to be developed as web applications. This limitation especially caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service (SaaS) offerings like Microsoft Office 365 and Google Docs already exist.
+Examples worth mentioning in this context include eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulates a desktop environment using HTML, the scripting language PHP, JavaScript, and the MySQL database management system. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of a Windows desktop in the browser using the discontinued application framework Microsoft Silverlight. Despite being free software, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications there. All required applications have to be developed as web applications. This limitation caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service (SaaS) offerings like Microsoft Office 365 and Google Docs already exist.
 
-The development of DaaS solutions in the past shows that a new DaaS will only be accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports applications for the Linux and Windows operating systems to enable flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
+A new DaaS is only accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports Linux and Windows applications both to enable flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
 
 Further essential features for most users are printing, sound, and compatibility with external storage media. 
 
@@ -206,49 +207,49 @@ Compared to RDP, the protocol VNC offers fewer features in Guacamole since it do
 %       - Illustrate each subsection
 %       - Typos, grammar, etc.
 
-In order to describe the mission-critical performance aspects of our system,
-we initially give a short overview on potential challenges,
-inherent bottlenecks as well as other problem areas.
-We do that with respect to the underlying usecase model of DaaS-Systems
+To describe the mission-critical performance aspects of our system,
+we initially give a short overview of potential challenges,
+describe bottlenecks as well as other problem areas.
+We do that concerning the underlying use case model of DaaS-Systems
 and then follow with a more thorough description
-of our own specific design decissions and particular solutions.
+of our own specific design decisions and particular solutions.
 
-From our perspective, performance in general can be seen as the most crucial system property
+From our perspective, performance, in general can be seen as the most crucial system property
 which influences a majority of all other other relevant properties,
-such as user experience, system responsivness and overall efficiency.
+such as user experience, system responsiveness, and overall efficiency.
 As a result, we had to address multifaceted
 and potentially cross-concerning challenges
-on several distinct layers within our own architecture.
+on several distinct layers within our architecture.
 
-From the core infratructure to backend services
-and user-facing elements, each component inidvidually
-has to achieve certain minimum requirements in its own domain
-and in order to contribute to the overall performance goals of the whole system.
+From the core infrastructure to backend services
+and user-facing elements, each component individually
+has to achieve specific minimum requirements in its domain
+and to contribute to the overall performance goals of the whole system.
 Hence, we outline key limiting factors that impede performance,
 along with our experiences and tailored solutions
 aimed at mitigating these challenges.
-From our point of view the three most critial performance aspects
+From our point of view, the three most critical performance aspects
 for Daas-Systems are:
 \begin{itemize}
 	\item Infrastructure and Platform
 	\item Network Latency and Bandwidth
 	\item Internal Processing and Communication
 \end{itemize}
-As there is no generalized measurment system available,
+As there is no generalized measurement system available,
 we ordered them by their magnitude of impact
 and based them to the best of our knowledge
 on the obtained experiences during our research project.
-Since each of them have their own characteristics,
+Since each of them has their own characteristics,
 specific behavior and requirements, implying a potential impact
 on the overall system performance and resource utilization,
 we describe them individually and in more detail
-in the following seperate subsections.
+in the following separate subsections.
 
 \subsubsection{Infrastructure and Platform}
-In general can be said, that the chosen infrastructure, platform and utilized software
-may have the most influental impact on cpu and resource consumption
+In general, it can be said that the chosen infrastructure, platform, and utilized software
+may have the most influential impact on CPU and resource consumption
 which has a dramatic impact on the overall system performance.
-As a DaaS combines all aspects of IaaS, PaaS, SaaS into one system
+As a DaaS combines all aspects of IaaS, PaaS, and SaaS into one system
 each related performance characteristic has to be taken into account.
 
 For Infrastructure-as-a-Service can be said
@@ -256,22 +257,22 @@ that our solution generally offers possibilities
 to use either virtual machines or docker containers.
 As can be seen in several scientific publications
 discussing relevant performance aspects of such systems,
-the obvious advanatge in most categories
-has a lightweight container solution compared to virtual machine
-if a identical program was tested in both environments
+the obvious advantage in most categories
+has a lightweight container solution compared to the virtual machine
+if an identical program was tested in both environments
 ~\cite{felter2015updated,potdar2020performance,seo2014performance}.
 
-On one hand, that implies for our solution,
+On the one hand, that implies for our solution,
 that a container-based approach is most likely preferable,
 if that choice is available.
 On the other hand, that  choice is not always available,
 as not every app can be run in a container-based environment.
-In order to maximize coverage of possible apps being able to run on our system,
-we offer container-based and virtual machine based application hosting
-as a key concept of our solution.
+To maximize coverage of possible apps being able to run on our system,
+we offer container-based and virtual machine-based application hosting
+as a critical concept of our solution.
 
-As a second observation in the area of PaaS can be added
-that in most studies there is no dramatic difference
+As a second observation in the area of PaaS, it can be added
+that in most studies, there is no dramatic difference
 if derivates of operating systems are compared to each other.
 Nevertheless, there are derivates
 which are more driven towards being lightweight and more performant
@@ -280,7 +281,7 @@ which are more driven towards being lightweight and more performant
 In cases where a Windows virtual machine can be replaced with a natively operating wine platform,
 additional performance potentials can be leveraged
 ~\cite{huang2012performance}.  % win inside vm
-In contrast to that if operating system of different types are compared to each other,
+In contrast to that, if the operating systems of different types are compared to each other,
 there are more obvious results
 especially when taking into account implementations of low-level operating system functionality,
 such as interrupt handling, memory allocation, driver-specific implementations
@@ -289,129 +290,125 @@ or the time needed for maintenance or system updates
 ~\cite{sergeev2022docker,sulaiman2021comparison}. % docker, win vs nix
 % ~\cite{sulaiman2021comparison}. % office apps win vs nix
 
-As a result of our research we aim to spport
-any Windows or Linux based operating system in virtual machines
+As a result of our research, we aim to support
+any Windows or Linux-based operating system in virtual machines
 but can only support Linux and Wine in containers
-due to the fact that only terminal based Windows containers are supported by Microsoft.
+This is because only terminal-based Windows containers are supported by Microsoft.
 
 \subsubsection{Network Latency and Bandwidth}
-Another important aspect when providing web-based access to DaaS apps
-is that also network latency and bandwidth play a very important role
-which contribute to a large degree to the responsivenes of the system
+Another essential aspect when providing web-based access to DaaS apps
+is that also network latency and bandwidth play a significant role
+which contributes to a large degree to the responsiveness of the system
 directly experienced by the user.
 As the user utilizes its application through a web browser
 we aim to support standardized frame-buffer protocols
-to enable user interaction and access to external devices such as printers or usb sticks.
+to enable user interaction and access to external devices such as printers or USB sticks.
 
 Within such protocols and in cases where video content is transmitted,
 the provided network bandwidth might be the main bottleneck
 especially when it comes to high-resolution video streams.
-In cases where audio, mouse movement or keyboard strokes are transmitted,
-the network latency plays a more important role.
-Therefore, the experienced responsivness and usability
+In cases where audio, mouse movement, or keyboard strokes are transmitted,
+the network latency plays a more critical role.
+Therefore, the experienced responsibility and usability
 crucially depends on the hosted application.
 
-In general, such application specific requirements can to a certain degree be controlled
+In general, such application-specific requirements can, to a certain degree, be controlled
 by protocol-inherent tuning parameters and utilized compression algorithms.
-Therefore, our solution aims to maximize coverage of potential usecases
+Therefore, our solution aims to maximize coverage of potential use cases
 by offering several solutions and a set of appropriate tuning options
 which intentionally forces the user to decide
-which solution actually fits best for him.
+which solution fits best for him.
 
-For that purpose we utilize the desktop gateway implementation Guacamole,
-which offers support for most utilized frame-buffer protocols VNC and RDP
+For that purpose, we utilize the desktop gateway implementation Guacamole,
+which offers support for the most utilized frame-buffer protocols, VNC and RDP
 as well as all relevant tuning options.
 Guacamole not only implements out-of-the-box support for the protocols itself
 but also adds the ability to integrate audio support for VNC or other external devices
-as well as a javascript based webclient.
+as well as a JavaScript-based web client.
 
-Nevertheless, in order to integrate guacamole into the system,
-there are still things to consider which are not handled by guacamole
-but would be assumed from a full fledged daas solution.
+Nevertheless, to integrate guacamole into the system,
+there are still things to consider that are not handled by guacamole
+but would be assumed from a full-fledged DaaS solution.
 
-First and foremost must be considered how authentication is handled.
-On one hand, from a daas system a user would expect the system to work
+First and foremost, how authentication is handled must be considered.
+On one hand, from a DaaS system, a user would expect the system to work
 without forcing him to authenticate himself
-to more than one authentication system and also only once per session.
-On the other hand crucial information such as user passwords
-might in general better be kept secret to the system,
-such that users can not manipulate the provided system in an unintended way.
-A potential problem arises if taken into account
-that by default RDP requires a valid user session to the system.
+to multiple authentication systems and only once per session.
+On the other hand, crucial information such as user passwords
+might, in general, better be kept secret from the system
+so that users can not manipulate the provided system in an unintended way.
+A potential problem arises if it is considered
+that, by default, RDP requires a valid user session to the system.
 
-For that particular reason guacamole was integrated
-in a proxied approach by using proxied websockets.
-This enables to keep credentials of the generated system secret to the host system
+For that reason, guacamole was integrated with a proxied approach using proxied websockets.
+This enables keeping the credentials of the generated system secret to the host system
 while still providing authorized but passwordless access to the hosted application.
 
-Further the proxy mechanism enables to support dynamic desktop resizing
+Further, the proxy mechanism enables the support of dynamic desktop resizing
 which is a default guacamole feature for RDP,
 but which is not available in VNC through guacamole.
-By intercepting websocket opcodes and listening for size requests,
+By intercepting WebSocket opcodes and listening for size requests,
 the requested resolution can then be enforced
 by directly interacting with the related container or virtual machine.
 
-Both changes to the default guacamole usecase are mandatory
-in order to comply with the requirements for the underlying daas design
+Both changes to the default guacamole use case are mandatory
+to comply with the requirements for the underlying DaaS design
 but both also impact the overall system performance and responsiveness in a negative way.
-From a network perspective the integration as proxy adds an additonal network hop
-and leads to a noticable delay in the network communication.
-The protocol level evaluation of opcodes enhances that delay additonally
-and the perceived responsiveness might suffer
-if resize requests take more time then expected.
+From a network perspective, the integration as a proxy adds network hop
+and leads to a noticeable delay in network communication.
+The protocol-level evaluation of opcodes additionally enhances that delay, and perceived responsiveness might suffer if resize requests take more time than expected.
 Overall, the introduced overhead is still acceptable
-and enables platform-independent and seamless access for all defined daas usecases.
+and enables platform-independent and seamless access for all defined DaaS use cases.
 
 \subsubsection{Internal processing and Communication}
-Another important aspect directly related with performance and responsiveness
-is the approach in which data is internally processed, stored and communicated
+Another critical aspect directly related to performance and responsiveness
+is the approach in which data is internally processed, stored, and communicated
 to all involved components and instances.
 This includes the metadata being collected and processed by essential components
 but also implies raw physical data being directly exchanged with object instances.
 
-In order to provide a satisfying user experience in a daas system
-certain components in a host system are required.
+To provide a satisfying user experience in a DaaS system
+specific components in a host system are required.
 This includes access to all backend services
 being used to create containers and virtual machines,
 a local or remote database, a local or remote authentication service,
-local and distributed filesystems as well as
+local and distributed filesystems, as well as
 virtual or physical network devices.
-Further a webserver is integrated to provide all relevant api endpoints
+Further, a web server is integrated to provide all relevant API endpoints
 for the frontend communication
-as well as all websocket endpoints for the viewer communication.
+as well as all WebSocket endpoints for viewer communication.
 
-Generally spoken all of these components might become a potential bottleneck
+Generally spoken, all of these components might become a potential bottleneck
 when being utilized with high throughputs
 or large amounts of concurrent applications demanding low latencies.
 This is especially the case if being used in a sequential manner
 or being served from the same hardware.
-The total time needed for a request being fully processed
-can increase drastically if delays add up to each other.
+If delays add up, the total time needed for a request to be fully processed can increase drastically.
 
-On a architectural level all relevant components are therefore designed
+On an architectural level, all relevant components are, therefore designed
 for being distributed to different hosting systems
-if requirements of a certain user scenario suggests it.
+if the requirements of a particular user scenario suggest it.
 Nevertheless, it might still be advisable
-to keep certain components directly on the host system
-in order to ensure low latency component access.
+to keep specific components directly on the host system
+to ensure low latency component access.
 
-For all components with realtime and low latency usecases it is generally advisable
-to keep them as close to the core hosting system as possble.
+For all components with real-time and low-latency latency usecases, it is generally advisable
+to keep them as close to the core hosting system as possible.
 This includes all data and communication
-relevant to audio, video, mouse and keyboard transmission,
-but also the relevant backend-service to host containers and virtual machines.
+relevant to audio, video, mouse, and keyboard transmission,
+but also the backend service pertinent to host containers and virtual machines.
 That might be in the best case to host them natively on the host itself
 which enables virtual network and hardware access.
-In the worst case that might be at least connected to the same physical network
-in order to reduce network latencies as much as possbile.
+In the worst case, that might be at least connected to the same physical network
+to reduce network latencies as much as possible.
 
-For all other components of overarching nature
-such as database access, authentication provider and filesystems
-it is still advisable to keep a close distance to the host
-but it also highly depending on the total amounts of users
-and the specifics of their usecases.
-In small scales it is still advisable to keep such components on the same system
-but in larger scales it preferable to externalize such functionality to dedicated systems.
+For all other components of the overarching nature
+such as database access, authentication provider, and filesystems
+it is still advisable to keep a close distance from the host
+but it also highly depends on the total amounts of users
+and the specifics of their use cases.
+On small scales, it is still advisable to keep such components on the same system
+but on larger scales, it is preferable to externalize such functionality to dedicated systems.
 
 
 \subsection{Stability}
@@ -456,7 +453,7 @@ but in larger scales it preferable to externalize such functionality to dedicate
 %		- Errors affect only errornous component
 
 
-Stability in Desktop as a Service (DaaS) applications is of significant importance
+Stability in DaaS applications is of significant importance
 to ensure that our solution can meet the demands of continuous
 and time-critical operations across varied user scenarios.
 From our point of view, any DaaS system must ensure the stability
@@ -524,7 +521,7 @@ such that arbitrary configurations are possible.
 For horizontal scaling of instances
 the builtin mechanisms of each backend service are automatically configured and utilized
 such that instances can be arbitrarily distributed across a pool of connected nodes.
-In the case of virtual machines, the responsible backend service proxmox implements
+In the case of virtual machines, the responsible backend service Proxmox implements
 such mechanisms as part of its 'Proxmox VE High Availability (HA)' cluster.
 In the case of containers, any backend service fulfilling
 similar concepts can be integrated, for example, with Kubernetes.
