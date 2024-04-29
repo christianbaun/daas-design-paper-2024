@@ -46,7 +46,7 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Desktop-as-a-Service (DaaS) is a cloud service category with a tremendous potential for improving the everyday work of running and using applications. However, existing DaaS solutions have several drawbacks, which have limited the popularity of this service category in the past. Our novel DaaS solution called DESIGN not only overcomes the limitations of existing solutions but also offers significant benefits. It has the potential to revolutionize the way we use applications, supporting non-modified Linux and Windows applications with just a browser on the client side. This paper describes some of the knowledge we gained during the development because of the challenges we faced and the solutions we found.
+	Desktop-as-a-Service (DaaS) is a cloud service category with a tremendous potential for improving the everyday work of running and using applications. However, existing DaaS solutions have several drawbacks, which have limited the popularity of this service category in the past. Our novel DaaS solution called DESIGN not only overcomes the limitations of existing solutions but also offers significant benefits. It has the potential to revolutionize the way we use applications, supporting non-modified Linux and Windows applications with just a browser on the client side. This paper describes some of the knowledge we gained during the development because of the challenges we faced and the solutions we found.
 
 	\keywords{DaaS \and Compatibility \and Performance \and Stability \and Usability}
 \end{abstract}
@@ -612,16 +612,41 @@ websocket proxy connected to the guacamole daemon and the user.
 Any other component may reside elsewhere within the DaaS network.
 
 \subsection{Usability}
+An essential feature of a DaaS platform is its strong user-friendliness,
+which eliminates the complexity of the different operating systems
+used inside virtual machines and containers,
+makes the underlying hardware transparent,
+and simplifies the necessary interactions as much as possible.
 
-% TODO: Christian (1)
-% TODO: Johannes (2)
+Since users already have an operating system on their clients,
+and the motivation for using a DaaS is the simple use of various applications,
+it makes no sense for most users to have additional desktops available in the browser.
+The focus should be on the applications.
+For this reason, when developing a new DaaS solution,
+the main goal should be to reduce the graphical output
+to the limits of the respective application.
+The concept uses a separate browser tab for each application
+whose content exclusively represents the application.
 
-An essential feature of a DaaS platform is its strong user-friendliness, which eliminates the complexity of the different operating systems used inside virtual machines and containers, makes the underlying hardware transparent, and simplifies the necessary interactions as much as possible.
+Developing the automatic adaptation of the output
+to the limits of the respective application window is challenging.
+Only a few RDP and VNC server implementations offer to export the graphical output
+of only individual windows or processes.
+For Windows operating systems, the proprietary built-in RDP server
+and the free software TightVNC offer the export of full desktops and single windows.
 
-Since users already have an operating system on their clients, and the motivation for using a DaaS is the simple use of various applications, it makes no sense for most users to have additional desktops available in the browser. The focus should be on the applications. For this reason, when developing a new DaaS solution, the main goal should be to reduce the graphical output to the limits of the respective application. The concept uses a separate browser tag for each application whose content exclusively represents the application.
+For Linux operating system deployments,
+the free software projects xrdp and x11vnc enable all desired features
+and single-app functionality can be easily obtained
+by using a custom window manager such as for example qtile
+~\footnote{\url{https://qtile.org/}}.
 
-Developing the automatic adaptation of the output to the limits of the respective application window is challenging. Only a few RDP and VNC server implementations offer to export the graphical output of only individual windows or processes. For Windows operating systems, the proprietary built-in RDP server and the free software TightVNC offer the export of full desktops and single windows. For Linux operating system deployments, the free software projects xrdp and x11vnc enable all desired features. Table ~\ref{tab:DaaS_Services_Overview} includes an overview of the mentioned service implementations for RDP and VNC protocols and their relevant characteristics. Further implementations like TigerVNC and protocols like NX NoMachine exist but do not seem useful for designing and implementing a novel DaaS because they do not meet all feature requirements.~\cite{OJCC_2023v8i1n01_Baun}
-
+Table~\ref{tab:DaaS_Services_Overview} includes an overview
+of the mentioned service implementations for RDP and VNC protocols
+and their relevant characteristics.
+Further implementations like TigerVNC and protocols like NX NoMachine exist
+but do not seem useful for designing and implementing a novel DaaS because
+they do not meet all feature requirements.~\cite{OJCC_2023v8i1n01_Baun}
 
 \begin{table}
 	\centering
@@ -635,7 +660,7 @@ Developing the automatic adaptation of the output to the limits of the respectiv
 		\hline
 		Windows RDP server      & RDP               & supported              & Windows            & proprietary       \\
 		\hline
-		x11vnc                  & VNC               & supported              & Linux              & GPL2              \\
+		x11vnc                  & VNC               & not supported          & Linux              & GPL2              \\
 		\hline
 		Xrdp                    & RDP               & supported              & Linux              & Apache 2.0        \\
 		\hline
@@ -643,15 +668,46 @@ Developing the automatic adaptation of the output to the limits of the respectiv
 	\label{tab:DaaS_Services_Overview}
 \end{table}
 
-The automatic adaptation of browser tabs content size, is done by.... TOTO: Johannes´...
+The automatic adaptation of viewer size and screen resolution,
+considering underlying protocols and systems,
+faced various limitations, briefly described below.
 
-TODO: Ideen und Konzepte zur Trennung von User und Admin-Ansicht
+One challenge was imposed by Guacamole's current lack of support
+for dynamic desktop resizing with VNC,
+leading to misaligned layouts and a poor user experience.
+To address this until such features are available in Guacamole
+\footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
+we implemented a separate mechanism using a websocket proxy
+and direct interaction with each instance.
 
-TODO: Herausforderungen, Entwicklung, Implementierung, Lessons-learned
+Additionally, protocol-specific behaviors may vary
+when hosted on different platforms or infrastructures.
+For instance, we observed connection terminations when resizing Linux-based containers,
+contrasting with the behavior observed in equivalent Linux-based virtual machines.
+To overcome such limitations, we created a separate layer around the Guacamole client,
+adapting to each infrastructure, platform, or protocol-specific configuration.
 
-TODO Johannes: Erlebnisse der letzten 3-4 Wochen aufschreiben
+Another challenge was managing RDP sessions which are typically tied to actual users,
+unlike VNC sessions which are typically authenticated against
+a server-maintained user registry.
+Utilizing the websocket proxy, the backend could pass credentials
+to the server without revealing them to the user.
 
+Essentially, Guacamole with its protocol implementations and additional features like audio and printing,
+provided the fundamental base for our core capabilities.
 
+Finally mentioned, certain instances might not be fully accessible during runtime
+due to hardware malfunctions, inappropriate system configurations for simply during system updates.
+Therefore, as a failover mechanism additional logic had to be added
+in order to provide reasonable debug views and recovery mechanisms,
+e.g.~to recreate instances from a specific snapshot or configuration state.
+
+A crucial lesson learned was therefore to realize that
+while individual problems can mostly be solved
+using established paradigms, services or libraries with only slight modifications,
+the real challenge for a full-fledged DaaS system lies in it's abilities
+to combining such isolated solutions appropriately
+and for each specific infrastructure and platform configuration.
 
 \section{Conclusion}
 \label{sec:Conclusions}
