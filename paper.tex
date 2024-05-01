@@ -10,6 +10,9 @@
 % Other font encondings may result in incorrect characters.
 %
 \usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric}
+\usepackage{adjustbox}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -245,6 +248,8 @@ drawing from our experiences obtained during the project.
 % we describe them individually and in more detail
 % in the following separate subsections.
 
+
+
 \subsubsection{Infrastructure and Platform}
 In general can be said that the chosen infrastructure, platform,
 and utilized software combined may have the most impact on the overall resource consumption
@@ -299,9 +304,36 @@ as plausible candidates for migration to our systems,
 rather than more complex distributed systems
 for which a tailored environments might be more suitable.
 
-As a result of these considerations, we aim to support
-any Windows or Linux-based application in virtual machines
+Figure~\ref{hosting_scenarios} visualizes the available hosting startegies for our platform.
+We aim to support any Windows or Linux-based application in virtual machines
 and support any Linux- and Wine-based applications for container environments.
+
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum height=1cm, align=center}]
+			%Type Column
+			\node[minimum width=2cm] at (-4,-2) {IaaS};
+			\node[minimum width=2cm] at (-4,-1) {PaaS};
+			\node[minimum width=2cm] at (-4,0) {SaaS};
+			\node[minimum width=2cm] at (-4,1) {DaaS};
+			% DaaS
+			\node[draw, minimum width=12cm, fill=gray!10] at (3,1) {DESIGN Frontend};
+			%Linux
+			\node[draw, minimum width=6cm, fill=gray!50] at (0,0) {Linux App};
+			\node[draw, minimum width=6cm, fill=gray!80] at (0,-1) {Linux OS};
+			\node[draw, minimum width=3cm, fill=gray!100] at (-1.5,-2) {Virtual Machine};
+			\node[draw, minimum width=3cm, fill=gray!100] at (1.5,-2) {Container};
+			%Windows
+			\node[draw, minimum width=6cm, fill=gray!50] at (6,0) {Windows App};
+			\node[draw, minimum width=3cm, fill=gray!80] at (4.5,-1) {Windows OS};
+			\node[draw, minimum width=3cm, fill=gray!80] at (7.5,-1) {Linux OS, Wine};
+			\node[draw, minimum width=3cm, fill=gray!100] at (4.5,-2) {Virtual Machine};
+			\node[draw, minimum width=3cm, fill=gray!100] at (7.5,-2) {Container};
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{Application hosting strategies.}\label{hosting_scenarios}
+\end{figure}
 
 \subsubsection{Network Latency and Bandwidth}
 Network Latency and Bandwidth are crucial factors
@@ -325,17 +357,24 @@ We utilize the Guacamole desktop gateway implementation,
 supporting widely-used frame-buffer protocols like VNC and RDP,
 along with relevant tuning options.
 Guacamole also enables audio support and integration with external devices
-through a JavaScript-based web client.
+through a JavaScript-based web client (guacamole.js).
+As depicted in figure~\ref{websocket_proxy},
+the proxy component recives HTTP requests from the guacamole.js webclient
+and forwarded by the backend by using regular WebSocket opcodes (Guacamole protocol).
+Such communication is forwarded to the Guacamole daemon (guacd)
+which in turn communicates to each instance
+by using the frame-buffer protocol of choice (VNC or RDP).
+
 
 However, integrating Guacamole into the system
-requires consideration of additional factors not handled by the software.
+requires consideration of additional factors besides the frame-buffer protocols itself.
 Authentication mechanisms for example are particularly important in a DaaS context,
 as users expect seamless authentication across the whole system
 without multiple logins per session.
 Additionally, safeguarding sensitive information like user passwords is crucial
 for maintaining system security and user trust.
-To mitigate the risk of unintended system manipulation,
-Guacamole was integrated with a proxied approach and by using websockets.
+To mitigate the risk of unintended system manipulation, Guacamole was integrated
+in a proxied approach and by using websockets.
 This ensures that credentials of a generated instance remain secret to the host system
 while still providing authorized, passwordless access to the hosted application.
 
@@ -359,6 +398,41 @@ if resize requests take longer than expected.
 However, despite the introduced overhead,
 the solution still enables platform-independent
 and seamless access for all defined DaaS use cases.
+
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum height=1cm, align=center}]
+
+			% Nodes center row
+			\node[draw, minimum width=3cm, fill=gray!10] (browser) at (0,0) {guacamole.js };
+			\node[draw, minimum width=3cm, fill=gray!50] (back) at (4,0) {DESIGN Backend};
+			\node[draw, minimum width=3cm, fill=gray!50] (proxy) at (8,0) {Proxy};
+			\node[draw, minimum width=3cm, fill=gray!50] (guacd) at (12,0) {guacd};
+			\node[draw, minimum width=3cm, fill=gray!100] (inst) at (16,0) {Instances};
+			% Arrows center row
+			\draw[<->, thick, black] (browser.east) -- (back.west);
+			\draw[<->, thick, black] (back.east) -- (proxy.west);
+			\draw[<->, thick, black] (proxy.east) -- (guacd.west);
+			\draw[<->, thick, black] (guacd.east) -- (inst.west);
+			% Upper row
+			\node[draw, minimum width=3cm, fill=gray!10] (client-backend) at (2,2) {HTTP/WebSocket};
+			\node[draw, minimum width=3cm, fill=gray!50] (backend-proxy) at (6,2) {HTTP/WebSocket};
+			\node[draw, minimum width=3cm, fill=gray!50] (proxy-guacd) at (10,2) {Guacamole protocol};
+			\node[draw, minimum width=3cm, fill=gray!100] (guacd-inst) at (14,2) {Framebuffer protocols/\\VNC,RDP};
+			% Dashed lines upper row
+			\draw[-, dashed, thick, black] (2,0) -- (2,1.5);
+			\draw[-, dashed, thick, black] (6,0) -- (6,1.5);
+			\draw[-, dashed, thick, black] (10,0) -- (10,1.5);
+			\draw[-, dashed, thick, black] (14,0) -- (14,1.5);
+			% Arrow bottom row
+			\draw[<->, thick, black] (0,-1) -- (3.8,-1) node[midway, below, font=\footnotesize] {Client Communication};
+			\draw[<->, thick, black] (4,-1) -- (11.8,-1)node[midway, below, font=\footnotesize] {Backend Communication};
+			\draw[<->, thick, black] (12,-1) -- (16,-1)node[midway, below, font=\footnotesize] {Instance Communication};
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{WebSocket Proxy Components.}\label{websocket_proxy}
+\end{figure}
 
 \subsubsection{Internal processing and Communication}
 Another critical aspect directly related to performance and responsiveness
@@ -384,9 +458,9 @@ must therefore be designed for distribution across different hosting systems.
 However, retaining certain components directly on the host system
 may still be required to ensure low-latency access.
 
-
 From our observations, components requiring realtime and low-latency performance,
-should physically be kept as close to the core hosting system as possible.
+should physically be kept as close to the core hosting system as possible
+as shown in figure~\ref{perf_internal_communication}.
 This includes all data and communication relevant to
 audio, video, mouse, and keyboard transmission,
 as well as all backend services for hosting containers and virtual machines.
@@ -403,6 +477,51 @@ as well as their specific use cases.
 On smaller scales, keeping these components
 in close physical proximity to the host remains prudent.
 
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum height=1cm, align=center}]
+			% Standalone Realtime
+			\node[draw, minimum width=8cm, fill=gray!10] (singlefront) at (0,-0.5) {DESIGN Frontend};
+			\node[draw, minimum width=8cm, fill=gray!30] (singleback) at (+0,-2) {DESIGN Backend};
+			\node[draw, minimum width=4cm, fill=gray!100] at (-2,-3) {Infrastructure\\(Proxmox/Docker) };
+			\node[draw, minimum width=4cm, fill=gray!100] at (-2,-4) {Proxy};
+			\node[draw, minimum width=4cm, fill=gray!100] at (-2,-5) {Backend API};
+			% Standalone Services
+			\node[draw, minimum width=4cm, fill=gray!50] at (+2,-3) {Database};
+			\node[draw, minimum width=4cm, fill=gray!50] at (+2,-4) {Filesystem};
+			\node[draw, minimum width=4cm, fill=gray!50] at (+2,-5) {Authentication};
+			%Standalone Caption
+			\node[minimum width=8cm] (browser) at (0,-6) {Standalone};
+			% Distributed Realtime
+			\node[draw, minimum width=10cm, fill=gray!10] (distfront) at (10,-0.5) {DESIGN Frontend};
+			\node[draw, minimum width=10cm, fill=gray!30] (distback) at (10,-2) {DESIGN Backend};
+			\node[draw, minimum width=4cm, fill=gray!100] (inf) at (7,-3) {Infrastructure\\(Proxmox/Docker) };
+			\node[draw, minimum width=4cm, fill=gray!100] (proxy) at (7,-4) {Proxy};
+			\node[draw, minimum width=4cm, fill=gray!100] (api) at (7,-5) {Backend API};
+			% Distributed Services
+			\node[draw, minimum width=4cm, fill=gray!50] (db) at (13,-3) {Database};
+			\node[draw, minimum width=4cm, fill=gray!50] (fs) at (13,-4) {Filesystem};
+			\node[draw, minimum width=4cm, fill=gray!50] (auth) at (13,-5) {Authentication};
+			% Network
+			\node[draw, minimum width=1cm, minimum height=3cm, fill=white] (browser) at (10,-4) {N\\E\\T\\W\\O\\R\\K};
+			% Distributed Caption
+			\node[minimum width=10cm] (browser) at (10,-6) {Distributed};
+			% Arrows back<->front
+			\draw[<->, thick, black] (singleback.north) -- (singlefront.south);
+			\draw[<->, thick, black] (distback.north) -- (distfront.south);
+			% Arrows realtime
+			\draw[<->, thick, black] (inf.east) -- ++(0.5,0);
+			\draw[<->, thick, black] (proxy.east) -- ++(0.5,0);
+			\draw[<->, thick, black] (api.east) -- ++(0.5,0);
+			% Arrows services
+			\draw[<->, thick, black] (db.west) ++(-0.5,0) -- ++(0.5,0);
+			\draw[<->, thick, black] (fs.west) ++(-0.5,0) -- ++(0.5,0);
+			\draw[<->, thick, black] (auth.west) ++(-0.5,0) -- ++(0.5,0);
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{Internal Communication Flow}\label{perf_internal_communication}
+\end{figure}
 
 \subsection{Stability}
 % TODO: Johannes (1)
@@ -494,24 +613,89 @@ using a common database containing meta information.
 Vertical scaling of DaaS nodes is not currently planned,
 but administrators are free to use custom third-party toolchains,
 such as GPU virtualization, for vertical scaling on a per-host basis.
-Although vertical scaling within a host is beyond the scope of our research project,
+Although vertical scaling within a host
+is beyond the scope of our research project,
 scaling the instances hosted within the system is feasible for both dimensions.
-
 For vertical scaling of instances, we provide appropriate parameters
 and API endpoints to manipulate resource assignments,
 allowing for arbitrary configurations.
+
 For horizontal scaling of instances, the built-in mechanisms
 of each backend service are automatically configured
 and utilized to distribute instances across a pool of connected nodes.
 For virtual machines, Proxmox implements such mechanisms
-as part of its 'Proxmox VE High Availability (HA)' cluster.
+as part of its `Proxmox VE High Availability (HA)' cluster.
 For containers, similar concepts can be integrated with any backend service,
 such as Kubernetes.
 Within these clusters,
 DaaS instances are entirely agnostic to their hosting system
-and only need to be reachable via a known hostname or IP as a single requirement.
+and only need to be reachable
+via a known hostname or IP as a single requirement.
+As shown in figure~\ref{scale_objects_horizontal},
+we provide a globally maintained state of data, authentication and storage
+which is accessible either by horizontally scaled backends and frontends
+or otherwise,
+by horizontally and vertically scaled instances in our DaaS object domain.
 
-\subsubsection{Redundancy of Components}
+
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum width=4cm, minimum height=1cm, align=center}]
+
+			% User
+			\node[draw, minimum width=4cm] (user) at (5,1.5) {User};
+			% Clusters
+			\node[] at (-5,-0.5) {Frontend Cluster\\(Horizontal)};
+			\node[] at (-5,-2.5) {Backend Cluster\\(Horizontal)};
+			\node[] at (-5,-4.5) {Object Domain\\(Horizontal and Vertical)};
+
+			% Node1
+			\node[draw, fill=gray!10]  (front1) at (0,-0.5) {DESIGN Frontend 1};
+			\node[draw, fill=gray!30]  (back1)  at (0,-2.0) {DESIGN Backend};
+			\node[draw, fill=gray!50]  (real1)   at (0,-3.0) {Realtime Components};
+			\node[draw, fill=gray!100] (inst1)  at (0,-4.5) {DaaS Instance (ID=1234)};
+			% Node2
+			\node[draw, fill=gray!10]  (front2) at (5,-0.5) {DESIGN Frontend};
+			\node[draw, fill=gray!30]  (back2) at (5,-2.0) {DESIGN Backend};
+			\node[draw, fill=gray!50]  (real2) at (5,-3.0) {Realtime Components};
+			\node[draw, fill=gray!100] (inst2)  at (5,-4.5) {DaaS Instance (ID=1234)};
+			% Node3
+			\node[draw, fill=gray!10]  (front3) at (10,-0.5) {DESIGN Frontend};
+			\node[draw, fill=gray!30]  (back3) at (10,-2.0) {DESIGN Backend};
+			\node[draw, fill=gray!50]  (real3) at (10,-3.0) {Realtime Components};
+			\node[draw, fill=gray!100] (inst3)  at (10,-4.5) {DaaS Instance (ID=1234)};
+			% Domain
+			\node[draw, dashed, minimum width=14.5cm, minimum height=1.25cm]  (domfront) at (5,-0.5){};
+			\node[draw, dashed, minimum width=14.5cm, minimum height=2.25cm]  (domback) at (5,-2.5){};
+			\node[draw, dashed, minimum width=14.5cm, minimum height=1.25cm]  (dominst) at (5,-4.5){};
+			% Backend Services
+			\node[draw, minimum width=2cm, minimum height=5cm] (backends) at (14,-2.5){Backend\\Services};
+			% Arrows back<->Inst
+			\draw[<->, thick, black] (inst1.north) -- (real1.south);
+			\draw[<->, thick, black] (inst2.north) -- (real2.south);
+			\draw[<->, thick, black] (inst3.north) -- (real3.south);
+			% % Arrows back<->front
+			\draw[<->, thick, black] (front1.south) -- (back1.north);
+			\draw[<->, thick, black] (front2.south) -- (back2.north);
+			\draw[<->, thick, black] (front3.south) -- (back3.north);
+			% % Arrows Insts
+			\draw[<->, thick, black] (inst1.east) -- (inst2.west);
+			\draw[<->, thick, black] (inst2.east) -- (inst3.west);
+			% % Arrows User
+			\draw[->, thick, black] (user.south) -- (front1.north);
+			\draw[->, thick, black] (user.south) -- (front2.north);
+			\draw[->, thick, black] (user.south) -- (front3.north);
+			% % Arrows Backend
+			\draw[<->, thick, black] (domfront.east) -- ++(0.75,0);
+			\draw[<->, thick, black] (domback.east) --  ++(0.75,0);
+			\draw[<->, thick, black] (dominst.east) --  ++(0.75,0);
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{DESIGN Component Scaling}\label{scale_objects_horizontal}
+\end{figure}
+
+\subsubsection{Redundancy of Backend Services}
 
 Redundancy is crucial in distributed systems,
 particularly in DaaS architectures,
@@ -519,9 +703,8 @@ to safeguard against service interruptions and data loss
 by duplicating essential components, functions, and data.
 This design principle ensures high availability and reliability,
 even during component failures.
-In the following, we provide a list of components eligible for redundancy,
-briefly describing the most relevant strategies in our architecture.
-
+Figure~\ref{service_redundancy} depicts all major DESIGN components eligible for redundancy
+and which will be briefly described following:
 \begin{itemize}
 	\item \textbf{Frontend/Backend:}
 	      In our final version,
@@ -534,6 +717,12 @@ briefly describing the most relevant strategies in our architecture.
 	      Both components contribute to redundancy
 	      by distributing requests and responses to their respecitive recipients
 	      instead of processing them on their own.
+	\item \textbf{Instances:} Redundancy of instances
+	      It is not a necessary condition for DaaS systems in general,
+	      but applying such strategies under certain conditions might be plausible.
+	      By using highly available clusters within our backend services
+	      redundancy can be achieved by using the corresponding API endpoints
+	      previously described and by parameterizing them appropriately.
 	\item \textbf{Database:}
 	      The database is integrated as a backend service
 	      and is therefore independent of surrounding components and contexts.
@@ -572,13 +761,67 @@ briefly describing the most relevant strategies in our architecture.
 	      while also offering block storage to the infrastructural backend services.
 	      Hosting DaaS instances directly from the distributed block storage
 	      enables migration and redundancy of instances or in other words, horizontal scaling.
-	\item \textbf{Instances:} Redundancy of instances
-	      It is not a necessary condition for DaaS systems in general,
-	      but applying such strategies under certain conditions might be plausible.
-	      By using highly available clusters within our backend services
-	      redundancy can be achieved by using the corresponding API endpoints
-	      previously described and by parameterizing them appropriately.
 \end{itemize}
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum height=1.5cm, align=center}]
+			% Node
+			\node[draw, minimum width=4cm, fill=gray!10] (front0) at (-4,-3.0) {DESIGN Frontend};
+			\node[draw, minimum width=4cm, fill=gray!30] (back0) at (-4,-4.5) {DESIGN Backend};
+			\node[draw, minimum width=4cm, fill=gray!50] (inf0) at (-4,-6.0) {DESIGN Infrastructure};
+			\node[draw, minimum width=4cm, fill=gray!10] (db0) at (0,-3.0) {Database};
+			\node[draw, minimum width=4cm, fill=gray!30] (auth0) at (0,-4.5) {Authentication};
+			\node[draw, minimum width=4cm, fill=gray!50] (fs0) at (0,-6.0) {Storage};
+			% Frontends
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (front1) at (-9,-2.5) {Frontend 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (front2) at (-9,-3.0) {Frontend 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (front3) at (-9,-3.5) {Frontend 3};
+			\draw[->, dashed, thick, black] (front0.west) -- (front1.east);
+			\draw[->, dashed, thick, black] (front0.west) -- (front2.east);
+			\draw[->, dashed, thick, black] (front0.west) -- (front3.east);
+			% Backends
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (back1) at (-9,-4.0) {Backend 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (back2) at (-9,-4.5) {Backend 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (back3) at (-9,-5.0) {Backend 3};
+			\draw[->, dashed, thick, black] (back0.west) -- (back1.east);
+			\draw[->, dashed, thick, black] (back0.west) -- (back2.east);
+			\draw[->, dashed, thick, black] (back0.west) -- (back3.east);
+			% Instances
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (inst1) at (-9,-5.5) {Instances 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (inst2) at (-9,-6.0) {Instances 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (inst3) at (-9,-6.5) {Instances 3};
+			\draw[->, dashed, thick, black] (inf0.west) -- (inst1.east);
+			\draw[->, dashed, thick, black] (inf0.west) -- (inst2.east);
+			\draw[->, dashed, thick, black] (inf0.west) -- (inst3.east);
+			% DB
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (db1) at (5,-2.5) {Database 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (db2) at (5,-3.0) {Database 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!10] (db3) at (5,-3.5) {Database 3};
+			\draw[->, dashed, thick, black] (db0.east) -- (db1.west);
+			\draw[->, dashed, thick, black] (db0.east) -- (db2.west);
+			\draw[->, dashed, thick, black] (db0.east) -- (db3.west);
+			% Auth
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (auth1) at (5,-4.0) {Authentication 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (auth2) at (5,-4.5) {Authentication 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!30] (auth3) at (5,-5.0) {Authentication 3};
+			\draw[->, dashed, thick, black] (auth0.east) -- (auth1.west);
+			\draw[->, dashed, thick, black] (auth0.east) -- (auth2.west);
+			\draw[->, dashed, thick, black] (auth0.east) -- (auth3.west);
+			% Fs
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (fs1) at (5,-5.5) {Storage 1};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (fs2) at (5,-6.0) {Storage 2};
+			\node[draw, minimum width=4cm,minimum height=0.5cm, fill=gray!50] (fs3) at (5,-6.5) {Storage 3};
+			\draw[->, dashed, thick, black] (fs0.east) -- (fs1.west);
+			\draw[->, dashed, thick, black] (fs0.east) -- (fs2.west);
+			\draw[->, dashed, thick, black] (fs0.east) -- (fs3.west);
+			% Arrows Bottom
+			\draw[<->, thick, black] (-11,-7.5) -- (-2.1,-7.5)node[midway, below, font=\footnotesize] {User-Facing Components};
+			\draw[<->, thick, black] (-1.9,-7.5) -- (7,-7.5)node[midway, below, font=\footnotesize] {Service Components};
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{DESIGN Component Redundancy}\label{service_redundancy}
+\end{figure}
 
 \subsubsection{Internal Communication}
 After discussing the principles of scalability and redundancy,
@@ -602,7 +845,7 @@ is immediately available to any other node relying in some way
 on that particular information change.
 Additionally, any extra information needed by a component must be fully contained
 within the related request or response.
-This enables arbitrarily distributed configurations as long as request
+As shown in figure~\ref{message_routing}, this enables arbitrarily distributed configurations as long as request
 and response messages reach their desired target eventually
 and as long relevant backend services remain available.
 
@@ -610,6 +853,49 @@ If that is the case, each distributed DaaS node might only contain essential and
 including the backend service hosting relevant instances as well as the described
 websocket proxy connected to the guacamole daemon and the user.
 Any other component may reside elsewhere within the DaaS network.
+
+\begin{figure}
+	\centering
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tikzpicture}[every node/.style={minimum width=4cm, minimum height=1cm, align=center}]
+			% Frontends
+			\node[draw,minimum height=0.5cm, fill=gray!10] (front1) at (-4,0.3) {Frontend 1};
+			\node[draw,minimum height=0.5cm, fill=gray!10] (front2) at (0,0.3) {Frontend 2};
+			\node[draw,minimum height=0.5cm, fill=gray!10] (front3) at (+4,0.3) {Frontend 3};
+			% Backends
+			\node[draw,minimum height=0.5cm, fill=gray!30] (back1) at (-4,1.1) {Backend 1};
+			\node[draw,minimum height=0.5cm, fill=gray!30] (back2) at (+0,1.1) {Backend 2};
+			\node[draw,minimum height=0.5cm, fill=gray!30] (back3) at (+4,1.1) {Backend 3};
+			% Instances
+			\node[draw,minimum width=12cm, minimum height=1cm, fill=gray!80] (instdomain) at (+0,2.1) {};
+			\node[draw,minimum height=0.5cm, fill=gray!80] (inst) at (+0,2) {Instance};
+			% Message
+			\node[draw,minimum height=0.5cm, fill=gray!50] (message) at (0,-0.75) {Message};
+			% Arrows instance
+			\draw[->, thick, black] (inst.west) -- ++(-3,0) node[midway, above=-5pt, font=\scriptsize] {Switch to host 1};
+			\draw[->, thick, black] (inst.east) -- ++(3,0) node[midway, above=-5pt, font=\scriptsize] {Switch to host 3};
+			% Arrows backend
+			\draw[->, thick, black] (back1.north) -- ++(0,0.25);
+			\draw[->, thick, black] (back2.north) -- ++(0,0.25);
+			\draw[->, thick, black] (back3.north) -- ++(0,0.25);
+			% Arrows frontend
+			\draw[->, thick, black] (front1.north) -- (back1.south);
+			% \draw[->, thick, black] (front1.north) -- (back2.south);
+			% \draw[->, thick, black] (front1.north) -- (back3.south);
+			% \draw[->, thick, black] (front2.north) -- (back1.south);
+			\draw[->, thick, black] (front2.north) -- (back2.south);
+			% \draw[->, thick, black] (front2.north) -- (back3.south);
+			% \draw[->, thick, black] (front3.north) -- (back1.south);
+			% \draw[->, thick, black] (front3.north) -- (back2.south);
+			\draw[->, thick, black] (front3.north) -- (back3.south);
+			% Arrows Message
+			\draw[->, thick, black] (message.north) -- (front1.south);
+			\draw[->, thick, black] (message.north) -- (front2.south);
+			\draw[->, thick, black] (message.north) -- (front3.south);
+		\end{tikzpicture}
+	\end{adjustbox}
+	\caption{Message Oriented Routing.}\label{message_routing}
+\end{figure}
 
 \subsection{Usability}
 An essential feature of a DaaS platform is its strong user-friendliness,
