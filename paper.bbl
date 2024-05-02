@@ -1,0 +1,128 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{balen2020performance}
+Balen, J., Vdovjak, K., Martinovi{\'c}, G.: Performance evaluation of windows
+  virtual machines on a linux host. Automatika: {\v{c}}asopis za automatiku,
+  mjerenje, elektroniku, ra{\v{c}}unarstvo i komunikacije  \textbf{61}(3),
+  425--435 (2020)
+
+\bibitem{OJCC_2023v8i1n01_Baun}
+Baun, C., Bouche, J.: Closing the gap between web applications and desktop
+  applications by designing a novel desktop-as-a-service (daas) with seamless
+  support for desktop applications. Open Journal of Cloud Computing (OJCC)
+  \textbf{8}(1),  1--19 (2023)
+
+\bibitem{boras2020performance}
+Boras, M., Balen, J., Vdovjak, K.: Performance evaluation of linux operating
+  systems. In: 2020 International Conference on Smart Systems and Technologies
+  (SST). pp. 115--120. IEEE (2020)
+
+\bibitem{celesti2016improving}
+Celesti, A., Mulfari, D., Fazio, M., Villari, M., Puliafito, A.: Improving
+  desktop as a service in openstack. In: 2016 IEEE Symposium on Computers and
+  Communication (ISCC). pp. 281--288. IEEE (2016)
+
+\bibitem{ChoyWongSimonRosenberg2012}
+Choy, S., Wong, B., Simon, G., Rosenberg, C.: The brewing storm in cloud
+  gaming: A measurement study on cloud to end-user latency. In: 2012 11th
+  Annual Workshop on Network and Systems Support for Games (NetGames). pp.~1--6
+  (2012). \doi{10.1109/NetGames.2012.6404024}
+
+\bibitem{claypool2010latency}
+Claypool, M., Claypool, K.: Latency can kill: precision and deadline in online
+  games. In: Proceedings of the first annual ACM SIGMM conference on Multimedia
+  systems. pp. 215--222 (2010)
+
+\bibitem{clincy2013subjective}
+Clincy, V., Wilgor, B.: Subjective evaluation of latency and packet loss in a
+  cloud-based game. In: 2013 10th International Conference on Information
+  Technology: New Generations. pp. 473--476. IEEE (2013)
+
+\bibitem{felter2015updated}
+Felter, W., Ferreira, A., Rajamony, R., Rubio, J.: An updated performance
+  comparison of virtual machines and linux containers. In: 2015 IEEE
+  international symposium on performance analysis of systems and software
+  (ISPASS). pp. 171--172. IEEE (2015)
+
+\bibitem{garmpis2016design}
+Garmpis, A., Gouvatsos, N.: Design and development of webubu: An innovating
+  web-based instruction tool for linux os courses. Computer Applications in
+  Engineering Education  \textbf{24}(2),  313--319 (2016)
+
+\bibitem{ApacheGuacamole2024}
+Guacamole, A.: Configuring guacamole (2024),
+  \url{https://guacamole.apache.org/doc/1.5.5/gug/configuring-guacamole.html}
+
+\bibitem{huang2012performance}
+Huang, C., Chen, J., Zhang, L., Luo, Q.: Performance evaluation of
+  virtualization technologies for windows programs running on linux operating
+  system. In: International Conference on Network Computing and Information
+  Security. pp. 759--766. Springer (2012)
+
+\bibitem{jarschel2011evaluation}
+Jarschel, M., Schlosser, D., Scheuring, S., Ho{\ss}feld, T.: An evaluation of
+  qoe in cloud gaming based on subjective tests. In: 2011 Fifth International
+  Conference on Innovative Mobile and Internet Services in Ubiquitous
+  Computing. pp. 330--335. IEEE (2011)
+
+\bibitem{lampe2014assessing}
+Lampe, U., Wu, Q., Dargutev, S., Hans, R., Miede, A., Steinmetz, R.: Assessing
+  latency in cloud gaming. In: Cloud Computing and Services Science: Third
+  International Conference, CLOSER 2013, Aachen, Germany, May 8-10, 2013,
+  Revised Selected Papers 3. pp. 52--68. Springer (2014)
+
+\bibitem{liu2012research}
+Liu, K., Dong, L.j.: Research on cloud data storage technology and its
+  architecture implementation. Procedia Engineering  \textbf{29},  133--137
+  (2012)
+
+\bibitem{magana2019remote}
+Magana, E., Sesma, I., Morato, D., Izal, M.: Remote access protocols for
+  desktop-as-a-service solutions. PloS one  \textbf{14}(1),  e0207512 (2019)
+
+\bibitem{potdar2020performance}
+Potdar, A.M., Narayan, D., Kengond, S., Mulla, M.M.: Performance evaluation of
+  docker container and virtual machine. Procedia Computer Science
+  \textbf{171},  1419--1428 (2020)
+
+\bibitem{sefraoui2012openstack}
+Sefraoui, O., Aissaoui, M., Eleuldj, M., et~al.: Openstack: toward an
+  open-source solution for cloud computing. International Journal of Computer
+  Applications  \textbf{55}(3),  38--42 (2012)
+
+\bibitem{seo2014performance}
+Seo, K.T., Hwang, H.S., Moon, I.Y., Kwon, O.Y., Kim, B.J.: Performance
+  comparison analysis of linux container and virtual machine for building
+  cloud. Advanced Science and Technology Letters  \textbf{66}(105-111), ~2
+  (2014)
+
+\bibitem{sergeev2022docker}
+Sergeev, A., Rezedinova, E., Khakhina, A.: Docker container performance
+  comparison on windows and linux operating systems. In: 2022 International
+  Conference on Communications, Information, Electronic and Energy Systems
+  (CIEES). pp.~1--4. IEEE (2022)
+
+\bibitem{sulaiman2021comparison}
+Sulaiman, N.S., Raffi, A.S.H.A.: Comparison of operating system performance
+  between windows 10 and linux mint. International Journal of Synergy in
+  Engineering and Technology  \textbf{2}(1),  92--102 (2021)
+
+\bibitem{vaquero2011dynamically}
+Vaquero, L.M., Rodero-Merino, L., Buyya, R.: Dynamically scaling applications
+  in the cloud. ACM SIGCOMM Computer Communication Review  \textbf{41}(1),
+  45--52 (2011)
+
+\bibitem{vidyabanu2011implementation}
+VidyaBanu, R., Preethi, J., Dinesh, N.: {Implementation of financial system
+  using EyeOS in the cloud environment}. In: 2011 International Conference on
+  Recent Trends in Information Technology (ICRTIT). pp. 656--660. IEEE (2011)
+
+\bibitem{zhong2010virtualization}
+Zhong, L., Wo, T., Li, J., Li, B.: A virtualization-based saas enabling
+  architecture for cloud computing. In: 2010 Sixth International Conference on
+  Autonomic and Autonomous Systems. pp. 144--149. IEEE (2010)
+
+\end{thebibliography}

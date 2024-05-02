@@ -63,7 +63,7 @@ This paper discusses challenges during the development and implementation of a n
 
 Undoubtedly, the development of a feature-rich DaaS system is a complex task, riddled with numerous obstacles and challenges. This paper meticulously addresses these challenges, categorizing them under compatibility, performance, stability, and usability. It not only brings these obstacles to light but also presents the solutions we devised to overcome them, along with the valuable lessons we learned in the process.
 
-This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture DESIGN we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions, and section~\ref{sec:NextSteps} includes directions for future work.
+This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture DESIGN we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions and includes directions for future work.
 
 
 % TODO: Christian (1)
@@ -114,6 +114,14 @@ On first thought, the latency requirements of a modern computer game are hardly 
 
 Figure~\ref{figure_architecture} shows the architecture of our novel DaaS solution DESIGN that can run unmodified Linux and Windows applications in Linux containers (Linux and Windows applications compatible with Wine) and virtual machines (Windows applications incompatible with Wine).
 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.75\linewidth]{images/DaaS_DESIGN_Architecture_v12_english.pdf}
+	\caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.} 
+	\label{figure_architecture}
+\end{figure}
+
 The open-source server virtualization platform Proxmox VE runs bare-metal and offers virtual machines with the Kernel-based Virtual Machine (KVM) and container-based virtualization via LXC Linux container. Since the LXC API is, in comparison to the Docker API, rather poorly documented and lacks several features, we considered Docker a better container virtualization solution. A deployment of docker directly in the host-operating system or inside a virtual machine is both possible.
 
 Exporting the graphical user interface of Linux and Windows applications, is possible using the a protocols VNC or RDP. Free server implementations exist for both operating system families. Since the focus of our DaaS solution is to export only the application's graphical user interface and not full desktops -- a feature not all server implementations include -- is the number of available projects and solutions limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software TightVNC and the Windows-internal RDP server can be used.
@@ -128,12 +136,6 @@ In general, the self-developed instance component allows users to carry out esse
 
 % TODO: Die letzten 3 Abschnitte noch überarbeiten und präzisieren
 
-
-\begin{figure}
-	\centering
-	\includegraphics[width=.9\textwidth]{images/DaaS_DESIGN_Architecture_v11_english.pdf}
-	\caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.} \label{figure_architecture}
-\end{figure}
 
 \section{Challenges and Solutions}
 \label{sec:AnalysisPossibleComponents}
@@ -995,13 +997,13 @@ the real challenge for a full-fledged DaaS system lies in it's abilities
 to combining such isolated solutions appropriately
 and for each specific infrastructure and platform configuration.
 
-\section{Conclusion}
+\section{Conclusion and Outlook}
 \label{sec:Conclusions}
 
 In this paper, we describe an architecture for a novel and feature-rich DaaS that is, by principle, superior to comparable products and approaches because it supports running unmodified Linux and Windows applications. Furthermore, we identified characteristic issues -- concerning compatibility, performance, stability, and usability -- during the development and implementation of our DaaS and present solutions to overcome these challenges.
 
-\section{Outlook}
-\label{sec:NextSteps}
+% \section{Outlook}
+% \label{sec:NextSteps}
 
 For future work, we plan to do a performance analysis that includes an evaluation of different user behaviors for various popular applications and realistic deployment and utilization scenarios.
 
