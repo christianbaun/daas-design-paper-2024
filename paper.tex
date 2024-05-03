@@ -61,7 +61,7 @@ Desktop-as-a-Service (DaaS) is a cloud service category with tremendous potentia
 
 This paper discusses challenges during the development and implementation of a novel Desktop-as-a-Service (DaaS) solution called DESIGN that enables the deployment and usage of unmodified Linux and Windows applications in the same way as web applications and can run inside public resources but can also be deployed in a private context. Since all interaction with DESIGN and the applications inside is done via a user's web browser, the users can use any client, no matter what hardware or host operating system it is compromised of. A browser is the only software component required to use the novel DaaS service.
 
-Undoubtedly, developing a feature-rich DaaS system is a complex task, riddled with numerous obstacles and challenges. This paper meticulously categorizes these challenges into compatibility, performance, stability, and usability. It brings these obstacles to light and presents the solutions we devised to overcome them, along with the valuable lessons we learned in the process.
+Undoubtedly, developing a feature-rich DaaS system is a complex task, riddled with numerous obstacles and challenges. This paper meticulously categorizes these challenges into compatibility, performance, stability, and usability. It reveals these obstacles and presents the solutions we devised to overcome them, along with the valuable lessons we learned in the process.
 
 This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture DESIGN we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions and includes directions for future work.
 
@@ -79,9 +79,9 @@ This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} d
 DaaS has been a well-known service category since the emergence of cloud computing. Still, it got much less attention in research and literature.
 The challenges and obstacles when developing DaaS solutions, rather than infrastructure (IaaS) and platform services (PaaS), have seldom been discussed in the literature.
 
-Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using the IaaS solution OpenStack~\cite{sefraoui2012openstack} and analyzed the characteristics and performance aspects of using noVNC, which is a client for the protocol Virtual Network Computing (VNC) that is implemented in the Hypertext Markup Language (HTML) and JavaScript, the protocol SPICE (Simple Protocol for Independent Computing Environments), and the remote desktop gateway Apache Guacamole as solutions for providing access to the desktop via a browser. One focus of the paper is the redirection of the sound interface of the virtual desktop. The paper's authors conclude that Guacamole, in combination with the Remote Desktop Protocol (RDP), is the best solution. The authors evaluated the lag time for remote audio playback in an Internet scenario by measuring the time between the automated initiation of the live streaming using the media player software VLC and the arrival of the music data by analyzing network traffic via monitoring software Wireshark. When using Guacamole combined with the protocol RDP, the average lag was around 750\,ms. When using Guacamole combined with the protocol VNC, the average lag was around 1750\,ms. The paper also includes a short evaluation of the lag for video frames represented by background color changes of a Java application. Again, the configuration Guacamole and RDP offered the best performance video update with an average lag of around 300\,ms. The configuration of Guacamole and VNC caused an average lag of around 500\,ms.
+Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using the IaaS solution OpenStack~\cite{sefraoui2012openstack} and analyzed the characteristics and performance aspects of using noVNC, which is a client for the protocol Virtual Network Computing (VNC) that is implemented in the Hypertext Markup Language (HTML) and JavaScript, the protocol SPICE (Simple Protocol for Independent Computing Environments), and the remote desktop gateway Apache Guacamole as solutions for providing access to the desktop via a browser. One focus of the paper is the redirection of the sound interface of the virtual desktop. The paper's authors conclude that Guacamole, in combination with the Remote Desktop Protocol (RDP), is the best solution. The authors evaluated the lag time for remote audio playback in an Internet scenario by measuring the time between the automated initiation of the live streaming using the media player software VLC and the arrival of the music data by analyzing network traffic via the monitoring software Wireshark. When using Guacamole combined with the protocol RDP, the average lag was around 750\,ms. When using Guacamole combined with the protocol VNC, the average lag was around 1750\,ms. The paper also includes a short evaluation of the lag for video frames represented by background color changes of a Java application. Again, the configuration Guacamole and RDP offered the best performance video update with an average lag of around 300\,ms. The configuration of Guacamole and VNC caused an average lag of around 500\,ms.
 
-Magana et al.~\cite{magana2019remote} compared in 2019 the most popular remote desktop protocols and software implementations. The authors analyzed five protocols: PCoIP used in the Amazon WorkSpaces, RDP, TeamViewer, VNC, and Citrix Independent Computing Architecture (ICA). In the paper, the network transfer rate and its relation to the quality experienced by the DaaS user are evaluated by assuming three scenarios: using an office software suite, web browsing, and video streaming. One emphasis of the paper is comparing the transfer rate of the different protocols for three scenarios. In the Office Software Suite scenario, the transfer rate is measured and compared when performing several different tasks like opening and editing a document (typing), loading an image, and saving a document. The web browsing scenario covers requesting three different web pages, and for the video streaming scenario, the same YouTube video file was viewed at different resolutions. The authors conclude that RDP requires fewer downstream and upstream network resources for all three scenarios. It is important to understand that the protocols RDP and VNC are implemented in open-source projects and proprietary solutions for many different operating systems. Depending on the different quality levels of the many existing implementations, it is difficult to generalize about the performance of the protocols, as individual implementations may have better or worse performance characteristics than expected.
+Magana et al.~\cite{magana2019remote} compared in 2019 the most popular remote desktop protocols and software implementations. The authors analyzed five protocols: PCoIP used in the Amazon WorkSpaces, RDP, TeamViewer, VNC, and Citrix Independent Computing Architecture (ICA). In the paper, the network transfer rate and its relation to the quality experienced by the DaaS user are evaluated by assuming three scenarios: using an office software suite, web browsing, and video streaming. One emphasis of the paper is comparing the transfer rate of the different protocols for three scenarios. In the Office Software Suite scenario, the transfer rate is measured and compared when performing several tasks like opening and editing a document (typing), loading an image, and saving a document. The web browsing scenario covers requesting three different web pages, and for the video streaming scenario, the same YouTube video file was viewed at different resolutions. The authors conclude that RDP requires fewer downstream and upstream network resources for all three scenarios. It is important to understand that the protocols RDP and VNC are implemented in open-source projects and proprietary solutions for many different operating systems. Depending on the various quality levels of the many existing implementations, it is difficult to generalize about the performance of the protocols, as individual implementations may have better or worse performance characteristics than expected.
 
 Several works in literature have analyzed the latency of Cloud gaming services that have, in some aspects, similar requirements to DaaS offerings. According to Lampe et al.~\cite{lampe2014assessing}, the latency of locally executed games is compromised of the following components:
 
@@ -124,15 +124,15 @@ Figure~\ref{figure_architecture} shows the architecture of our novel DaaS soluti
 
 The open-source server virtualization platform Proxmox VE runs bare-metal and offers virtual machines with the Kernel-based Virtual Machine (KVM) and container-based virtualization via LXC Linux container. Since the LXC API is, in comparison to the Docker API, rather poorly documented and lacks several features, we considered Docker a better container virtualization solution. A deployment of docker directly in the host-operating system or inside a virtual machine is both possible.
 
-Exporting the graphical user interface of Linux and Windows applications, is possible using the a protocols VNC or RDP. Free server implementations exist for both operating system families. Since the focus of our DaaS solution is to export only the application's graphical user interface and not full desktops -- a feature not all server implementations include -- is the number of available projects and solutions limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software TightVNC and the Windows-internal RDP server can be used.
+Exporting the graphical user interface of Linux and Windows applications is possible using VNC or RDP protocols. Free server implementations exist for both operating system families. Since our DaaS solution focuses on exporting only the application's graphical user interface and not full desktops -- a feature not all server implementations include -- the number of available projects and solutions is limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software TightVNC and the Windows-internal RDP server can be used.
 
-One of the main goals of DESIGN is to allow all interactions to be carried out solely by using a browser. Thus, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole which supports VNC and RDP both and includes further relevant features regarding sound and printing.
+One of the main goals of DESIGN is to allow all interactions to be carried out solely using a browser. Thus, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole, which supports VNC and RDP and includes further relevant features regarding sound and printing.
 
 The core components of DESIGN are our self-developed Web UI and the Control Application, which carry out the communication between all service components.
 
-When starting a virtual machine or container instance, it automatically includes an SSH service. Our self-developed instance component waits until the SSH service is ready to satisfy requests. In case applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
+Starting a virtual machine or container instance automatically includes an SSH service. Our self-developed instance component waits until the SSH service is ready to satisfy requests. If applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
 
-In general, the self-developed instance component allows users to carry out essential administration and usage tasks that the operating system does not offer via a generalized API.
+The self-developed instance component generally allows users to carry out essential administration and usage tasks that the operating system does not offer via a generalized API.
 
 % TODO: Die letzten 3 Abschnitte noch überarbeiten und präzisieren
 
@@ -143,7 +143,7 @@ In general, the self-developed instance component allows users to carry out esse
 % TODO: Christian (1)
 % TODO: Johannes (2)
 
-While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each of these issues belongs to one of these four categories: compatibility, performance, stability, and usability. This section presents the issues we were confronted with, the possible approaches we analyzed, and the solutions we chose.
+While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each issue belongs to one of four categories: compatibility, performance, stability, and usability. This section presents the issues we faced, the possible approaches we analyzed, and the solutions we chose.
 
 \subsection{Compatibility}
 % 
@@ -152,15 +152,16 @@ While developing the novel DaaS platform DESIGN, we faced multiple obstacles and
 
 The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular applications.
 
-Examples worth mentioning in this context include eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} which simulates a desktop environment using HTML, the scripting language PHP, JavaScript, and the MySQL database management system. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of a Windows desktop in the browser using the discontinued application framework Microsoft Silverlight. Despite being free software, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications there. All required applications have to be developed as web applications. This limitation caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service (SaaS) offerings like Microsoft Office 365 and Google Docs already exist.
+Examples worth mentioning in this context include eyeOS and SilveOS. The project eyeOS~\cite{liu2012research,vidyabanu2011implementation} simulates a desktop environment using HTML, the scripting language PHP, JavaScript, and the MySQL database management system. The project SilveOS~\cite{garmpis2016design} mimics the look and feel of a Windows desktop in the browser using the discontinued application framework Microsoft Silverlight. Despite being free software, both solutions have never become widely used since it is impossible to import and use native Windows or Linux applications there. All required applications have to be developed as web applications. This limitation caused most potential users to lose interest in web desktops because many popular native applications can hardly be replaced or re-developed, and many feature-rich and well-established Software-as-a-Service (SaaS) offerings like Microsoft Office 365 and Google Docs already exist.
 
-A new DaaS is only accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports Linux and Windows applications both to enable flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
+A new DaaS is only accepted by a broad user group if it enables the integration of native applications in an unchanged manner. It is also desirable that a DaaS supports Linux and Windows applications both to allow flexible working and make the operation of a virtualization solution on the desktops unnecessary. Ideally, it should also be possible to run native Mac OS applications. However, this goal is difficult to achieve under legal conditions due to the Mac OS operating system's licensing restrictions.
 
 Further essential features for most users are printing, sound, and compatibility with external storage media.
 
 Guacamole supports redirecting audio, printing, and disk access via the protocol RDP. The printing feature does not allow access to local or remote printers; instead, it allows users to print directly to PDF files, which are received by the user's web browser. As a prerequisite, the GhostScript interpreter must be deployed on the Guacamole server. File transfer over RDP supports Guacamole by emulating a virtual disk drive that persistently stores data on the Guacamole server.~\cite{ApacheGuacamole2024}
 
-Compared to RDP, the protocol VNC offers fewer features in Guacamole since it does not support sound on its own. However, Guacamole supports sound using PulseAudio\footnote{On Linux operating systems, sound and microphone devices are accessed via sound servers like PulseAudio and PipeWire, which interact with the sound interface present in the kernel, e.g., Advanced Linux Sound Architecture (ALSA) or Open Sound System (OSS)} as a workaround solution. VNC also does not offer file transfer and access to external storage media, but as a workaround solution, Guacamole supports file transfer file transfer via the SSH File Transfer Protocol (SFTP) which is an extension of the Secure Shell protocol (SSH).
+Compared to RDP, the protocol VNC offers fewer features in Guacamole since it does not support sound on its own. However, Guacamole supports sound using PulseAudio\footnote{On Linux operating systems, sound and microphone devices are accessed via sound servers like PulseAudio and PipeWire, which interact with the sound interface present in the kernel, e.g., Advanced Linux Sound Architecture (ALSA) or Open Sound System (OSS)} as a workaround solution. VNC also does not offer file transfer and access to external storage media. Still, as a workaround solution, Guacamole supports file transfer file transfer via the SSH File Transfer Protocol (SFTP), which is an extension of the Secure Shell protocol (SSH).
+
 
 
 
@@ -221,7 +222,7 @@ Subsequently, we give a more comprehensive description
 of our specific design decisions and tailored solutions.
 
 Performance, from our viewpoint, stands out as the most crucial system property,
-implying influence of other  relevant properties,
+implying the influence of other  relevant properties,
 such as user experience, system responsiveness, and overall efficiency.
 Consequently, we encountered multifaceted challenges
 that potentially intersected across several layers within our architecture.
@@ -253,11 +254,10 @@ drawing from our experiences obtained during the project.
 
 
 \subsubsection{Infrastructure and Platform}
-In general can be said that the chosen infrastructure, platform,
+In general, it can be said that the chosen infrastructure, platform,
 and utilized software combined may have the most impact on the overall resource consumption
 and are therefore of major importance.
-As a DaaS system combines all aspects of IaaS-, PaaS, and SaaS-based computation
-each individual performance characteristics has to be taken into account.
+As a DaaS system combines all aspects of IaaS-, PaaS, and SaaS-based computation, each performance characteristic must be considered.
 
 
 Regarding Infrastructure-as-a-Service (IaaS),
@@ -293,22 +293,23 @@ with a container-based solution integrating wine
 For SaaS, performance largely depends on the underlying usage model
 and the actual software being virtualized.
 Depending on the use case, influential properties
-such as multi-tenancy, provision strategies or the virtualized data type
+such as multi-tenancy, provision strategies, or the virtualized data type
 might be utilized to varying degrees, resulting in overall
 better or worse performing systems ~\cite{zhong2010virtualization}.
 
 Despite the potential for usecase-specific optimization,
 we emphasize that for DaaS systems,
 coverage of a broad range of potential use cases is generally more favorable
-than solving a particular use case in the most efficient way.
+than solving a particular use case most efficiently.
 Therefore, we consider all user-facing desktop applications
 as plausible candidates for migration to our systems,
 rather than more complex distributed systems
-for which a tailored environments might be more suitable.
+for which tailored environments might be more suitable.
 
-Figure~\ref{hosting_scenarios} visualizes the available hosting startegies for our platform.
+
+Figure~\ref{hosting_scenarios} visualizes the available hosting strategies for our platform.
 We aim to support any Windows or Linux-based application in virtual machines
-and support any Linux- and Wine-based applications for container environments.
+and any Linux- and Wine-based applications in container environments.
 
 \begin{figure}
 	\centering

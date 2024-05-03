@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.3.13)  3 MAY 2024 10:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.3.13)  3 MAY 2024 11:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -613,7 +613,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 163.
  [6]
 [7]
-Overfull \hbox (6.61319pt too wide) in paragraph at lines 358--369
+Overfull \hbox (6.61319pt too wide) in paragraph at lines 359--370
 []\T1/cmr/m/n/10 We uti-lize the Gua-camole desk-top gate-way im-ple-men-ta-tio
 n, sup-port-ing widely-
  []
@@ -622,7 +622,7 @@ n, sup-port-ing widely-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-Overfull \hbox (6.21051pt too wide) in paragraph at lines 474--481
+Overfull \hbox (6.21051pt too wide) in paragraph at lines 475--482
 []\T1/cmr/m/n/10 Regarding other com-po-nents such as database ac-cess, au-then
 -ti-ca-tion providers,
  []
@@ -632,13 +632,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
 [10]
-Overfull \hbox (2.1842pt too wide) in paragraph at lines 711--722
+Overfull \hbox (2.1842pt too wide) in paragraph at lines 712--723
 \T1/cmr/m/n/10 stances to ded-i-cated sys-tems and uti-liz-ing stan-dard-ized l
 oad-balancing strate-
  []
 
 [11]
-Overfull \hbox (2.21614pt too wide) in paragraph at lines 752--766
+Overfull \hbox (2.21614pt too wide) in paragraph at lines 753--767
 []\T1/cmr/bx/n/10 Distributed Filesys-tem: \T1/cmr/m/n/10 Within our ar-chi-tec
 -ture, we uti-lize the dis-tributed
  []
@@ -661,7 +661,7 @@ Here is how much of TeX's memory you used:
  36429 multiletter control sequences out of 15000+600000
  569058 words of font info for 55 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
- 84i,10n,93p,1593b,850s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,10n,93p,1597b,850s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/
 fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/c
 m-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb
@@ -670,7 +670,7 @@ onts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm
 -super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
 </usr/share/texmf/fonts/type1/public/cm-super/sfsl1000.pfb></usr/share/texmf/fo
 nts/type1/public/cm-super/sftt0900.pfb>
-Output written on paper.pdf (17 pages, 472958 bytes).
+Output written on paper.pdf (17 pages, 472824 bytes).
 PDF statistics:
  128 PDF objects out of 1000 (max. 8388607)
  78 compressed objects within 1 object stream
