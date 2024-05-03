@@ -344,48 +344,45 @@ in delivering web-based access to DaaS apps,
 directly impacting system responsiveness experienced by users.
 Supporting standardized frame-buffer protocols enables user interaction initially
 and provide additional access to external devices like printers or USB sticks.
-In cases involving for example video content transmission,
+In cases involving, for example, video content transmission,
 network bandwidth often becomes the main bottleneck,
 especially with high-resolution video streams.
-In contrast to that,  when transmitting audio, mouse movements,
+In contrast to that, when transmitting audio, mouse movements,
 or keyboard inputs, network latency becomes more important.
 
 Application-specific requirements can be managed to some extent
 through protocol-inherent tuning parameters and compression algorithms.
-Our solution therefore offers a range of tuning options
-in order to adapt to different use cases
-and empowering users to choose their own tailored solution.
+Our solution, therefore, offers a range of tuning options
+to adapt to different use cases
+and empowering users to choose their own tailored solutions.
 
 We utilize the Guacamole desktop gateway implementation,
-supporting widely-used frame-buffer protocols like VNC and RDP,
+supporting widely used frame-buffer protocols like VNC and RDP,
 along with relevant tuning options.
 Guacamole also enables audio support and integration with external devices
 through a JavaScript-based web client (guacamole.js).
 As depicted in figure~\ref{websocket_proxy},
-the proxy component recives HTTP requests from the guacamole.js webclient
-and forwarded by the backend by using regular WebSocket opcodes (Guacamole protocol).
+the proxy component receives HTTP requests from the guacamole.js web client
+and is forwarded by the backend by using regular WebSocket opcodes (Guacamole protocol).
 Such communication is forwarded to the Guacamole daemon (guacd)
-which in turn communicates to each instance
-by using the frame-buffer protocol of choice (VNC or RDP).
-
+which in turn communicates to each instance using the frame-buffer protocol of choice (VNC or RDP).
 
 However, integrating Guacamole into the system
 requires consideration of additional factors besides the frame-buffer protocols itself.
-Authentication mechanisms for example are particularly important in a DaaS context,
+Authentication mechanisms, for example, are essential in a DaaS context,
 as users expect seamless authentication across the whole system
 without multiple logins per session.
 Additionally, safeguarding sensitive information like user passwords is crucial
 for maintaining system security and user trust.
 To mitigate the risk of unintended system manipulation, Guacamole was integrated
-in a proxied approach and by using websockets.
-This ensures that credentials of a generated instance remain secret to the host system
+using a proxied approach and WebSockets.
+This ensures that the credentials of a generated instance remain secret to the host system
 while still providing authorized, passwordless access to the hosted application.
 
 Moreover, the proxy mechanism enables support for other additional features
 such as dynamic desktop resizing.
-While Guacamole offers support for that by default in RDP,
-support is completely missing for the VNC protocol.
-Nevertheless, the proxied approach enables to intercept all exchanged websocket opcodes
+While Guacamole offers support for that by default in RDP, support for the VNC protocol is completely missing.
+Nevertheless, the proxied approach enables intercepting all exchanged WebSocket opcodes
 and by listening for size requests
 the requested feature could be added
 by directly interacting with the instance on another layer.
@@ -442,7 +439,7 @@ Another critical aspect directly related to performance and responsiveness
 is how data is internally processed, stored, and communicated
 among all involved components and instances.
 This includes metadata collected and processed by essential components
-and involves direct exchange of raw data with object instances.
+and involves the direct exchange of raw data with object instances.
 
 Ensuring a satisfying user experience in a DaaS system
 implies specific components in a host system.
@@ -450,18 +447,18 @@ This includes access to all backend services
 used to create containers and virtual machines,
 local or remote databases, authentication services, filesystems, and network devices.
 Additionally, a web server is integrated to provide relevant API endpoints
-for frontend communication and websocket endpoints for viewer communication.
+for frontend communication and WebSocket endpoints for viewer communication.
 
 Generally spoken, all of these components can potentially become bottlenecks
 when handling high throughputs or large amounts of concurrent applications
-requiring low latency access and especially if all necessary backend components
+requiring low latency access, especially if all necessary backend components
 are served from the same hardware.
 Architecturally, all relevant components
-must therefore be designed for distribution across different hosting systems.
-However, retaining certain components directly on the host system
+must be designed for distribution across different hosting systems.
+However, retaining specific components directly on the host system
 may still be required to ensure low-latency access.
 
-From our observations, components requiring realtime and low-latency performance,
+From our observations, components requiring real-time and low-latency performance,
 should physically be kept as close to the core hosting system as possible
 as shown in figure~\ref{perf_internal_communication}.
 This includes all data and communication relevant to
@@ -470,12 +467,12 @@ as well as all backend services for hosting containers and virtual machines.
 Ideally, these components should be hosted natively on the host system
 for virtual network and hardware access
 or at least be connected to the same physical network
-in order to minimize network latencies.
+to minimize network latencies.
 
-Regarding other components such as database access,
+Regarding other components, such as database access,
 authentication providers, and filesystems,
 maintaining a close distance from the host is advisable,
-but this depends largely on the total number of users
+but this depends mainly on the total number of users
 as well as their specific use cases.
 On smaller scales, keeping these components
 in close physical proximity to the host remains prudent.
@@ -604,7 +601,7 @@ requiring strong single-thread performance or low latencies.
 To comply with both approaches,
 we designed the system and its backend services
 to be split into logical units that can be distributed across dedicated systems.
-Each backend service receives dedicated configuration
+Each backend service receives a dedicated configuration
 and can be accessed via hostname and port tuples.
 By default, all backend services reside on the same host,
 with tuples derived from the host configuration.
@@ -615,7 +612,7 @@ using a common database containing meta information.
 
 Vertical scaling of DaaS nodes is not currently planned,
 but administrators are free to use custom third-party toolchains,
-such as GPU virtualization, for vertical scaling on a per-host basis.
+such as GPU virtualization for vertical scaling on a per-host basis.
 Although vertical scaling within a host
 is beyond the scope of our research project,
 scaling the instances hosted within the system is feasible for both dimensions.
@@ -626,16 +623,16 @@ allowing for arbitrary configurations.
 For horizontal scaling of instances, the built-in mechanisms
 of each backend service are automatically configured
 and utilized to distribute instances across a pool of connected nodes.
-For virtual machines, Proxmox implements such mechanisms
-as part of its `Proxmox VE High Availability (HA)' cluster.
-For containers, similar concepts can be integrated with any backend service,
+Proxmox implements such mechanisms
+for virtual machines as part of its `Proxmox VE High Availability (HA)' cluster.
+Similar concepts can be integrated for containers with any backend service,
 such as Kubernetes.
 Within these clusters,
 DaaS instances are entirely agnostic to their hosting system
 and only need to be reachable
 via a known hostname or IP as a single requirement.
 As shown in figure~\ref{scale_objects_horizontal},
-we provide a globally maintained state of data, authentication and storage
+we provide a globally maintained state of data, authentication, and storage
 which is accessible either by horizontally scaled backends and frontends
 or otherwise,
 by horizontally and vertically scaled instances in our DaaS object domain.
@@ -718,7 +715,7 @@ and which will be briefly described following:
 	      to serve as a gateway between the user and the backend service
 	      containing all relevant instances.
 	      Both components contribute to redundancy
-	      by distributing requests and responses to their respecitive recipients
+	      by distributing requests and responses to their respective recipients
 	      instead of processing them on their own.
 	\item \textbf{Instances:} Redundancy of instances
 	      It is not a necessary condition for DaaS systems in general,
@@ -726,9 +723,9 @@ and which will be briefly described following:
 	      By using highly available clusters within our backend services
 	      redundancy can be achieved by using the corresponding API endpoints
 	      previously described and by parameterizing them appropriately.
-	\item \textbf{Database:}
+\item \textbf{Database:}
 	      The database is integrated as a backend service
-	      and is therefore independent of surrounding components and contexts.
+	      and is, therefore, independent of surrounding components and contexts.
 	      It can be distributed to a dedicated system if necessary.
 	      Modern database solutions, like MariaDB,
 	      offer rich features for maintaining specific data consistency strategies
@@ -741,7 +738,7 @@ and which will be briefly described following:
 	      Authentication within our architecture is implemented as a backend service,
 	      allowing for distribution to any dedicated system.
 	      It can also be targeted by standardized load-balancing mechanisms
-	      and remains fully agnostic of surrounding components
+	      and remains entirely agnostic of surrounding components
 	      or calling contexts.
 	      The authentication system maintains its credential registry
 	      in a separate database, along with a customizable set
@@ -749,7 +746,7 @@ and which will be briefly described following:
 	      Additionally, it implements the well-defined OAuth 2.0 standard
 	      to facilitate remote authentication.
 	      In our final version,
-	      a customizable amount of redundant systems may be configured.
+	      a customizable number of redundant systems may be configured.
 	\item \textbf{Distributed Filesystem:}
 	      Within our architecture, we utilize the distributed filesystem Ceph,
 	      which offers object, block, and file storage capabilities.
@@ -763,7 +760,7 @@ and which will be briefly described following:
 	      and all hosted DaaS instances,
 	      while also offering block storage to the infrastructural backend services.
 	      Hosting DaaS instances directly from the distributed block storage
-	      enables migration and redundancy of instances or in other words, horizontal scaling.
+	      enables migration and redundancy of instances or, in other words, horizontal scaling.
 \end{itemize}
 \begin{figure}
 	\centering
@@ -854,7 +851,7 @@ and as long relevant backend services remain available.
 
 If that is the case, each distributed DaaS node might only contain essential and time-critical components,
 including the backend service hosting relevant instances as well as the described
-websocket proxy connected to the guacamole daemon and the user.
+WebSocket proxy connected to the guacamole daemon and the user.
 Any other component may reside elsewhere within the DaaS network.
 
 \begin{figure}
@@ -927,7 +924,7 @@ and the free software TightVNC offer the export of full desktops and single wind
 For Linux operating system deployments,
 the free software projects xrdp and x11vnc enable all desired features
 and single-app functionality can be easily obtained
-by using a custom window manager such as for example qtile
+by using a custom window manager such, as for example, qtile
 ~\footnote{\url{https://qtile.org/}}.
 
 Table~\ref{tab:DaaS_Services_Overview} includes an overview
@@ -966,7 +963,7 @@ for dynamic desktop resizing with VNC,
 leading to misaligned layouts and a poor user experience.
 To address this until such features are available in Guacamole
 \footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
-we implemented a separate mechanism using a websocket proxy
+we implemented a separate mechanism using a WebSocket proxy
 and direct interaction with each instance.
 
 Additionally, protocol-specific behaviors may vary
@@ -976,26 +973,26 @@ contrasting with the behavior observed in equivalent Linux-based virtual machine
 To overcome such limitations, we created a separate layer around the Guacamole client,
 adapting to each infrastructure, platform, or protocol-specific configuration.
 
-Another challenge was managing RDP sessions which are typically tied to actual users,
-unlike VNC sessions which are typically authenticated against
+Another challenge was managing RDP sessions, which are typically tied to actual users,
+unlike VNC sessions, which are typically authenticated against
 a server-maintained user registry.
-Utilizing the websocket proxy, the backend could pass credentials
+Utilizing the WebSocket proxy, the backend could pass credentials
 to the server without revealing them to the user.
 
-Essentially, Guacamole with its protocol implementations and additional features like audio and printing,
+Essentially, Guacamole, with its protocol implementations and additional features like audio and printing,
 provided the fundamental base for our core capabilities.
 
-Finally mentioned, certain instances might not be fully accessible during runtime
-due to hardware malfunctions, inappropriate system configurations for simply during system updates.
-Therefore, as a failover mechanism additional logic had to be added
-in order to provide reasonable debug views and recovery mechanisms,
-e.g.~to recreate instances from a specific snapshot or configuration state.
+Finally, certain instances might not be fully accessible during runtime
+due to hardware malfunctions and inappropriate system configurations during system updates.
+Therefore, as a failover mechanism, additional logic had to be added
+to provide reasonable debug views and recovery mechanisms,
+e.g., recreate instances from a specific snapshot or configuration state.
 
-A crucial lesson learned was therefore to realize that
+A crucial lesson learned was, therefore, to realize that
 while individual problems can mostly be solved
-using established paradigms, services or libraries with only slight modifications,
-the real challenge for a full-fledged DaaS system lies in it's abilities
-to combining such isolated solutions appropriately
+using established paradigms, services, or libraries with only slight modifications,
+the real challenge for a full-fledged DaaS system lies in its abilities
+to combine such isolated solutions appropriately
 and for each specific infrastructure and platform configuration.
 
 \section{Conclusion and Outlook}
@@ -1011,7 +1008,7 @@ For future work, we plan to do a performance analysis that includes an evaluatio
 
 \section*{Acknowledgements}
 
-This work was funded by the Federal Ministry for Economic Affairs and Climate Action
+The Federal Ministry for Economic Affairs and Climate Action funded this work
 ('\textsl{Bundesministerium f\"ur Wirtschaft und Klimaschutz}')
 in the framework of the central innovation programme
 for small and medium-sized enterprises
