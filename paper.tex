@@ -49,7 +49,7 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Desktop-as-a-Service (DaaS) is a cloud service category with tremendous potential for improving the everyday work of running and using applications. However, existing DaaS solutions have several drawbacks, which have limited the popularity of this service category in the past. Our novel DaaS solution, DESIGN, overcomes existing solutions' limitations and offers significant benefits. It can potentially revolutionize how we use applications, supporting non-modified Linux and Windows applications with just a browser on the client side. This paper describes some of the knowledge we gained during the development because of the challenges we faced and the solutions we found.
+	Desktop-as-a-Service (DaaS) is a cloud service category with tremendous potential for improving the everyday work of running and using applications. However, existing DaaS solutions have several drawbacks, which have limited the popularity of this service category in the past. Our novel DaaS solution, DESIGN, overcomes existing solutions' limitations and offers significant benefits. It can potentially revolutionize how we use applications, supporting non-modified Linux and Windows applications with just a browser on the client side. This paper describes some of the knowledge we gained during the development because of the challenges we faced and the solutions we found.
 
 	\keywords{DaaS \and Compatibility \and Performance \and Stability \and Usability}
 \end{abstract}
@@ -66,14 +66,8 @@ Undoubtedly, developing a feature-rich DaaS system is a complex task, riddled wi
 This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture DESIGN we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions and includes directions for future work.
 
 
-% TODO: Christian (1)
-% TODO: Johannes (2)
-
 \section{Related Work}
 \label{sec:relatedworkAbschnitt}
-% TODO:  Introduce: Infratstructure-as-a-Service  and others (IaaS, PaaS, SaaS, DaaS)
-% TODO: Christian (1)
-% TODO: Johannes (2)
 
 
 DaaS has been a well-known service category since the emergence of cloud computing. Still, it got much less attention in research and literature.
@@ -101,7 +95,8 @@ In cloud gaming scenarios, the following components increase latency further:
 	\item Transfer time (downstream) for sending the video stream to the client.
 	\item Time required for decoding the video stream back into a frame.
 \end{itemize}
-
+% TODO: Mention hardware-accelerated framebuffer protocols like \cite{hanimplementation} \cite{darcy2022latency}
+% TODO: More scientific papers: \cite{di2021network} \cite{carrascosa2022cloud}
 For every deployment scenario or cloud service category possible, users expect a latency value that is not annoying when interacting with the service and its applications. Choy et al.~\cite{ChoyWongSimonRosenberg2012}, Claypool et al.~\cite{claypool2010latency}, and Jarschel et al.~\cite{jarschel2011evaluation} consider a maximum tolerable latency, based on subjective tests, being around 100\,ms. This relatively low value sets the demand for a fast network interaction between client and service and limits their maximum distance. As mentioned in Clincy et al.~\cite{clincy2013subjective}, The former cloud gaming service provider OnLive specified in the year 2010 that the distance between the service provider and the consumer should not be greater than 1000 miles (approx. 1600\,km) because otherwise, the round-trip communications delay time between will be too long for video games.
 
 On first thought, the latency requirements of a modern computer game are hardly the same as those of a desktop application. However, just as with computer games, the lagging operation of desktop programs has a negative impact on the user experience, and with video conferencing or other graphics-intensive applications, the utilization of resources and latency requirements are very similar to computer games.
@@ -109,16 +104,11 @@ On first thought, the latency requirements of a modern computer game are hardly 
 \section{Architecture}
 \label{sec:RecommendDaaSarchitecture}
 % 
-% TODO: Christian (1)
-% TODO: Johannes (2)
-
 Figure~\ref{figure_architecture} shows the architecture of our novel DaaS solution DESIGN that can run unmodified Linux and Windows applications in Linux containers (Linux and Windows applications compatible with Wine) and virtual machines (Windows applications incompatible with Wine).
-
-
 \begin{figure}
 	\centering
 	\includegraphics[width=.75\linewidth]{images/DaaS_DESIGN_Architecture_v12_english.pdf}
-	\caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.} 
+	\caption{Architecture of the novel DaaS DESIGN~\cite{OJCC_2023v8i1n01_Baun}.}
 	\label{figure_architecture}
 \end{figure}
 
@@ -140,15 +130,9 @@ The self-developed instance component generally allows users to carry out essent
 \section{Challenges and Solutions}
 \label{sec:AnalysisPossibleComponents}
 
-% TODO: Christian (1)
-% TODO: Johannes (2)
-
 While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each issue belongs to one of four categories: compatibility, performance, stability, and usability. This section presents the issues we faced, the possible approaches we analyzed, and the solutions we chose.
 
 \subsection{Compatibility}
-% 
-% TODO: Christian (1)
-% TODO: Johannes (2)
 
 The first relevant characteristic of a DaaS that a user is confronted with is the list of compatible applications. In the best case, all applications of all popular operating systems can be integrated and used with such a novel platform. Several DaaS projects and solutions from the last two decades and similar concepts like web desktops or webtops lacked native support for popular applications.
 
@@ -166,54 +150,6 @@ Compared to RDP, the protocol VNC offers fewer features in Guacamole since it do
 
 
 \subsection{Performance}
-% Initial brainstorm:
-% + Welche Performance-Paramter / Kriterien sind hier relevant für die Anwendung / Nutzung
-% + Fokus: Bottlenecks, Möglichkeiten der Performance-Steigerung, Grenzen/Limits, die man akzeptieren muss
-% + Latenz hängt auch immer von Entfernung und Übertragungsmedium ab.
-% + Skalierbarkeit: Stand und Möglichkeite
-% + Ceph-Dateisystem
-% + Datenbank SQlite aktuell. Perspektivisch MariaDB
-% + Guacamole läuft 1x direkt auf dem Host aktuell. Läuft theoretisch auf jedem Host.
-%
-% Structure:
-% performance of:
-% - our serice itself
-% - backend services
-% - Viewer performance
-% Limiting Factors
-% - Hosting
-% - Network
-% - Internal data and communication
-% Chosen techniques/solutions/protocols:
-% - Filesystem (Ceph)
-% - Database (sqlite, mariadb)
-% - Guacamole (Proxy approach)
-% Similar_Examples:
-% - Cloud Gaming efforts 
-%    - technical solutions, 
-%    - latencies, 
-%    - hardware support and integration)
-%
-% TODO: Johannes (1)
-% TODO: Christian (2)
-% TODO: Christian: Latenz bei Cloud-Gaming Erfahrungen
-% TODO: 
-%       - Include overall takeaway messages somewhere before:
-%           - IaaS, PaaS and SaaS combined is defined as DaaS
-%           - Define terms: Backend-service, Host-System, Instance
-%           - We want a stable and usable system first, performance comes second
-%           - Low effort to use and integrate is the most crucial aspect!!!
-%           - No "Gamestation", but all modern applications shall be suported
-%               - "Regular" office apps (Spreadsheets, Editor, Email, Filemanager)
-%               - 3D modelling (Blender, Mayo, etc.)
-%               - Audio/Video Editing? (kdenlive, Adobe Premiere, OBS?)
-%               - Services (Webserver, Emailserver, Fileserver, etc.)
-%           - If several solutions are plausible, implement all and let the user decide
-%           - Give definitions for all specified daas-usecase
-%       - More references
-%       - Illustrate each subsection
-%       - Typos, grammar, etc.
-
 To describe the mission-critical performance aspects of the discussed system,
 we initially provide a brief overview of potential challenges
 by outlining bottlenecks and other relevant problem areas.
@@ -237,21 +173,6 @@ along with our experiences and the chosen mitigation strategies.
 Given the absence of a generalized measurement system,
 we ranked these factors based on their magnitude of impact,
 drawing from our experiences obtained during the project.
-
-% From our point of view, the three most critical performance aspects
-% for Daas-Systems are:
-% \begin{itemize}
-% 	\item Infrastructure and Platform
-% 	\item Network Latency and Bandwidth
-% 	\item Internal Processing and Communication
-% \end{itemize}
-% Since each of them has their own characteristics,
-% specific behavior and requirements, implying a potential impact
-% on the overall system performance and resource utilization,
-% we describe them individually and in more detail
-% in the following separate subsections.
-
-
 
 \subsubsection{Infrastructure and Platform}
 In general, it can be said that the chosen infrastructure, platform,
@@ -295,7 +216,7 @@ and the actual software being virtualized.
 Depending on the use case, influential properties
 such as multi-tenancy, provision strategies, or the virtualized data type
 might be utilized to varying degrees, resulting in overall
-better or worse performing systems ~\cite{zhong2010virtualization}.
+better or worse performing systems~\cite{zhong2010virtualization}.
 
 Despite the potential for usecase-specific optimization,
 we emphasize that for DaaS systems,
@@ -524,46 +445,6 @@ in close physical proximity to the host remains prudent.
 \end{figure}
 
 \subsection{Stability}
-% TODO: Johannes (1)
-% TODO: Christian (2)
-% TODO: Johannes: Beschreibung zur Position der Komponenten, Möglichkeiten der Parallelisierung und Einschränkungen
-%
-% Was ist hier relevant?
-% Verfügbarkeit des Service und der Benutzerdaten
-% Redundante Komponenten (Hardware und Software)
-% Welche Komponenten kann man sinnvoll redundant vorhalten?
-% Was sind die Vor- und Nachteile?
-% Auch Kosten?
-% Wo sehen wir aktuell in unserer Architektur Risiken für Dienstausfall und Datenverlust?
-% Features von Proxmox
-% Ceph-Dateisystem
-% Datenbank SQlite aktuell. Perspektivisch MariaDB
-% Guacamole läuft 1x direkt auf dem Host aktuell. Läuft theoretisch auf jedem Host. Proxmox kann sich darum kümmern?!
-% Docker haben/nicht haben / Vor- und Nachteile
-% Hier auch auf die Skalierbarkeit beziehen
-% Structure:
-%	- Stability
-%		- Redundancy
-%		- Scalability
-%	- Backend-services
-%		- Database
-%		- Authentication
-%		- Distributed Filesystem
-%		- Container/VM (Proxmox, Kubernetes?) 
-%		- Instance error => Recreate
-%	- Considerations:
-%		- TODO: Mention that term: Divide and conquer
-%		- Requirement: Distributable components
-%	- Risks:
-%		- Filesystem error
-%		- Database error
-%		- Authentication error
-%		- Infrastructure error (Container/VM)
-%	- Benefits/Drawbacks:
-%		- Distribution of components is distribution of load => Performance
-%		- Eliminates bottlenecks
-%		- Errors affect only errornous component
-
 Stability in DaaS applications is especially important
 for meeting the demands of continuous and time-critical operations
 across diverse user scenarios.
@@ -723,7 +604,7 @@ and which will be briefly described following:
 	      By using highly available clusters within our backend services
 	      redundancy can be achieved by using the corresponding API endpoints
 	      previously described and by parameterizing them appropriately.
-\item \textbf{Database:}
+	\item \textbf{Database:}
 	      The database is integrated as a backend service
 	      and is, therefore, independent of surrounding components and contexts.
 	      It can be distributed to a dedicated system if necessary.
@@ -924,15 +805,15 @@ and the free software TightVNC offer the export of full desktops and single wind
 For Linux operating system deployments,
 the free software projects xrdp and x11vnc enable all desired features
 and single-app functionality can be easily obtained
-by using a custom window manager such, as for example, qtile
-~\footnote{\url{https://qtile.org/}}.
+by using a custom window manager such,
+as for example, qtile~\footnote{\url{https://qtile.org/}}.
 
 Table~\ref{tab:DaaS_Services_Overview} includes an overview
 of the mentioned service implementations for RDP and VNC protocols
 and their relevant characteristics.
 Further implementations like TigerVNC and protocols like NX NoMachine exist
 but do not seem useful for designing and implementing a novel DaaS because
-they do not meet all feature requirements.~\cite{OJCC_2023v8i1n01_Baun}
+they do not meet all feature requirements~\cite{OJCC_2023v8i1n01_Baun}.
 
 \begin{table}
 	\centering
@@ -961,8 +842,8 @@ faced various limitations, briefly described below.
 One challenge was imposed by Guacamole's current lack of support
 for dynamic desktop resizing with VNC,
 leading to misaligned layouts and a poor user experience.
-To address this until such features are available in Guacamole
-\footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
+To address this until such features are available in
+Guacamole~\footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
 we implemented a separate mechanism using a WebSocket proxy
 and direct interaction with each instance.
 
@@ -1000,11 +881,7 @@ and for each specific infrastructure and platform configuration.
 
 In this paper, we describe an architecture for a novel and feature-rich DaaS that is, by principle, superior to comparable products and approaches because it supports running unmodified Linux and Windows applications. Furthermore, we identified characteristic issues -- concerning compatibility, performance, stability, and usability -- during the development and implementation of our DaaS and present solutions to overcome these challenges.
 
-% \section{Outlook}
-% \label{sec:NextSteps}
-
 For future work, we plan to do a performance analysis that includes an evaluation of different user behaviors for various popular applications and realistic deployment and utilization scenarios.
-
 
 \section*{Acknowledgements}
 
@@ -1017,18 +894,8 @@ for small and medium-sized enterprises
 We thank our project partners from Nuromedia GmbH for their support.
 We especially thank Björn Goetschke, Mike Ludemann, Dario Savella, Holger Sprengel, and Rahul Tomar.
 
-
-
 % ---- Bibliography ----
-%
-% BibTeX users should specify bibliography style 'splncs04'.
-% References will then be sorted and formatted in the correct style.
-%
 \bibliographystyle{splncs04}
 \bibliography{biblio}
-%
-
-% \bibliography{\jobname_no_dashes_at_repeated_names,references}{}
-
 
 \end{document}
