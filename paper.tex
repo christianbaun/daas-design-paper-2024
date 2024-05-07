@@ -77,8 +77,11 @@ Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using the 
 
 Magana et al.~\cite{magana2019remote} compared in 2019 the most popular remote desktop protocols and software implementations. The authors analyzed five protocols: PCoIP used in the Amazon WorkSpaces, RDP, TeamViewer, VNC, and Citrix Independent Computing Architecture (ICA). In the paper, the network transfer rate and its relation to the quality experienced by the DaaS user are evaluated by assuming three scenarios: using an office software suite, web browsing, and video streaming. One emphasis of the paper is comparing the transfer rate of the different protocols for three scenarios. In the Office Software Suite scenario, the transfer rate is measured and compared when performing several tasks like opening and editing a document (typing), loading an image, and saving a document. The web browsing scenario covers requesting three different web pages, and for the video streaming scenario, the same YouTube video file was viewed at different resolutions. The authors conclude that RDP requires fewer downstream and upstream network resources for all three scenarios. It is important to understand that the protocols RDP and VNC are implemented in open-source projects and proprietary solutions for many different operating systems. Depending on the various quality levels of the many existing implementations, it is difficult to generalize about the performance of the protocols, as individual implementations may have better or worse performance characteristics than expected.
 
-Several works in literature have analyzed the latency of Cloud gaming services that have, in some aspects, similar requirements to DaaS offerings. According to Lampe et al.~\cite{lampe2014assessing}, the latency of locally executed games is compromised of the following components:
-
+Several works in literature have analyzed
+the latency of Cloud gaming services that have, in some aspects,
+similar requirements to DaaS offerings.
+According to Lampe et al.~\cite{lampe2014assessing},
+the latency of locally executed games is compromised of the following components:
 \begin{itemize}
 	\item Input lag caused by the controller device (e.g., mouse or keyboard).
 	\item CPU time for processing the user input and the program itself.
@@ -87,19 +90,44 @@ Several works in literature have analyzed the latency of Cloud gaming services t
 	\item LCD response time (time required to display the frame on the screen).
 \end{itemize}
 
-In cloud gaming scenarios, the following components increase latency further:
 
+In cloud gaming scenarios the following components increase latency further:
 \begin{itemize}
 	\item Transfer time (upstream) for sending the user input to the service provider.
 	\item Time required for capturing the frames and encoding it as a video stream.
 	\item Transfer time (downstream) for sending the video stream to the client.
 	\item Time required for decoding the video stream back into a frame.
 \end{itemize}
-% TODO: Mention hardware-accelerated framebuffer protocols like \cite{hanimplementation} \cite{darcy2022latency}
-% TODO: More scientific papers: \cite{di2021network} \cite{carrascosa2022cloud}
-For every deployment scenario or cloud service category possible, users expect a latency value that is not annoying when interacting with the service and its applications. Choy et al.~\cite{ChoyWongSimonRosenberg2012}, Claypool et al.~\cite{claypool2010latency}, and Jarschel et al.~\cite{jarschel2011evaluation} consider a maximum tolerable latency, based on subjective tests, being around 100\,ms. This relatively low value sets the demand for a fast network interaction between client and service and limits their maximum distance. As mentioned in Clincy et al.~\cite{clincy2013subjective}, The former cloud gaming service provider OnLive specified in the year 2010 that the distance between the service provider and the consumer should not be greater than 1000 miles (approx. 1600\,km) because otherwise, the round-trip communications delay time between will be too long for video games.
 
-On first thought, the latency requirements of a modern computer game are hardly the same as those of a desktop application. However, just as with computer games, the lagging operation of desktop programs has a negative impact on the user experience, and with video conferencing or other graphics-intensive applications, the utilization of resources and latency requirements are very similar to computer games.
+For every deployment scenario or cloud service category possible,
+users expect a latency value that is not annoying
+when interacting with the service and its applications.
+Choy et al.~\cite{ChoyWongSimonRosenberg2012},
+Claypool et al.~\cite{claypool2010latency},
+and Jarschel et al.~\cite{jarschel2011evaluation}
+consider a maximum tolerable latency, based on subjective tests,
+being around 100\,ms. This relatively low value sets the demand for a fast network interaction
+between client and service and limits their maximum distance.
+As mentioned in Clincy et al.~\cite{clincy2013subjective},
+The former cloud gaming service provider OnLive specified in the year 2010
+that the distance between the service provider and the consumer
+should not be greater than 1000 miles (approx. 1600\,km) because otherwise,
+the round-trip communications delay time between will be too long for video games.
+A more in-depth comparison of
+commercially available cloud gaming services is given
+by Di Domenico et al.~\cite{di2021network}
+or by Carrascosa et al.~\cite{carrascosa2022cloud}.
+Additionally, implied delays and round-trips can be further reduced
+by using more sophisticated transmission protocols
+directly interacting with GPU drivers,
+such as Moonlight~\cite{hanimplementation}~\cite{darcy2022latency}.
+
+On first thought, the latency requirements of a modern computer game
+are hardly the same as those of a desktop application.
+However, just as with computer games,
+the lagging operation of desktop programs has a negative impact on the user experience,
+and with video conferencing or other graphics-intensive applications,
+the utilization of resources and latency requirements are very similar to computer games.
 
 \section{Architecture}
 \label{sec:RecommendDaaSarchitecture}
@@ -150,29 +178,28 @@ Compared to RDP, the protocol VNC offers fewer features in Guacamole since it do
 
 
 \subsection{Performance}
-To describe the mission-critical performance aspects of the discussed system,
-we initially provide a brief overview of potential challenges
-by outlining bottlenecks and other relevant problem areas.
-This is done in the context of the underlying use case model of DaaS systems.
-Subsequently, we give a more comprehensive description
-of our specific design decisions and tailored solutions.
-
 Performance, from our viewpoint, stands out as the most crucial system property,
 implying the influence of other  relevant properties,
 such as user experience, system responsiveness, and overall efficiency.
 Consequently, we encountered multifaceted challenges
-that potentially intersected across several layers within our architecture.
+that potentially intersected across several layers within our architecture
+and which will be described in the following subsections.
 
-Hence, every component from the core infrastructure
-to all backend services and user-facing elements,
-must meet individual and domain-specific requirements
-to contribute to the overall performance goals of the entire system.
-Thus, we outline key limiting factors that hinder performance,
-along with our experiences and the chosen mitigation strategies.
-
-Given the absence of a generalized measurement system,
-we ranked these factors based on their magnitude of impact,
-drawing from our experiences obtained during the project.
+% To describe the mission-critical performance aspects of the discussed system,
+% we initially provide a brief overview of potential challenges
+% by outlining bottlenecks and other relevant problem areas.
+% This is done in the context of the underlying use case model of DaaS systems.
+% Subsequently, we give a more comprehensive description
+% of our specific design decisions and tailored solutions.
+% Hence, every component from the core infrastructure
+% to all backend services and user-facing elements,
+% must meet individual and domain-specific requirements
+% to contribute to the overall performance goals of the entire system.
+% Thus, we outline key limiting factors that hinder performance,
+% along with our experiences and the chosen mitigation strategies.
+% Given the absence of a generalized measurement system,
+% we ranked these factors based on their magnitude of impact,
+% drawing from our experiences obtained during the project.
 
 \subsubsection{Infrastructure and Platform}
 In general, it can be said that the chosen infrastructure, platform,
@@ -180,14 +207,13 @@ and utilized software combined may have the most impact on the overall resource 
 and are therefore of major importance.
 As a DaaS system combines all aspects of IaaS-, PaaS, and SaaS-based computation, each performance characteristic must be considered.
 
-
 Regarding Infrastructure-as-a-Service (IaaS),
 our solution generally offers the flexibility
 to use either virtual machines or containers.
 Scientific publications discussing relevant performance aspects of such systems
 highlight the apparent advantage of a lightweight container solution
 over virtual machines when identical programs are tested in both environments
-~\cite{felter2015updated,potdar2020performance,seo2014performance}.
+~\cite{felter2015updated,potdar2020performance}.
 
 This suggests that a container-based approach is likely preferable
 if the choice is available.
@@ -205,11 +231,11 @@ In contrast, comparing operating systems of different types
 reveals more obvious results, particularly when considering
 low-level operating system functionality implementations
 such as interrupt handling, memory allocation, and boot time
-~\cite{sergeev2022docker,sulaiman2021comparison}.
+~\cite{sulaiman2021comparison}.
 Additional performance potentials can be leveraged
 in cases where a Windows virtual machine can be replaced
 with a container-based solution integrating wine
-~\cite{huang2012performance}.  % win inside vm
+~\cite{huang2012performance}.
 
 For SaaS, performance largely depends on the underlying usage model
 and the actual software being virtualized.
@@ -274,8 +300,7 @@ or keyboard inputs, network latency becomes more important.
 Application-specific requirements can be managed to some extent
 through protocol-inherent tuning parameters and compression algorithms.
 Our solution, therefore, offers a range of tuning options
-to adapt to different use cases
-and empowering users to choose their own tailored solutions.
+to adapt to different use cases on a per-user basis.
 
 We utilize the Guacamole desktop gateway implementation,
 supporting widely used frame-buffer protocols like VNC and RDP,
@@ -283,16 +308,17 @@ along with relevant tuning options.
 Guacamole also enables audio support and integration with external devices
 through a JavaScript-based web client (guacamole.js).
 As depicted in figure~\ref{websocket_proxy},
-the proxy component receives HTTP requests from the guacamole.js web client
-and is forwarded by the backend by using regular WebSocket opcodes (Guacamole protocol).
-Such communication is forwarded to the Guacamole daemon (guacd)
-which in turn communicates to each instance using the frame-buffer protocol of choice (VNC or RDP).
+the proxy component receives HTTP requests from guacamole.js
+and is forwarded by the backend through WebSocket opcodes (Guacamole protocol).
+These opcodes are then transmitted to the Guacamole daemon (guacd)
+which in turn communicates to each instance
+by using regular frame-buffer protocols (VNC or RDP).
 
 However, integrating Guacamole into the system
 requires consideration of additional factors besides the frame-buffer protocols itself.
 Authentication mechanisms, for example, are essential in a DaaS context,
 as users expect seamless authentication across the whole system
-without multiple logins per session.
+without multiple logins.
 Additionally, safeguarding sensitive information like user passwords is crucial
 for maintaining system security and user trust.
 To mitigate the risk of unintended system manipulation, Guacamole was integrated
@@ -357,26 +383,23 @@ and seamless access for all defined DaaS use cases.
 
 \subsubsection{Internal processing and Communication}
 Another critical aspect directly related to performance and responsiveness
-is how data is internally processed, stored, and communicated
-among all involved components and instances.
-This includes metadata collected and processed by essential components
-and involves the direct exchange of raw data with object instances.
+is how data is internally processed, stored, and communicated.
+This includes metadata collected and processed
+and involves data exchange with all relevant backend services or instances.
 
 Ensuring a satisfying user experience in a DaaS system
-implies specific components in a host system.
-This includes access to all backend services
-used to create containers and virtual machines,
-local or remote databases, authentication services, filesystems, and network devices.
+implies specific components to be available.
+This includes access to all infrastructural backend services,
+a databases, authentication services, filesystems, and network devices.
 Additionally, a web server is integrated to provide relevant API endpoints
-for frontend communication and WebSocket endpoints for viewer communication.
+for frontend communication and WebSocket endpoints for the viewer.
 
 Generally spoken, all of these components can potentially become bottlenecks
 when handling high throughputs or large amounts of concurrent applications
-requiring low latency access, especially if all necessary backend components
-are served from the same hardware.
+and is especially true if all components are served from the same hardware.
 Architecturally, all relevant components
-must be designed for distribution across different hosting systems.
-However, retaining specific components directly on the host system
+must therefore be designed for distribution across different hosts.
+However, keeping specific components directly on the host system
 may still be required to ensure low-latency access.
 
 From our observations, components requiring real-time and low-latency performance,
@@ -389,14 +412,22 @@ Ideally, these components should be hosted natively on the host system
 for virtual network and hardware access
 or at least be connected to the same physical network
 to minimize network latencies.
+All other components might be distributed to dedicated systems
+if large user amounts and specific use cases have to be handled
+but keeping them in close physical proximity
+to the host remains prudent in smaller scales.
 
-Regarding other components, such as database access,
-authentication providers, and filesystems,
-maintaining a close distance from the host is advisable,
-but this depends mainly on the total number of users
-as well as their specific use cases.
-On smaller scales, keeping these components
-in close physical proximity to the host remains prudent.
+Allthough we can not yet provide a full-fledged performance analysis,
+we already measured promising results in our local test environment.
+Depending on the exact setup,
+the solution provides
+reasonable round-trip times and delays for each communication direction
+visualized in figure~\ref{perf_internal_communication}.
+In a minimal setup, we measured delays of around 10ms for client communication,
+below 1ms for internal backend communication
+but up to 1000ms for instance communication.
+But these numbers are only rough estimates
+as certain optimization concepts remain to be implemented.
 
 \begin{figure}
 	\centering
@@ -450,28 +481,21 @@ for meeting the demands of continuous and time-critical operations
 across diverse user scenarios.
 Ensuring the stability of all system components during runtime is paramount
 to maintain service continuity, handle growing user loads,
-and transparently recover from failures
-while providing a seamless end-user experience.
+and transparent failure recovery while providing a seamless end-user experience.
 These considerations are integral to our architectural concept,
 directly impacting the operational integrity of the system
 and its suitability for enterprise-level deployment and trust.
 
-This definition of stability is supported
-by various architectural and operational strategies,
-including component redundancy, node scalability,
-and a robust backend service framework facilitating communication
-between components and nodes.
-These strategies, along with their drawbacks and benefits,
-will be further explored at a component level
-and within the following subsections.
+Therefore, key strategies, such as component redundancy, node scalability
+as well as the internal communication concept
+will be described in the following subsections.
 
 \subsubsection{Scalability of Components}
-
 Scalability in DaaS environments
 can be approached through two fundamental methods: horizontal and vertical scaling.
-Horizontal scaling, or scaling out, involves adding more machines or instances
+Horizontal scaling (scale out), involves adding more machines or instances
 to manage increased loads.
-In contrast, vertical scaling, or scaling up,
+In contrast, vertical scaling (scale up),
 adds more power (CPU, RAM) to existing machines
 ~\cite{vaquero2011dynamically}.
 While horizontal scaling offers flexibility
@@ -484,12 +508,9 @@ we designed the system and its backend services
 to be split into logical units that can be distributed across dedicated systems.
 Each backend service receives a dedicated configuration
 and can be accessed via hostname and port tuples.
-By default, all backend services reside on the same host,
-with tuples derived from the host configuration.
+By default, all backend services reside on the same host.
 In a distributed context, services can be distributed to dedicated remote systems
 to adhere to horizontal scaling principles.
-Relevant tuples can then be derived from any node
-using a common database containing meta information.
 
 Vertical scaling of DaaS nodes is not currently planned,
 but administrators are free to use custom third-party toolchains,
@@ -517,7 +538,6 @@ we provide a globally maintained state of data, authentication, and storage
 which is accessible either by horizontally scaled backends and frontends
 or otherwise,
 by horizontally and vertically scaled instances in our DaaS object domain.
-
 
 \begin{figure}
 	\centering
@@ -606,42 +626,34 @@ and which will be briefly described following:
 	      previously described and by parameterizing them appropriately.
 	\item \textbf{Database:}
 	      The database is integrated as a backend service
-	      and is, therefore, independent of surrounding components and contexts.
-	      It can be distributed to a dedicated system if necessary.
+	      and is, therefore, independent of surrounding components and contexts
+	      and can be externalized to a dedicated systems.
 	      Modern database solutions, like MariaDB,
 	      offer rich features for maintaining specific data consistency strategies
-	      such as data replication, clustering, failover mechanisms,
-	      and RAID control.
+	      such as data replication, clustering, failover mechanisms or RAID control.
 	      Currently, redundancies in our database system are not planned
-	      but can be easily applied by users using such database-specific features
+	      but can be easily applied by using such database-specific features
 	      and a modified database adapter.
 	\item \textbf{Authentication: }
 	      Authentication within our architecture is implemented as a backend service,
-	      allowing for distribution to any dedicated system.
-	      It can also be targeted by standardized load-balancing mechanisms
-	      and remains entirely agnostic of surrounding components
-	      or calling contexts.
-	      The authentication system maintains its credential registry
-	      in a separate database, along with a customizable set
-	      of user and group privileges.
-	      Additionally, it implements the well-defined OAuth 2.0 standard
-	      to facilitate remote authentication.
-	      In our final version,
-	      a customizable number of redundant systems may be configured.
+	      also allowing for distribution to dedicated systems.
+	      It can be targeted by standardized load-balancing mechanisms
+	      and remains entirely agnostic of calling contexts.
+	      The system maintains its credential registry in a separate database,
+	      along with customizable user and group privileges and implements
+	      the well-defined OAuth 2.0 standard to facilitate remote authentication.
 	\item \textbf{Distributed Filesystem:}
-	      Within our architecture, we utilize the distributed filesystem Ceph,
-	      which offers object, block, and file storage capabilities.
-	      Redundancy in Ceph is implicitly achieved
+	      In our architecture, we utilize the distributed filesystem Ceph,
+	      which offers means of object, block, and file storage.
+	      Redundancy is implicitly achieved
 	      through its self-healing and self-managing features, employing
 	      the CRUSH algorithm (Controlled Replication Under Scalable Hashing).
 	      Data availability and fault tolerance are ensured
-	      by automatically replicating data across different devices.
-	      Our architecture leverages these capabilities
-	      to reliably provide file storage to host systems
-	      and all hosted DaaS instances,
-	      while also offering block storage to the infrastructural backend services.
-	      Hosting DaaS instances directly from the distributed block storage
-	      enables migration and redundancy of instances or, in other words, horizontal scaling.
+	      by automatically replicating data across multiple systems.
+	      Such benefits are leveraged by providing reliable file storage to all instances,
+	      and by providing block storage to the infrastructural backend services.
+	      By doing that, migration and redundancy of instances is achieved
+	      or, in other words, horizontal scaling.
 \end{itemize}
 \begin{figure}
 	\centering
@@ -697,8 +709,8 @@ and which will be briefly described following:
 			\draw[->, dashed, thick, black] (fs0.east) -- (fs2.west);
 			\draw[->, dashed, thick, black] (fs0.east) -- (fs3.west);
 			% Arrows Bottom
-			\draw[<->, thick, black] (-11,-7.5) -- (-2.1,-7.5)node[midway, below, font=\footnotesize] {User-Facing Components};
-			\draw[<->, thick, black] (-1.9,-7.5) -- (7,-7.5)node[midway, below, font=\footnotesize] {Service Components};
+			\draw[<->, thick, black] (-11,-7.5) -- (-2.1,-7.5) node[midway, above, yshift=-0.5cm, font=\footnotesize] {User-Facing Components};
+			\draw[<->, thick, black] (-1.9,-7.5) -- (7,-7.5) node[midway, above, yshift=-0.5cm, font=\footnotesize] {Service Components};
 		\end{tikzpicture}
 	\end{adjustbox}
 	\caption{DESIGN Component Redundancy}\label{service_redundancy}
@@ -706,34 +718,32 @@ and which will be briefly described following:
 
 \subsubsection{Internal Communication}
 After discussing the principles of scalability and redundancy,
-we finally discuss how communication flows are managed in our distributed environment.
-Our proposed solution is rooted in a message-oriented architecture
+we finally describe how communication flows are managed within our system.
+Our solution is rooted in a message-oriented architecture
 designed to fulfill DaaS properties for scalability and redundancy,
 as previously outlined.
 
 This implies that any action triggered, whether in the frontend on the client side,
-backend on the host side, or within hosted instances,
-must ensure that the necessary information for execution
-is readily available at the time of processing.
+in the backend on the host side, or within hosted instances,
+must ensure that all necessary information is readily available at the time of processing.
 
 We achieve this by storing runtime information in distributed block storage,
 relevant configuration files in distributed file storage,
 object metadata in a common database,
-and by utilizing a decentralized OAuth component for authentication.
+and by utilizing a decentralized authentication component.
 
 This ensures that any change triggered by a node within the DaaS domain
 is immediately available to any other node relying in some way
 on that particular information change.
 Additionally, any extra information needed by a component must be fully contained
-within the related request or response.
+within the related request.
 As shown in figure~\ref{message_routing}, this enables arbitrarily distributed configurations as long as request
-and response messages reach their desired target eventually
-and as long relevant backend services remain available.
+and response messages reach their desired target eventually.
 
-If that is the case, each distributed DaaS node might only contain essential and time-critical components,
-including the backend service hosting relevant instances as well as the described
-WebSocket proxy connected to the guacamole daemon and the user.
-Any other component may reside elsewhere within the DaaS network.
+If that is the case, each distributed host system might only contain it's essential components,
+including the backend service with all hosted instances
+as well as the described proxy component for direct user interaction.
+Any other component may reside somewhere in the DaaS network.
 
 \begin{figure}
 	\centering
@@ -879,9 +889,26 @@ and for each specific infrastructure and platform configuration.
 \section{Conclusion and Outlook}
 \label{sec:Conclusions}
 
-In this paper, we describe an architecture for a novel and feature-rich DaaS that is, by principle, superior to comparable products and approaches because it supports running unmodified Linux and Windows applications. Furthermore, we identified characteristic issues -- concerning compatibility, performance, stability, and usability -- during the development and implementation of our DaaS and present solutions to overcome these challenges.
+In this paper, we describe an architecture for a novel
+and feature-rich DaaS that is, by principle,
+superior to comparable products and approaches
+because it supports running unmodified Linux and Windows applications.
+Furthermore, we identified characteristic issues
+-- concerning compatibility, performance, stability, and usability --
+during the development and implementation of our DaaS
+and present solutions to overcome these challenges.
 
-For future work, we plan to do a performance analysis that includes an evaluation of different user behaviors for various popular applications and realistic deployment and utilization scenarios.
+For future work,
+we plan to replace our temporary solution for internal communication
+with a more efficient approach as our preliminary performance tests revealed
+a potential bottlenack in that particular area.
+We also plan to apply certain optimization strategies
+with respect to backend and instance communication.
+We further plan to enhance our yet limited performance testing
+and will provide a full-fledged performance analysis
+of realsitic deployment scnarios and utilization patterns
+which include an evaluation of different user behaviors
+within various popular applications.
 
 \section*{Acknowledgements}
 

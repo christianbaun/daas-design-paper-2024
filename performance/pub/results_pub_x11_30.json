@@ -1,0 +1,1518 @@
+[
+  {
+    "rttReq": {
+      "begin": 1714963274038,
+      "end": 1714963274878,
+      "diff": 840
+    },
+    "rttAuth": {
+      "begin": 1714963274143,
+      "end": 1714963274411,
+      "diff": 268
+    },
+    "rttTask": {
+      "begin": 1714963274411,
+      "end": 1714963274825,
+      "diff": 414
+    },
+    "owdClient2Backend": {
+      "begin": 1714963274038,
+      "end": 1714963274143,
+      "diff": 105
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963274411,
+      "end": 1714963274636,
+      "diff": 225
+    },
+    "owdClient2Inst": {
+      "begin": 1714963274038,
+      "end": 1714963274636,
+      "diff": 598
+    },
+    "owdBackend2Client": {
+      "begin": 1714963274825,
+      "end": 1714963274878,
+      "diff": 53
+    },
+    "owdInst2Backend": {
+      "begin": 1714963274636,
+      "end": 1714963274825,
+      "diff": 189
+    },
+    "owdInst2Client": {
+      "begin": 1714963274636,
+      "end": 1714963274878,
+      "diff": 242
+    },
+    "totalDirections": 840,
+    "totalDelay": 0,
+    "totalOwd": 572
+  },
+  {
+    "rttReq": {
+      "begin": 1714963279037,
+      "end": 1714963279714,
+      "diff": 677
+    },
+    "rttAuth": {
+      "begin": 1714963279046,
+      "end": 1714963279259,
+      "diff": 213
+    },
+    "rttTask": {
+      "begin": 1714963279259,
+      "end": 1714963279665,
+      "diff": 406
+    },
+    "owdClient2Backend": {
+      "begin": 1714963279037,
+      "end": 1714963279046,
+      "diff": 9
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963279259,
+      "end": 1714963279471,
+      "diff": 212
+    },
+    "owdClient2Inst": {
+      "begin": 1714963279037,
+      "end": 1714963279471,
+      "diff": 434
+    },
+    "owdBackend2Client": {
+      "begin": 1714963279665,
+      "end": 1714963279714,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963279471,
+      "end": 1714963279665,
+      "diff": 194
+    },
+    "owdInst2Client": {
+      "begin": 1714963279471,
+      "end": 1714963279714,
+      "diff": 243
+    },
+    "totalDirections": 677,
+    "totalDelay": 0,
+    "totalOwd": 464
+  },
+  {
+    "rttReq": {
+      "begin": 1714963284037,
+      "end": 1714963284867,
+      "diff": 830
+    },
+    "rttAuth": {
+      "begin": 1714963284045,
+      "end": 1714963284423,
+      "diff": 378
+    },
+    "rttTask": {
+      "begin": 1714963284423,
+      "end": 1714963284817,
+      "diff": 394
+    },
+    "owdClient2Backend": {
+      "begin": 1714963284037,
+      "end": 1714963284045,
+      "diff": 8
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963284423,
+      "end": 1714963284636,
+      "diff": 213
+    },
+    "owdClient2Inst": {
+      "begin": 1714963284037,
+      "end": 1714963284636,
+      "diff": 599
+    },
+    "owdBackend2Client": {
+      "begin": 1714963284817,
+      "end": 1714963284867,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963284636,
+      "end": 1714963284817,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963284636,
+      "end": 1714963284867,
+      "diff": 231
+    },
+    "totalDirections": 830,
+    "totalDelay": 0,
+    "totalOwd": 452
+  },
+  {
+    "rttReq": {
+      "begin": 1714963289037,
+      "end": 1714963289901,
+      "diff": 864
+    },
+    "rttAuth": {
+      "begin": 1714963289262,
+      "end": 1714963289454,
+      "diff": 192
+    },
+    "rttTask": {
+      "begin": 1714963289454,
+      "end": 1714963289853,
+      "diff": 399
+    },
+    "owdClient2Backend": {
+      "begin": 1714963289037,
+      "end": 1714963289262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963289454,
+      "end": 1714963289664,
+      "diff": 210
+    },
+    "owdClient2Inst": {
+      "begin": 1714963289037,
+      "end": 1714963289664,
+      "diff": 627
+    },
+    "owdBackend2Client": {
+      "begin": 1714963289853,
+      "end": 1714963289901,
+      "diff": 48
+    },
+    "owdInst2Backend": {
+      "begin": 1714963289664,
+      "end": 1714963289853,
+      "diff": 189
+    },
+    "owdInst2Client": {
+      "begin": 1714963289664,
+      "end": 1714963289901,
+      "diff": 237
+    },
+    "totalDirections": 864,
+    "totalDelay": 0,
+    "totalOwd": 672
+  },
+  {
+    "rttReq": {
+      "begin": 1714963294037,
+      "end": 1714963295126,
+      "diff": 1089
+    },
+    "rttAuth": {
+      "begin": 1714963294267,
+      "end": 1714963294655,
+      "diff": 388
+    },
+    "rttTask": {
+      "begin": 1714963294655,
+      "end": 1714963295073,
+      "diff": 418
+    },
+    "owdClient2Backend": {
+      "begin": 1714963294037,
+      "end": 1714963294267,
+      "diff": 230
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963294655,
+      "end": 1714963294880,
+      "diff": 225
+    },
+    "owdClient2Inst": {
+      "begin": 1714963294037,
+      "end": 1714963294880,
+      "diff": 843
+    },
+    "owdBackend2Client": {
+      "begin": 1714963295073,
+      "end": 1714963295126,
+      "diff": 53
+    },
+    "owdInst2Backend": {
+      "begin": 1714963294880,
+      "end": 1714963295073,
+      "diff": 193
+    },
+    "owdInst2Client": {
+      "begin": 1714963294880,
+      "end": 1714963295126,
+      "diff": 246
+    },
+    "totalDirections": 1089,
+    "totalDelay": 0,
+    "totalOwd": 701
+  },
+  {
+    "rttReq": {
+      "begin": 1714963299037,
+      "end": 1714963299914,
+      "diff": 877
+    },
+    "rttAuth": {
+      "begin": 1714963299262,
+      "end": 1714963299454,
+      "diff": 192
+    },
+    "rttTask": {
+      "begin": 1714963299454,
+      "end": 1714963299865,
+      "diff": 411
+    },
+    "owdClient2Backend": {
+      "begin": 1714963299037,
+      "end": 1714963299262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963299454,
+      "end": 1714963299671,
+      "diff": 217
+    },
+    "owdClient2Inst": {
+      "begin": 1714963299037,
+      "end": 1714963299671,
+      "diff": 634
+    },
+    "owdBackend2Client": {
+      "begin": 1714963299865,
+      "end": 1714963299914,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963299671,
+      "end": 1714963299865,
+      "diff": 194
+    },
+    "owdInst2Client": {
+      "begin": 1714963299671,
+      "end": 1714963299914,
+      "diff": 243
+    },
+    "totalDirections": 877,
+    "totalDelay": 0,
+    "totalOwd": 685
+  },
+  {
+    "rttReq": {
+      "begin": 1714963304037,
+      "end": 1714963304914,
+      "diff": 877
+    },
+    "rttAuth": {
+      "begin": 1714963304262,
+      "end": 1714963304457,
+      "diff": 195
+    },
+    "rttTask": {
+      "begin": 1714963304457,
+      "end": 1714963304865,
+      "diff": 408
+    },
+    "owdClient2Backend": {
+      "begin": 1714963304037,
+      "end": 1714963304262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963304457,
+      "end": 1714963304675,
+      "diff": 218
+    },
+    "owdClient2Inst": {
+      "begin": 1714963304037,
+      "end": 1714963304675,
+      "diff": 638
+    },
+    "owdBackend2Client": {
+      "begin": 1714963304865,
+      "end": 1714963304914,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963304675,
+      "end": 1714963304865,
+      "diff": 190
+    },
+    "owdInst2Client": {
+      "begin": 1714963304675,
+      "end": 1714963304914,
+      "diff": 239
+    },
+    "totalDirections": 877,
+    "totalDelay": 0,
+    "totalOwd": 682
+  },
+  {
+    "rttReq": {
+      "begin": 1714963309037,
+      "end": 1714963309687,
+      "diff": 650
+    },
+    "rttAuth": {
+      "begin": 1714963309047,
+      "end": 1714963309221,
+      "diff": 174
+    },
+    "rttTask": {
+      "begin": 1714963309221,
+      "end": 1714963309637,
+      "diff": 416
+    },
+    "owdClient2Backend": {
+      "begin": 1714963309037,
+      "end": 1714963309047,
+      "diff": 10
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963309221,
+      "end": 1714963309456,
+      "diff": 235
+    },
+    "owdClient2Inst": {
+      "begin": 1714963309037,
+      "end": 1714963309456,
+      "diff": 419
+    },
+    "owdBackend2Client": {
+      "begin": 1714963309637,
+      "end": 1714963309687,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963309456,
+      "end": 1714963309637,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963309456,
+      "end": 1714963309687,
+      "diff": 231
+    },
+    "totalDirections": 650,
+    "totalDelay": 0,
+    "totalOwd": 476
+  },
+  {
+    "rttReq": {
+      "begin": 1714963314037,
+      "end": 1714963314875,
+      "diff": 838
+    },
+    "rttAuth": {
+      "begin": 1714963314047,
+      "end": 1714963314428,
+      "diff": 381
+    },
+    "rttTask": {
+      "begin": 1714963314428,
+      "end": 1714963314825,
+      "diff": 397
+    },
+    "owdClient2Backend": {
+      "begin": 1714963314037,
+      "end": 1714963314047,
+      "diff": 10
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963314428,
+      "end": 1714963314636,
+      "diff": 208
+    },
+    "owdClient2Inst": {
+      "begin": 1714963314037,
+      "end": 1714963314636,
+      "diff": 599
+    },
+    "owdBackend2Client": {
+      "begin": 1714963314825,
+      "end": 1714963314875,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963314636,
+      "end": 1714963314825,
+      "diff": 189
+    },
+    "owdInst2Client": {
+      "begin": 1714963314636,
+      "end": 1714963314875,
+      "diff": 239
+    },
+    "totalDirections": 838,
+    "totalDelay": 0,
+    "totalOwd": 457
+  },
+  {
+    "rttReq": {
+      "begin": 1714963319037,
+      "end": 1714963319759,
+      "diff": 722
+    },
+    "rttAuth": {
+      "begin": 1714963319049,
+      "end": 1714963319285,
+      "diff": 236
+    },
+    "rttTask": {
+      "begin": 1714963319285,
+      "end": 1714963319709,
+      "diff": 424
+    },
+    "owdClient2Backend": {
+      "begin": 1714963319037,
+      "end": 1714963319049,
+      "diff": 12
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963319285,
+      "end": 1714963319517,
+      "diff": 232
+    },
+    "owdClient2Inst": {
+      "begin": 1714963319037,
+      "end": 1714963319517,
+      "diff": 480
+    },
+    "owdBackend2Client": {
+      "begin": 1714963319709,
+      "end": 1714963319759,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963319517,
+      "end": 1714963319709,
+      "diff": 192
+    },
+    "owdInst2Client": {
+      "begin": 1714963319517,
+      "end": 1714963319759,
+      "diff": 242
+    },
+    "totalDirections": 722,
+    "totalDelay": 0,
+    "totalOwd": 486
+  },
+  {
+    "rttReq": {
+      "begin": 1714963324037,
+      "end": 1714963324724,
+      "diff": 687
+    },
+    "rttAuth": {
+      "begin": 1714963324048,
+      "end": 1714963324266,
+      "diff": 218
+    },
+    "rttTask": {
+      "begin": 1714963324266,
+      "end": 1714963324674,
+      "diff": 408
+    },
+    "owdClient2Backend": {
+      "begin": 1714963324037,
+      "end": 1714963324048,
+      "diff": 11
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963324266,
+      "end": 1714963324491,
+      "diff": 225
+    },
+    "owdClient2Inst": {
+      "begin": 1714963324037,
+      "end": 1714963324491,
+      "diff": 454
+    },
+    "owdBackend2Client": {
+      "begin": 1714963324674,
+      "end": 1714963324724,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963324491,
+      "end": 1714963324674,
+      "diff": 183
+    },
+    "owdInst2Client": {
+      "begin": 1714963324491,
+      "end": 1714963324724,
+      "diff": 233
+    },
+    "totalDirections": 687,
+    "totalDelay": 0,
+    "totalOwd": 469
+  },
+  {
+    "rttReq": {
+      "begin": 1714963329037,
+      "end": 1714963329678,
+      "diff": 641
+    },
+    "rttAuth": {
+      "begin": 1714963329047,
+      "end": 1714963329234,
+      "diff": 187
+    },
+    "rttTask": {
+      "begin": 1714963329234,
+      "end": 1714963329629,
+      "diff": 395
+    },
+    "owdClient2Backend": {
+      "begin": 1714963329037,
+      "end": 1714963329047,
+      "diff": 10
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963329234,
+      "end": 1714963329448,
+      "diff": 214
+    },
+    "owdClient2Inst": {
+      "begin": 1714963329037,
+      "end": 1714963329448,
+      "diff": 411
+    },
+    "owdBackend2Client": {
+      "begin": 1714963329629,
+      "end": 1714963329678,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963329448,
+      "end": 1714963329629,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963329448,
+      "end": 1714963329678,
+      "diff": 230
+    },
+    "totalDirections": 641,
+    "totalDelay": 0,
+    "totalOwd": 454
+  },
+  {
+    "rttReq": {
+      "begin": 1714963334037,
+      "end": 1714963334970,
+      "diff": 933
+    },
+    "rttAuth": {
+      "begin": 1714963334263,
+      "end": 1714963334528,
+      "diff": 265
+    },
+    "rttTask": {
+      "begin": 1714963334528,
+      "end": 1714963334921,
+      "diff": 393
+    },
+    "owdClient2Backend": {
+      "begin": 1714963334037,
+      "end": 1714963334263,
+      "diff": 226
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963334528,
+      "end": 1714963334739,
+      "diff": 211
+    },
+    "owdClient2Inst": {
+      "begin": 1714963334037,
+      "end": 1714963334739,
+      "diff": 702
+    },
+    "owdBackend2Client": {
+      "begin": 1714963334921,
+      "end": 1714963334970,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963334739,
+      "end": 1714963334921,
+      "diff": 182
+    },
+    "owdInst2Client": {
+      "begin": 1714963334739,
+      "end": 1714963334970,
+      "diff": 231
+    },
+    "totalDirections": 933,
+    "totalDelay": 0,
+    "totalOwd": 668
+  },
+  {
+    "rttReq": {
+      "begin": 1714963339037,
+      "end": 1714963339922,
+      "diff": 885
+    },
+    "rttAuth": {
+      "begin": 1714963339263,
+      "end": 1714963339459,
+      "diff": 196
+    },
+    "rttTask": {
+      "begin": 1714963339459,
+      "end": 1714963339873,
+      "diff": 414
+    },
+    "owdClient2Backend": {
+      "begin": 1714963339037,
+      "end": 1714963339263,
+      "diff": 226
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963339459,
+      "end": 1714963339672,
+      "diff": 213
+    },
+    "owdClient2Inst": {
+      "begin": 1714963339037,
+      "end": 1714963339672,
+      "diff": 635
+    },
+    "owdBackend2Client": {
+      "begin": 1714963339873,
+      "end": 1714963339922,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963339672,
+      "end": 1714963339873,
+      "diff": 201
+    },
+    "owdInst2Client": {
+      "begin": 1714963339672,
+      "end": 1714963339922,
+      "diff": 250
+    },
+    "totalDirections": 885,
+    "totalDelay": 0,
+    "totalOwd": 689
+  },
+  {
+    "rttReq": {
+      "begin": 1714963344037,
+      "end": 1714963344930,
+      "diff": 893
+    },
+    "rttAuth": {
+      "begin": 1714963344261,
+      "end": 1714963344485,
+      "diff": 224
+    },
+    "rttTask": {
+      "begin": 1714963344485,
+      "end": 1714963344881,
+      "diff": 396
+    },
+    "owdClient2Backend": {
+      "begin": 1714963344037,
+      "end": 1714963344261,
+      "diff": 224
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963344485,
+      "end": 1714963344700,
+      "diff": 215
+    },
+    "owdClient2Inst": {
+      "begin": 1714963344037,
+      "end": 1714963344700,
+      "diff": 663
+    },
+    "owdBackend2Client": {
+      "begin": 1714963344881,
+      "end": 1714963344930,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963344700,
+      "end": 1714963344881,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963344700,
+      "end": 1714963344930,
+      "diff": 230
+    },
+    "totalDirections": 893,
+    "totalDelay": 0,
+    "totalOwd": 669
+  },
+  {
+    "rttReq": {
+      "begin": 1714963349037,
+      "end": 1714963349945,
+      "diff": 908
+    },
+    "rttAuth": {
+      "begin": 1714963349261,
+      "end": 1714963349488,
+      "diff": 227
+    },
+    "rttTask": {
+      "begin": 1714963349488,
+      "end": 1714963349897,
+      "diff": 409
+    },
+    "owdClient2Backend": {
+      "begin": 1714963349037,
+      "end": 1714963349261,
+      "diff": 224
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963349488,
+      "end": 1714963349704,
+      "diff": 216
+    },
+    "owdClient2Inst": {
+      "begin": 1714963349037,
+      "end": 1714963349704,
+      "diff": 667
+    },
+    "owdBackend2Client": {
+      "begin": 1714963349897,
+      "end": 1714963349945,
+      "diff": 48
+    },
+    "owdInst2Backend": {
+      "begin": 1714963349704,
+      "end": 1714963349897,
+      "diff": 193
+    },
+    "owdInst2Client": {
+      "begin": 1714963349704,
+      "end": 1714963349945,
+      "diff": 241
+    },
+    "totalDirections": 908,
+    "totalDelay": 0,
+    "totalOwd": 681
+  },
+  {
+    "rttReq": {
+      "begin": 1714963354037,
+      "end": 1714963354938,
+      "diff": 901
+    },
+    "rttAuth": {
+      "begin": 1714963354261,
+      "end": 1714963354460,
+      "diff": 199
+    },
+    "rttTask": {
+      "begin": 1714963354460,
+      "end": 1714963354885,
+      "diff": 425
+    },
+    "owdClient2Backend": {
+      "begin": 1714963354037,
+      "end": 1714963354261,
+      "diff": 224
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963354460,
+      "end": 1714963354704,
+      "diff": 244
+    },
+    "owdClient2Inst": {
+      "begin": 1714963354037,
+      "end": 1714963354704,
+      "diff": 667
+    },
+    "owdBackend2Client": {
+      "begin": 1714963354885,
+      "end": 1714963354938,
+      "diff": 53
+    },
+    "owdInst2Backend": {
+      "begin": 1714963354704,
+      "end": 1714963354885,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963354704,
+      "end": 1714963354938,
+      "diff": 234
+    },
+    "totalDirections": 901,
+    "totalDelay": 0,
+    "totalOwd": 702
+  },
+  {
+    "rttReq": {
+      "begin": 1714963359037,
+      "end": 1714963359915,
+      "diff": 878
+    },
+    "rttAuth": {
+      "begin": 1714963359262,
+      "end": 1714963359473,
+      "diff": 211
+    },
+    "rttTask": {
+      "begin": 1714963359473,
+      "end": 1714963359865,
+      "diff": 392
+    },
+    "owdClient2Backend": {
+      "begin": 1714963359037,
+      "end": 1714963359262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963359473,
+      "end": 1714963359683,
+      "diff": 210
+    },
+    "owdClient2Inst": {
+      "begin": 1714963359037,
+      "end": 1714963359683,
+      "diff": 646
+    },
+    "owdBackend2Client": {
+      "begin": 1714963359865,
+      "end": 1714963359915,
+      "diff": 50
+    },
+    "owdInst2Backend": {
+      "begin": 1714963359683,
+      "end": 1714963359865,
+      "diff": 182
+    },
+    "owdInst2Client": {
+      "begin": 1714963359683,
+      "end": 1714963359915,
+      "diff": 232
+    },
+    "totalDirections": 878,
+    "totalDelay": 0,
+    "totalOwd": 667
+  },
+  {
+    "rttReq": {
+      "begin": 1714963364037,
+      "end": 1714963364906,
+      "diff": 869
+    },
+    "rttAuth": {
+      "begin": 1714963364262,
+      "end": 1714963364454,
+      "diff": 192
+    },
+    "rttTask": {
+      "begin": 1714963364454,
+      "end": 1714963364857,
+      "diff": 403
+    },
+    "owdClient2Backend": {
+      "begin": 1714963364037,
+      "end": 1714963364262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963364454,
+      "end": 1714963364664,
+      "diff": 210
+    },
+    "owdClient2Inst": {
+      "begin": 1714963364037,
+      "end": 1714963364664,
+      "diff": 627
+    },
+    "owdBackend2Client": {
+      "begin": 1714963364857,
+      "end": 1714963364906,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963364664,
+      "end": 1714963364857,
+      "diff": 193
+    },
+    "owdInst2Client": {
+      "begin": 1714963364664,
+      "end": 1714963364906,
+      "diff": 242
+    },
+    "totalDirections": 869,
+    "totalDelay": 0,
+    "totalOwd": 677
+  },
+  {
+    "rttReq": {
+      "begin": 1714963369037,
+      "end": 1714963369790,
+      "diff": 753
+    },
+    "rttAuth": {
+      "begin": 1714963369116,
+      "end": 1714963369325,
+      "diff": 209
+    },
+    "rttTask": {
+      "begin": 1714963369325,
+      "end": 1714963369737,
+      "diff": 412
+    },
+    "owdClient2Backend": {
+      "begin": 1714963369037,
+      "end": 1714963369116,
+      "diff": 79
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963369325,
+      "end": 1714963369556,
+      "diff": 231
+    },
+    "owdClient2Inst": {
+      "begin": 1714963369037,
+      "end": 1714963369556,
+      "diff": 519
+    },
+    "owdBackend2Client": {
+      "begin": 1714963369737,
+      "end": 1714963369790,
+      "diff": 53
+    },
+    "owdInst2Backend": {
+      "begin": 1714963369556,
+      "end": 1714963369737,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963369556,
+      "end": 1714963369790,
+      "diff": 234
+    },
+    "totalDirections": 753,
+    "totalDelay": 0,
+    "totalOwd": 544
+  },
+  {
+    "rttReq": {
+      "begin": 1714963374038,
+      "end": 1714963374744,
+      "diff": 706
+    },
+    "rttAuth": {
+      "begin": 1714963374049,
+      "end": 1714963374274,
+      "diff": 225
+    },
+    "rttTask": {
+      "begin": 1714963374274,
+      "end": 1714963374693,
+      "diff": 419
+    },
+    "owdClient2Backend": {
+      "begin": 1714963374038,
+      "end": 1714963374049,
+      "diff": 11
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963374274,
+      "end": 1714963374508,
+      "diff": 234
+    },
+    "owdClient2Inst": {
+      "begin": 1714963374038,
+      "end": 1714963374508,
+      "diff": 470
+    },
+    "owdBackend2Client": {
+      "begin": 1714963374693,
+      "end": 1714963374744,
+      "diff": 51
+    },
+    "owdInst2Backend": {
+      "begin": 1714963374508,
+      "end": 1714963374693,
+      "diff": 185
+    },
+    "owdInst2Client": {
+      "begin": 1714963374508,
+      "end": 1714963374744,
+      "diff": 236
+    },
+    "totalDirections": 706,
+    "totalDelay": 0,
+    "totalOwd": 481
+  },
+  {
+    "rttReq": {
+      "begin": 1714963379037,
+      "end": 1714963379696,
+      "diff": 659
+    },
+    "rttAuth": {
+      "begin": 1714963379047,
+      "end": 1714963379233,
+      "diff": 186
+    },
+    "rttTask": {
+      "begin": 1714963379233,
+      "end": 1714963379645,
+      "diff": 412
+    },
+    "owdClient2Backend": {
+      "begin": 1714963379037,
+      "end": 1714963379047,
+      "diff": 10
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963379233,
+      "end": 1714963379444,
+      "diff": 211
+    },
+    "owdClient2Inst": {
+      "begin": 1714963379037,
+      "end": 1714963379444,
+      "diff": 407
+    },
+    "owdBackend2Client": {
+      "begin": 1714963379645,
+      "end": 1714963379696,
+      "diff": 51
+    },
+    "owdInst2Backend": {
+      "begin": 1714963379444,
+      "end": 1714963379645,
+      "diff": 201
+    },
+    "owdInst2Client": {
+      "begin": 1714963379444,
+      "end": 1714963379696,
+      "diff": 252
+    },
+    "totalDirections": 659,
+    "totalDelay": 0,
+    "totalOwd": 473
+  },
+  {
+    "rttReq": {
+      "begin": 1714963384037,
+      "end": 1714963384889,
+      "diff": 852
+    },
+    "rttAuth": {
+      "begin": 1714963384254,
+      "end": 1714963384441,
+      "diff": 187
+    },
+    "rttTask": {
+      "begin": 1714963384441,
+      "end": 1714963384837,
+      "diff": 396
+    },
+    "owdClient2Backend": {
+      "begin": 1714963384037,
+      "end": 1714963384254,
+      "diff": 217
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963384441,
+      "end": 1714963384651,
+      "diff": 210
+    },
+    "owdClient2Inst": {
+      "begin": 1714963384037,
+      "end": 1714963384651,
+      "diff": 614
+    },
+    "owdBackend2Client": {
+      "begin": 1714963384837,
+      "end": 1714963384889,
+      "diff": 52
+    },
+    "owdInst2Backend": {
+      "begin": 1714963384651,
+      "end": 1714963384837,
+      "diff": 186
+    },
+    "owdInst2Client": {
+      "begin": 1714963384651,
+      "end": 1714963384889,
+      "diff": 238
+    },
+    "totalDirections": 852,
+    "totalDelay": 0,
+    "totalOwd": 665
+  },
+  {
+    "rttReq": {
+      "begin": 1714963389037,
+      "end": 1714963389894,
+      "diff": 857
+    },
+    "rttAuth": {
+      "begin": 1714963389263,
+      "end": 1714963389450,
+      "diff": 187
+    },
+    "rttTask": {
+      "begin": 1714963389450,
+      "end": 1714963389845,
+      "diff": 395
+    },
+    "owdClient2Backend": {
+      "begin": 1714963389037,
+      "end": 1714963389263,
+      "diff": 226
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963389450,
+      "end": 1714963389664,
+      "diff": 214
+    },
+    "owdClient2Inst": {
+      "begin": 1714963389037,
+      "end": 1714963389664,
+      "diff": 627
+    },
+    "owdBackend2Client": {
+      "begin": 1714963389845,
+      "end": 1714963389894,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963389664,
+      "end": 1714963389845,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963389664,
+      "end": 1714963389894,
+      "diff": 230
+    },
+    "totalDirections": 857,
+    "totalDelay": 0,
+    "totalOwd": 670
+  },
+  {
+    "rttReq": {
+      "begin": 1714963394037,
+      "end": 1714963394750,
+      "diff": 713
+    },
+    "rttAuth": {
+      "begin": 1714963394118,
+      "end": 1714963394293,
+      "diff": 175
+    },
+    "rttTask": {
+      "begin": 1714963394293,
+      "end": 1714963394701,
+      "diff": 408
+    },
+    "owdClient2Backend": {
+      "begin": 1714963394037,
+      "end": 1714963394118,
+      "diff": 81
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963394293,
+      "end": 1714963394511,
+      "diff": 218
+    },
+    "owdClient2Inst": {
+      "begin": 1714963394037,
+      "end": 1714963394511,
+      "diff": 474
+    },
+    "owdBackend2Client": {
+      "begin": 1714963394701,
+      "end": 1714963394750,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963394511,
+      "end": 1714963394701,
+      "diff": 190
+    },
+    "owdInst2Client": {
+      "begin": 1714963394511,
+      "end": 1714963394750,
+      "diff": 239
+    },
+    "totalDirections": 713,
+    "totalDelay": 0,
+    "totalOwd": 538
+  },
+  {
+    "rttReq": {
+      "begin": 1714963399037,
+      "end": 1714963399894,
+      "diff": 857
+    },
+    "rttAuth": {
+      "begin": 1714963399261,
+      "end": 1714963399449,
+      "diff": 188
+    },
+    "rttTask": {
+      "begin": 1714963399449,
+      "end": 1714963399845,
+      "diff": 396
+    },
+    "owdClient2Backend": {
+      "begin": 1714963399037,
+      "end": 1714963399261,
+      "diff": 224
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963399449,
+      "end": 1714963399659,
+      "diff": 210
+    },
+    "owdClient2Inst": {
+      "begin": 1714963399037,
+      "end": 1714963399659,
+      "diff": 622
+    },
+    "owdBackend2Client": {
+      "begin": 1714963399845,
+      "end": 1714963399894,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963399659,
+      "end": 1714963399845,
+      "diff": 186
+    },
+    "owdInst2Client": {
+      "begin": 1714963399659,
+      "end": 1714963399894,
+      "diff": 235
+    },
+    "totalDirections": 857,
+    "totalDelay": 0,
+    "totalOwd": 669
+  },
+  {
+    "rttReq": {
+      "begin": 1714963404037,
+      "end": 1714963404914,
+      "diff": 877
+    },
+    "rttAuth": {
+      "begin": 1714963404262,
+      "end": 1714963404439,
+      "diff": 177
+    },
+    "rttTask": {
+      "begin": 1714963404439,
+      "end": 1714963404861,
+      "diff": 422
+    },
+    "owdClient2Backend": {
+      "begin": 1714963404037,
+      "end": 1714963404262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963404439,
+      "end": 1714963404664,
+      "diff": 225
+    },
+    "owdClient2Inst": {
+      "begin": 1714963404037,
+      "end": 1714963404664,
+      "diff": 627
+    },
+    "owdBackend2Client": {
+      "begin": 1714963404861,
+      "end": 1714963404914,
+      "diff": 53
+    },
+    "owdInst2Backend": {
+      "begin": 1714963404664,
+      "end": 1714963404861,
+      "diff": 197
+    },
+    "owdInst2Client": {
+      "begin": 1714963404664,
+      "end": 1714963404914,
+      "diff": 250
+    },
+    "totalDirections": 877,
+    "totalDelay": 0,
+    "totalOwd": 700
+  },
+  {
+    "rttReq": {
+      "begin": 1714963409037,
+      "end": 1714963409913,
+      "diff": 876
+    },
+    "rttAuth": {
+      "begin": 1714963409263,
+      "end": 1714963409461,
+      "diff": 198
+    },
+    "rttTask": {
+      "begin": 1714963409461,
+      "end": 1714963409861,
+      "diff": 400
+    },
+    "owdClient2Backend": {
+      "begin": 1714963409037,
+      "end": 1714963409263,
+      "diff": 226
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963409461,
+      "end": 1714963409672,
+      "diff": 211
+    },
+    "owdClient2Inst": {
+      "begin": 1714963409037,
+      "end": 1714963409672,
+      "diff": 635
+    },
+    "owdBackend2Client": {
+      "begin": 1714963409861,
+      "end": 1714963409913,
+      "diff": 52
+    },
+    "owdInst2Backend": {
+      "begin": 1714963409672,
+      "end": 1714963409861,
+      "diff": 189
+    },
+    "owdInst2Client": {
+      "begin": 1714963409672,
+      "end": 1714963409913,
+      "diff": 241
+    },
+    "totalDirections": 876,
+    "totalDelay": 0,
+    "totalOwd": 678
+  },
+  {
+    "rttReq": {
+      "begin": 1714963414037,
+      "end": 1714963414972,
+      "diff": 935
+    },
+    "rttAuth": {
+      "begin": 1714963414262,
+      "end": 1714963414473,
+      "diff": 211
+    },
+    "rttTask": {
+      "begin": 1714963414473,
+      "end": 1714963414917,
+      "diff": 444
+    },
+    "owdClient2Backend": {
+      "begin": 1714963414037,
+      "end": 1714963414262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963414473,
+      "end": 1714963414708,
+      "diff": 235
+    },
+    "owdClient2Inst": {
+      "begin": 1714963414037,
+      "end": 1714963414708,
+      "diff": 671
+    },
+    "owdBackend2Client": {
+      "begin": 1714963414917,
+      "end": 1714963414972,
+      "diff": 55
+    },
+    "owdInst2Backend": {
+      "begin": 1714963414708,
+      "end": 1714963414917,
+      "diff": 209
+    },
+    "owdInst2Client": {
+      "begin": 1714963414708,
+      "end": 1714963414972,
+      "diff": 264
+    },
+    "totalDirections": 935,
+    "totalDelay": 0,
+    "totalOwd": 724
+  },
+  {
+    "rttReq": {
+      "begin": 1714963419037,
+      "end": 1714963419918,
+      "diff": 881
+    },
+    "rttAuth": {
+      "begin": 1714963419262,
+      "end": 1714963419475,
+      "diff": 213
+    },
+    "rttTask": {
+      "begin": 1714963419475,
+      "end": 1714963419869,
+      "diff": 394
+    },
+    "owdClient2Backend": {
+      "begin": 1714963419037,
+      "end": 1714963419262,
+      "diff": 225
+    },
+    "owdBackend2Inst": {
+      "begin": 1714963419475,
+      "end": 1714963419688,
+      "diff": 213
+    },
+    "owdClient2Inst": {
+      "begin": 1714963419037,
+      "end": 1714963419688,
+      "diff": 651
+    },
+    "owdBackend2Client": {
+      "begin": 1714963419869,
+      "end": 1714963419918,
+      "diff": 49
+    },
+    "owdInst2Backend": {
+      "begin": 1714963419688,
+      "end": 1714963419869,
+      "diff": 181
+    },
+    "owdInst2Client": {
+      "begin": 1714963419688,
+      "end": 1714963419918,
+      "diff": 230
+    },
+    "totalDirections": 881,
+    "totalDelay": 0,
+    "totalOwd": 668
+  },
+  {
+    "summary": true,
+    "name": "results_pub_x11_30.json",
+    "samples": 30,
+    "rttReq": 827.5,
+    "rttAuth": 223.06666666666666,
+    "rttTask": 407.3333333333333,
+    "owdClient2Backend": 146.76666666666668,
+    "owdBackend2Client": 50.333333333333336,
+    "owdBackend2Inst": 218.83333333333334,
+    "owdInst2Backend": 188.5,
+    "totalDirections": 827.5,
+    "totalDelay": 0,
+    "totalOwd": 604.4333333333333
+  }
+]
+
