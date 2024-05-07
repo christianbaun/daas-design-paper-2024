@@ -34,9 +34,10 @@
 %
 \author{Christian Baun \and
 	Johannes Bouché}
-% \author{Christian Baun\orcidID{0009-0004-9955-3752} \and
-% 	Johannes Bouché\orcidID{TODO}}
-%
+\author{Christian Baun\orcidID{0009-0004-9955-3752} \and
+	Johannes Bouché\orcidID{0009-0009-8003-4019}
+}
+
 \authorrunning{C. Baun, J. Bouché}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
@@ -174,9 +175,6 @@ Guacamole supports redirecting audio, printing, and disk access via the protocol
 
 Compared to RDP, the protocol VNC offers fewer features in Guacamole since it does not support sound on its own. However, Guacamole supports sound using PulseAudio\footnote{On Linux operating systems, sound and microphone devices are accessed via sound servers like PulseAudio and PipeWire, which interact with the sound interface present in the kernel, e.g., Advanced Linux Sound Architecture (ALSA) or Open Sound System (OSS)} as a workaround solution. VNC also does not offer file transfer and access to external storage media. Still, as a workaround solution, Guacamole supports file transfer file transfer via the SSH File Transfer Protocol (SFTP), which is an extension of the Secure Shell protocol (SSH).
 
-
-
-
 \subsection{Performance}
 Performance, from our viewpoint, stands out as the most crucial system property,
 implying the influence of other  relevant properties,
@@ -184,22 +182,6 @@ such as user experience, system responsiveness, and overall efficiency.
 Consequently, we encountered multifaceted challenges
 that potentially intersected across several layers within our architecture
 and which will be described in the following subsections.
-
-% To describe the mission-critical performance aspects of the discussed system,
-% we initially provide a brief overview of potential challenges
-% by outlining bottlenecks and other relevant problem areas.
-% This is done in the context of the underlying use case model of DaaS systems.
-% Subsequently, we give a more comprehensive description
-% of our specific design decisions and tailored solutions.
-% Hence, every component from the core infrastructure
-% to all backend services and user-facing elements,
-% must meet individual and domain-specific requirements
-% to contribute to the overall performance goals of the entire system.
-% Thus, we outline key limiting factors that hinder performance,
-% along with our experiences and the chosen mitigation strategies.
-% Given the absence of a generalized measurement system,
-% we ranked these factors based on their magnitude of impact,
-% drawing from our experiences obtained during the project.
 
 \subsubsection{Infrastructure and Platform}
 In general, it can be said that the chosen infrastructure, platform,
