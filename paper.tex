@@ -107,7 +107,34 @@ The challenges and obstacles when developing DaaS solutions, rather than infrast
 
 Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using the IaaS solution OpenStack~\cite{sefraoui2012openstack} and analyzed the characteristics and performance aspects of using noVNC, which is a client for the protocol Virtual Network Computing (VNC) that is implemented in the Hypertext Markup Language (HTML) and JavaScript, the protocol SPICE (Simple Protocol for Independent Computing Environments), and the remote desktop gateway Apache Guacamole as solutions for providing access to the desktop via a browser. One focus of the paper is the redirection of the sound interface of the virtual desktop. The paper's authors conclude that Guacamole, in combination with the Remote Desktop Protocol (RDP), is the best solution. The authors evaluated the lag time for remote audio playback in an Internet scenario by measuring the time between the automated initiation of the live streaming using the media player software VLC and the arrival of the music data by analyzing network traffic via the monitoring software Wireshark. When using Guacamole combined with the protocol RDP, the average lag was around 750\,ms. When using Guacamole combined with the protocol VNC, the average lag was around 1750\,ms. The paper also includes a short evaluation of the lag for video frames represented by background color changes of a Java application. Again, the configuration Guacamole and RDP offered the best performance video update with an average lag of around 300\,ms. The configuration of Guacamole and VNC caused an average lag of around 500\,ms.
 
-Magana et al.~\cite{magana2019remote} compared in 2019 the most popular remote desktop protocols and software implementations. The authors analyzed five protocols: PCoIP used in the Amazon WorkSpaces, RDP, TeamViewer, VNC, and Citrix Independent Computing Architecture (ICA). In the paper, the network transfer rate and its relation to the quality experienced by the DaaS user are evaluated by assuming three scenarios: using an office software suite, web browsing, and video streaming. One emphasis of the paper is comparing the transfer rate of the different protocols for three scenarios. In the Office Software Suite scenario, the transfer rate is measured and compared when performing several tasks like opening and editing a document (typing), loading an image, and saving a document. The web browsing scenario covers requesting three different web pages, and for the video streaming scenario, the same YouTube video file was viewed at different resolutions. The authors conclude that RDP requires fewer downstream and upstream network resources for all three scenarios. It is important to understand that the protocols RDP and VNC are implemented in open-source projects and proprietary solutions for many different operating systems. Depending on the various quality levels of the many existing implementations, it is difficult to generalize about the performance of the protocols, as individual implementations may have better or worse performance characteristics than expected.
+Magana et al.~\cite{magana2019remote} compared in 2019
+the most popular remote desktop protocols and software implementations.
+The authors analyzed five protocols:
+PCoIP used in the Amazon WorkSpaces, RDP, TeamViewer, VNC,
+and Citrix Independent Computing Architecture (ICA).
+In the paper, the network transfer rate and its relation to the quality
+experienced by the DaaS user are evaluated
+by assuming three scenarios:
+using an office software suite, web browsing, and video streaming.
+One emphasis of the paper is comparing the transfer rate
+of the different protocols for three scenarios.
+In the Office Software Suite scenario,
+the transfer rate is measured and compared
+when performing several tasks like opening
+and editing a document (typing), loading an image, and saving a document.
+The web browsing scenario covers requesting three different web pages,
+and for the video streaming scenario,
+the same YouTube video file was viewed at different resolutions.
+The authors conclude that RDP requires fewer downstream
+and upstream network resources for all three scenarios.
+Generally can be said, that protocols RDP and VNC
+are among the most popular frame-buffer protocols
+which are utilized in countless open-source and proprietary projects
+for different operating systems.
+Depending on the various quality levels of the many existing implementations,
+it is difficult to generalize about the performance of the protocols,
+as individual implementations may have better
+or worse performance characteristics than expected.
 
 Several works in literature have analyzed
 the latency of Cloud gaming services that have, in some aspects,
@@ -138,7 +165,8 @@ Choy et al.~\cite{ChoyWongSimonRosenberg2012},
 Claypool et al.~\cite{claypool2010latency},
 and Jarschel et al.~\cite{jarschel2011evaluation}
 consider a maximum tolerable latency, based on subjective tests,
-being around 100\,ms. This relatively low value sets the demand for a fast network interaction
+being around 100\,ms.
+This relatively low value sets the demand for a fast network interaction
 between client and service and limits their maximum distance.
 As mentioned in Clincy et al.~\cite{clincy2013subjective},
 The former cloud gaming service provider OnLive specified in the year 2010
@@ -157,9 +185,11 @@ such as Moonlight~\cite{hanimplementation}~\cite{darcy2022latency}.
 On first thought, the latency requirements of a modern computer game
 are hardly the same as those of a desktop application.
 However, just as with computer games,
-the lagging operation of desktop programs has a negative impact on the user experience,
+the lagging operation of desktop programs
+has a negative impact on the user experience,
 and with video conferencing or other graphics-intensive applications,
-the utilization of resources and latency requirements are very similar to computer games.
+the utilization of resources and latency requirements
+are very similar to computer games.
 
 \section{Architecture}
 \label{sec:RecommendDaaSarchitecture}
