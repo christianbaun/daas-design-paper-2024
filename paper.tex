@@ -46,9 +46,8 @@
 	Frankfurt University of Applied Sciences,\\
 	Nibelungenplatz 1, 60318 Frankfurt am Main, Germany
 	\email{[christianbaun|johannes.bouche]@fb2.fra-uas.de}}
-%
 \maketitle              % typeset the header of the contribution
-%
+
 \begin{abstract}
 	Desktop-as-a-Service (DaaS) is a cloud service category
 	with tremendous potential for improving the everyday work
@@ -66,12 +65,8 @@
 
 	\keywords{DaaS \and Compatibility \and Performance \and Stability \and Usability}
 \end{abstract}
-%
-%
-%
+
 \section{Introduction}
-
-
 This paper discusses challenges during the development
 and implementation of a novel Desktop-as-a-Service (DaaS) solution
 called DESIGN that enables the deployment
@@ -98,14 +93,41 @@ Finally, Section~\ref{sec:Conclusions} discusses conclusions
 and includes directions for future work.
 
 
-\section{Related Work}
-\label{sec:relatedworkAbschnitt}
+\section{Related Work}\label{sec:relatedworkAbschnitt}
 
 
-DaaS has been a well-known service category since the emergence of cloud computing. Still, it got much less attention in research and literature.
-The challenges and obstacles when developing DaaS solutions, rather than infrastructure (IaaS) and platform services (PaaS), have seldom been discussed in the literature.
+DaaS has been a well-known service category since the emergence of cloud computing.
+Still, it got much less attention in research and literature.
+The challenges and obstacles when developing DaaS solutions,
+rather than infrastructure (IaaS) and platform services (PaaS),
+have seldom been discussed in the literature.
 
-Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS using the IaaS solution OpenStack~\cite{sefraoui2012openstack} and analyzed the characteristics and performance aspects of using noVNC, which is a client for the protocol Virtual Network Computing (VNC) that is implemented in the Hypertext Markup Language (HTML) and JavaScript, the protocol SPICE (Simple Protocol for Independent Computing Environments), and the remote desktop gateway Apache Guacamole as solutions for providing access to the desktop via a browser. One focus of the paper is the redirection of the sound interface of the virtual desktop. The paper's authors conclude that Guacamole, in combination with the Remote Desktop Protocol (RDP), is the best solution. The authors evaluated the lag time for remote audio playback in an Internet scenario by measuring the time between the automated initiation of the live streaming using the media player software VLC and the arrival of the music data by analyzing network traffic via the monitoring software Wireshark. When using Guacamole combined with the protocol RDP, the average lag was around 750\,ms. When using Guacamole combined with the protocol VNC, the average lag was around 1750\,ms. The paper also includes a short evaluation of the lag for video frames represented by background color changes of a Java application. Again, the configuration Guacamole and RDP offered the best performance video update with an average lag of around 300\,ms. The configuration of Guacamole and VNC caused an average lag of around 500\,ms.
+Celesti et al.~\cite{celesti2016improving} implemented in 2016 a DaaS
+using the IaaS solution OpenStack~\cite{sefraoui2012openstack}
+and analyzed the characteristics and performance aspects of using noVNC,
+which is a client for the protocol Virtual Network Computing (VNC)
+that is implemented in the Hypertext Markup Language (HTML) and JavaScript,
+the protocol SPICE (Simple Protocol for Independent Computing Environments),
+and the remote desktop gateway Apache Guacamole as solutions
+for providing access to the desktop via a browser.
+One focus of the paper is the redirection
+of the sound interface of the virtual desktop.
+The paper's authors conclude that Guacamole,
+in combination with the Remote Desktop Protocol (RDP), is the best solution.
+The authors evaluated the lag time for remote audio playback
+in an Internet scenario by measuring the time between the automated initiation
+of the live streaming using the media player software VLC
+and the arrival of the music data by analyzing network traffic
+via the monitoring software Wireshark.
+When using Guacamole combined with the protocol RDP,
+the average lag was around 750\,ms.
+When using Guacamole combined with the protocol VNC,
+the average lag was around 1750\,ms.
+The paper also includes a short evaluation of the lag for video frames
+represented by background color changes of a Java application.
+Again, Guacamole and RDP offered
+the best video performance with an average lag of around 300\,ms.
+The configuration of Guacamole and VNC caused an average lag of around 500\,ms.
 
 Magana et al.~\cite{magana2019remote} compared in 2019
 the most popular remote desktop protocols and software implementations.
@@ -191,10 +213,13 @@ and with video conferencing or other graphics-intensive applications,
 the utilization of resources and latency requirements
 are very similar to computer games.
 
-\section{Architecture}
-\label{sec:RecommendDaaSarchitecture}
+\section{Architecture}\label{sec:RecommendDaaSarchitecture}
 % 
-Figure~\ref{figure_architecture} shows the architecture of our novel DaaS solution DESIGN that can run unmodified Linux and Windows applications in Linux containers (Linux and Windows applications compatible with Wine) and virtual machines (Windows applications incompatible with Wine).
+Figure~\ref{figure_architecture} shows the architecture
+of our novel DaaS solution DESIGN
+that can run unmodified Linux and Windows applications in Linux containers
+(Native Linux applications and Native Windows applications compatible with Wine)
+and virtual machines (Native Windows applications incompatible with Wine).
 \begin{figure}
 	\centering
 	\includegraphics[width=.75\linewidth]{images/DaaS_DESIGN_Architecture_v12_english.pdf}
@@ -204,21 +229,42 @@ Figure~\ref{figure_architecture} shows the architecture of our novel DaaS soluti
 
 The open-source server virtualization platform Proxmox VE runs bare-metal and offers virtual machines with the Kernel-based Virtual Machine (KVM) and container-based virtualization via LXC Linux container. Since the LXC API is, in comparison to the Docker API, rather poorly documented and lacks several features, we considered Docker a better container virtualization solution. A deployment of docker directly in the host-operating system or inside a virtual machine is both possible.
 
-Exporting the graphical user interface of Linux and Windows applications is possible using VNC or RDP protocols. Free server implementations exist for both operating system families. Since our DaaS solution focuses on exporting only the application's graphical user interface and not full desktops -- a feature not all server implementations include -- the number of available projects and solutions is limited. For Linux containers, the free software projects x11vnc and Xrdp can be used in the DESIGN DaaS. For Windows VMs, the free software TightVNC and the Windows-internal RDP server can be used.
+Exporting the graphical user interface of Linux and Windows applications
+is possible using VNC or RDP protocols.
+Free server implementations exist for both operating system families.
+Since our DaaS solution focuses on exporting only the application's graphical user interface
+and not full desktops -- a feature not all server implementations include --
+the number of available projects and solutions is limited.
+For Linux containers, the free software projects
+x11vnc and Xrdp can be used in the DESIGN DaaS.
+For Windows VMs, the free software TightVNC
+and the Windows-internal RDP server can be used.
 
-One of the main goals of DESIGN is to allow all interactions to be carried out solely using a browser. Thus, a broker or proxy software that mediates between the VNC or RDP implementation and the browser is required. The most advanced solution available is the free software project Apache Guacamole, which supports VNC and RDP and includes further relevant features regarding sound and printing.
+One of the main goals of DESIGN is to allow all interactions to be carried out
+solely using a browser.
+Thus, a broker or proxy software that mediates between the VNC or RDP
+implementation and the browser is required.
+The most advanced solution available
+is the free software project Apache Guacamole, which supports VNC and RDP
+and includes further relevant features regarding sound and printer support.
 
-The core components of DESIGN are our self-developed Web UI and the Control Application, which carry out the communication between all service components.
+The core components of DESIGN are our self-developed Web UI
+and the Control Application,
+which carry out the communication between all service components.
 
-Starting a virtual machine or container instance automatically includes an SSH service. Our self-developed instance component waits until the SSH service is ready to satisfy requests. If applications are to be started or modifications are to be carried out, the instance component sends these requests to the virtual machine or container. Modification requests include resolution changes and fetching host status information.
+Starting a virtual machine or container instance automatically includes an SSH service.
+Our self-developed instance component waits
+until the SSH service is ready to satisfy requests.
+If applications are to be started or modifications are to be carried out,
+the instance component sends these requests to the virtual machine or container.
+Modification requests include resolution changes
+and fetching host status information.
 
-The self-developed instance component generally allows users to carry out essential administration and usage tasks that the operating system does not offer via a generalized API.
+The self-developed instance component generally allows users
+to carry out essential administration
+and usage tasks that the operating system does not offer via a generalized API.
 
-% TODO: Die letzten 3 Abschnitte noch überarbeiten und präzisieren
-
-
-\section{Challenges and Solutions}
-\label{sec:AnalysisPossibleComponents}
+\section{Challenges and Solutions}\label{sec:AnalysisPossibleComponents}
 
 While developing the novel DaaS platform DESIGN, we faced multiple obstacles and challenges. Each issue belongs to one of four categories: compatibility, performance, stability, and usability. This section presents the issues we faced, the possible approaches we analyzed, and the solutions we chose.
 
