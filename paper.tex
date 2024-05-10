@@ -50,7 +50,19 @@
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-	Desktop-as-a-Service (DaaS) is a cloud service category with tremendous potential for improving the everyday work of running and using applications. However, existing DaaS solutions have several drawbacks, which have limited the popularity of this service category in the past. Our novel DaaS solution, DESIGN, overcomes existing solutions' limitations and offers significant benefits. It can potentially revolutionize how we use applications, supporting non-modified Linux and Windows applications with just a browser on the client side. This paper describes some of the knowledge we gained during the development because of the challenges we faced and the solutions we found.
+	Desktop-as-a-Service (DaaS) is a cloud service category
+	with tremendous potential for improving the everyday work
+	of running and using applications.
+	However, existing DaaS solutions have several drawbacks,
+	which have limited the popularity of this service category in the past.
+	Our novel DaaS solution, DESIGN, overcomes existing solutions limitations
+	and offers significant benefits.
+	It can potentially revolutionize how we use applications,
+	supporting non-modified Linux and Windows applications
+	with just a browser on the client side.
+	This paper describes some of the knowledge we gained
+	during the development because of the challenges
+	we faced and the solutions we found.
 
 	\keywords{DaaS \and Compatibility \and Performance \and Stability \and Usability}
 \end{abstract}
@@ -60,11 +72,30 @@
 \section{Introduction}
 
 
-This paper discusses challenges during the development and implementation of a novel Desktop-as-a-Service (DaaS) solution called DESIGN that enables the deployment and usage of unmodified Linux and Windows applications in the same way as web applications and can run inside public resources but can also be deployed in a private context. Since all interaction with DESIGN and the applications inside is done via a user's web browser, the users can use any client, no matter what hardware or host operating system it is compromised of. A browser is the only software component required to use the novel DaaS service.
+This paper discusses challenges during the development
+and implementation of a novel Desktop-as-a-Service (DaaS) solution
+called DESIGN that enables the deployment
+and usage of unmodified Linux and Windows applications
+in the same way as web applications
+and can run inside public resources
+but can also be deployed in a private context.
+Since all interaction with DESIGN and the hosted applications
+is done via a user's web browser,
+the users can use any client, no matter what hardware or host operating system
+it is compromised of.
+A browser is the only software component required to use the novel DaaS service.
 
 Undoubtedly, developing a feature-rich DaaS system is a complex task, riddled with numerous obstacles and challenges. This paper meticulously categorizes these challenges into compatibility, performance, stability, and usability. It reveals these obstacles and presents the solutions we devised to overcome them, along with the valuable lessons we learned in the process.
 
-This document is structured as follows. Section~\ref{sec:relatedworkAbschnitt} discusses related work on DaaS solutions from an academic perspective, whereas section~\ref{sec:RecommendDaaSarchitecture} describes the state-of-the-art DaaS architecture DESIGN we designed and implemented. Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced, analyses our options for handling these, and describes the solution we found. Finally, section~\ref{sec:Conclusions} discusses conclusions and includes directions for future work.
+Therefore, this document discusses in Section~\ref{sec:relatedworkAbschnitt}
+the related work on DaaS solutions from an academic perspective,
+whereas Section~\ref{sec:RecommendDaaSarchitecture}
+describes the state-of-the-art DaaS architecture DESIGN we designed and implemented.
+Section~\ref{sec:AnalysisPossibleComponents} presents the most relevant challenges we faced,
+analyses our options for handling these,
+and describes the solution we found.
+Finally, Section~\ref{sec:Conclusions} discusses conclusions
+and includes directions for future work.
 
 
 \section{Related Work}
