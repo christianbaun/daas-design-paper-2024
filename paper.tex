@@ -202,7 +202,7 @@ or by Carrascosa et al.~\cite{carrascosa2022cloud}.
 Additionally, implied delays and round-trips can be further reduced
 by using more sophisticated transmission protocols
 directly interacting with GPU drivers,
-such as Moonlight~\cite{hanimplementation}~\cite{darcy2022latency}.
+such as Moonlight~\cite{darcy2022latency,hanimplementation}.
 
 On first thought, the latency requirements of a modern computer game
 are hardly the same as those of a desktop application.
@@ -324,7 +324,7 @@ As a prerequisite, the GhostScript interpreter
 must be deployed on the Guacamole server.
 File transfer over RDP supports Guacamole
 by emulating a virtual disk drive that persistently stores data
-on the Guacamole server.~\cite{ApacheGuacamole2024}
+on the Guacamole server.\footnote{\url{https://guacamole.apache.org/doc/1.5.5/gug/configuring-guacamole.html}}
 
 Compared to RDP, the protocol VNC offers fewer features in Guacamole
 since it does not support sound on its own.
@@ -358,8 +358,8 @@ our solution generally offers the flexibility
 to use either virtual machines or containers.
 Scientific publications discussing relevant performance aspects of such systems
 highlight the apparent advantage of a lightweight container solution
-over virtual machines when identical programs are tested in both environments
-~\cite{felter2015updated,potdar2020performance}.
+over virtual machines when identical programs are tested in both
+environments~\cite{felter2015updated,potdar2020performance}.
 
 This suggests that a container-based approach is likely preferable
 if the choice is available.
@@ -370,18 +370,18 @@ by offering both container-based and virtual machine-based application hosting.
 
 Regarding Platform-as-a-Service (PaaS),
 studies show that there is no dramatic difference in performance
-when derivatives of operating systems are compared to each other
-~\cite{balen2020performance,boras2020performance}.
+when derivatives of operating systems are compared to each
+other~\cite{balen2020performance,boras2020performance}.
 Nevertheless, some derivatives are more lightweight and performant.
 In contrast, comparing operating systems of different types
 reveals more obvious results, particularly when considering
 low-level operating system functionality implementations
-such as interrupt handling, memory allocation, and boot time
-~\cite{sulaiman2021comparison}.
+such as interrupt handling, memory allocation, and boot
+time~\cite{sulaiman2021comparison}.
 Additional performance potentials can be leveraged
 in cases where a Windows virtual machine can be replaced
-with a container-based solution integrating wine
-~\cite{huang2012performance}.
+with a container-based solution integrating 
+wine~\cite{huang2012performance}.
 
 For SaaS, performance largely depends on the underlying usage model
 and the actual software being virtualized.
@@ -572,7 +572,7 @@ visualized in figure~\ref{perf_internal_communication}.
 In a minimal setup, we measured delays of around 10ms for client communication,
 around 100ms for internal backend communication
 but up to 1000ms for instance communication.
-But these numbers are only rough estimates
+However, these numbers are only rough estimates
 as certain optimization concepts remain to be implemented.
 % Explanation delays: Half-way of a Roundtrip.
 % We state 1000ms for instance-communication (500ms per connection, we make two, so 1000ms)
@@ -628,7 +628,7 @@ as certain optimization concepts remain to be implemented.
 \end{figure}
 
 \subsection{Stability}
-Stability in DaaS applications is especially important
+Stability in DaaS applications is essential
 for meeting the demands of continuous and time-critical operations
 across diverse user scenarios.
 Ensuring the stability of all system components during runtime is paramount
@@ -648,8 +648,8 @@ can be approached through two fundamental methods: horizontal and vertical scali
 Horizontal scaling (scale out), involves adding more machines or instances
 to manage increased loads.
 In contrast, vertical scaling (scale up),
-adds more power (CPU, RAM) to existing machines
-~\cite{vaquero2011dynamically}.
+adds more power (CPU, RAM) to existing 
+machines~\cite{vaquero2011dynamically}.
 While horizontal scaling offers flexibility
 and is often preferred in cloud environments,
 vertical scaling remains important for applications
@@ -779,10 +779,10 @@ and which will be briefly described following:
 	\item \textbf{Database:}
 	      The database is integrated as a backend service
 	      and is, therefore, independent of surrounding components and contexts
-	      and can be externalized to a dedicated systems.
+	      and can be externalized to a dedicated system.
 	      Modern database solutions, like MariaDB,
 	      offer rich features for maintaining specific data consistency strategies
-	      such as data replication, clustering, failover mechanisms or RAID control.
+	      such as data replication, clustering, failover mechanisms, or RAID control.
 	      Currently, redundancies in our database system are not planned
 	      but can be easily applied by using such database-specific features
 	      and a modified database adapter.
@@ -876,7 +876,7 @@ designed to fulfill DaaS properties for scalability and redundancy,
 as previously outlined.
 
 This implies that any action triggered, whether in the frontend on the client side,
-in the backend on the host side, or within hosted instances,
+in the backend on the host side or within hosted instances,
 must ensure that all necessary information is readily available at the time of processing.
 
 We achieve this by storing runtime information in distributed block storage,
@@ -892,7 +892,7 @@ within the related request.
 As shown in figure~\ref{message_routing}, this enables arbitrarily distributed configurations as long as request
 and response messages reach their desired target eventually.
 
-If that is the case, each distributed host system might only contain it's essential components,
+If that is the case, each distributed host system might only contain its essential components,
 including the backend service with all hosted instances
 as well as the described proxy component for direct user interaction.
 Any other component may reside somewhere in the DaaS network.
@@ -968,7 +968,7 @@ For Linux operating system deployments,
 the free software projects xrdp and x11vnc enable all desired features
 and single-app functionality can be easily obtained
 by using a custom window manager such,
-as for example, qtile~\footnote{\url{https://qtile.org/}}.
+as for example, qtile\footnote{\url{https://qtile.org}}.
 
 Table~\ref{tab:DaaS_Services_Overview} includes an overview
 of the mentioned service implementations for RDP and VNC protocols
@@ -1005,7 +1005,7 @@ One challenge was imposed by Guacamole's current lack of support
 for dynamic desktop resizing with VNC,
 leading to misaligned layouts and a poor user experience.
 To address this until such features are available in
-Guacamole~\footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
+Guacamole\footnote{\url{https://issues.apache.org/jira/browse/GUACAMOLE-1196}},
 we implemented a separate mechanism using a WebSocket proxy
 and direct interaction with each instance.
 
@@ -1052,9 +1052,9 @@ and present solutions to overcome these challenges.
 For future work,
 we plan to replace our temporary solution for internal communication
 with a more efficient approach as our preliminary performance tests revealed
-a potential bottlenack in that particular area.
+a potential bottleneck in that particular area.
 We also plan to apply certain optimization strategies
-with respect to backend and instance communication.
+concerning backend and instance communication.
 We further plan to enhance our yet limited performance testing
 and will provide a full-fledged performance analysis
 of realistic deployment scenarios and utilization patterns
