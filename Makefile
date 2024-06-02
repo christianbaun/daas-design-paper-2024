@@ -9,7 +9,7 @@ all:
 	pdflatex paper
 
 clean:
-	rm -f *.snm *.vrb *.nav *.log *.toc *.tpm *.dvi *.aux *.out *.blg *.bbl 
+	rm -f *.snm *.vrb *.nav *.log *.toc *.tpm *.dvi *.aux *.out *.blg *.bbl
 
 
 
